@@ -1,7 +1,5 @@
 import style from "./styles.module.css";
-import {Link} from "react-router-dom";
-import arrow from "../../../assets/Arrow.png";
-import rectangle from "../../../assets/Rectangle.png";
+
 import imageMain from "../../../assets/imageMain.png";
 import littleHouse from "../../../assets/littleHouse.png";
 import littleHouse2 from "../../../assets/littleHouse2.png";
@@ -10,22 +8,13 @@ import plan2 from "../../../assets/plan2.png";
 import plan3 from "../../../assets/plan3.png";
 import plan4 from "../../../assets/plan4.png";
 import galochka from "../../../assets/galochka.png";
+import Navigation from "../Navigation/Navigation.tsx";
+
 
 const MainWindow = () => {
     return(
         <div className={style.main}>
-            <div className={style.topContent}>
-                <p className={style.navigate}>
-                    <Link className={style.address} to={'/'}> Главная</Link> <img src={arrow}/> <Link className={style.address} to={'/projects'}>Проекты</Link>
-                </p>
-                <p className={style.pageName}>
-                    Проекты
-                </p>
-                <div className={style.imgRectangle}>
-                    <img className={style.rectangle} src={rectangle}/>
-                    <p className={style.imgText}>"От фундамента до крыши – профессиональный подход к каждому проекту!"</p>
-                </div>
-            </div>
+            <Navigation/>
             <div className={style.middleContent}>
                 <div className={style.contentLeft}>
                     <div className={style.contentOne}>

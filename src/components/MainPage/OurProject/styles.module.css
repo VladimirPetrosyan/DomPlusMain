@@ -1,0 +1,56 @@
+.main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    background-color: #F3F3F3;
+    gap: 3rem;
+}
+.ourProjects{
+    color: black;
+    font-family: Montserrat;
+    font-size: 1.875rem;
+    font-weight: 400;
+    text-align: center;
+
+}
+.oneProject{
+    background: linear-gradient(180deg, rgba(12, 12, 12, 0.3) 0%, rgba(0, 0, 0, 0.4) 100%), url("../../../assets/image 39.png") center;
+    width: 35.125rem;
+    height: 26.625rem;
+    border-radius: 2.344rem;
+
+}
+.projects{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: center;
+}
+.imageTopText{
+    color: #FFFFFF;
+    position: relative;
+    top: 22rem;
+    left: 2rem;
+}
+.imageBottomText{
+    color: #FFFFFF;
+    position: relative;
+    top: 22rem;
+    left: 2rem;
+    font-weight: 800;
+    font-size: 2.5rem;
+}
+.contentBottom{
+    background-color: #404944;
+    border-radius: 3rem;
+}
+.more{
+    font-family: Montserrat;
+    font-size: 1.875rem;
+    font-weight: 500;
+    text-align: center;
+    color: white;
+    padding: 1rem 5rem 1rem 5rem;
+}

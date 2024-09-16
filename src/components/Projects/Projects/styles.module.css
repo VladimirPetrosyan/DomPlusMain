@@ -1,0 +1,68 @@
+.main{
+    display: flex;
+    padding: 2rem 8rem 4rem 8rem;
+    flex-direction: row;
+    gap: 1rem;
+    background-color: #F3F3F3;
+}
+.oneProject{
+    border-radius: 2.344rem;
+    flex: 1 1 calc(30% - 1rem);
+    position: relative;
+}
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(12, 12, 12, 0.3) 0%, rgba(0, 0, 0, 0.4) 100%);
+    border-radius: 2.344rem;
+}
+
+
+.projectImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Изображение заполняет контейнер без искажения */
+    border-radius: 2.344rem;
+
+}
+.textContainer {
+    position: relative;
+    top: -5rem;
+    left: 0;
+    display: flex;
+    gap: 1rem;
+}
+.projects{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    flex: 1 1 calc(30% - 0.75rem);
+}
+.imageTopText{
+    color: #FFFFFF;
+    position: absolute;
+    top: 0;
+    left: 2rem;
+}
+.imageBottomText{
+    color: #FFFFFF;
+    position: absolute;
+    top: 1rem;
+    left: 2rem;
+    font-weight: 800;
+    font-size: 2.5rem;
+}
+.contentBottom{
+    background-color: #404944;
+    border-radius: 3rem;
+}
+.more{
+    font-family: Montserrat;
+    font-size: 1.875rem;
+    font-weight: 500;
+    text-align: center;
+    color: white;
+    padding: 1rem 5rem 1rem 5rem;
+}

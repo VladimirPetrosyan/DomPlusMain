@@ -1,0 +1,123 @@
+.main{
+    background: linear-gradient(180deg, #404944 0%, #1E2522 100%);
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 6rem;
+}
+.contentTop{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-content: center;
+    flex-wrap: wrap;
+}
+.quoteTop{
+    font-family: Montserrat, serif;
+    font-size: 1.875rem;
+    font-style: italic;
+    font-weight: 400;
+    text-align: left;
+    color: #C2C2C2;
+}
+.quoteBottom{
+    font-family: Montserrat, serif;
+    font-size: 3.750rem;
+    font-weight: 400;
+    display: flex;
+    flex-direction: row;
+}
+.client{
+    color: #F9D267;
+}
+.contentMiddle{
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+}
+.feedback{
+    background: linear-gradient(99.69deg, #4025ED 6.36%, #2596ED 91.9%);
+    border-radius: 1.625rem;
+    padding: 1.75rem;
+    max-width: 31rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    rotate:-5deg;
+    gap: 2rem;
+
+}
+.firstFeedbackName{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+}
+.imageLogo{
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translate(0%, -50%);
+}
+.quotes{
+    position: absolute;
+    left: 0;
+    top: -50%;
+    transform: translate(-40%, -50%);
+}
+.firstFeedbackText{
+    display: flex;
+    position: relative;
+
+}
+.quotesEnd{
+    position: absolute;
+    top: 100%;
+    right: 0;
+    transform: translate(40%, 50%);
+}
+.name{
+    font-size: 1.625rem;
+    font-family: Montserrat, serif;
+    font-weight: 600;
+}
+.product{
+    font-family: Montserrat, serif;
+    font-size: 1rem;
+    font-weight: 300;
+}
+.feedbackTextMain{
+    font-family: Montserrat, serif;
+    font-size: 1rem;
+    font-style: italic;
+    font-weight: 400;
+}
+.feedbackSecond{
+    background: linear-gradient(99.69deg, #068C50 6.36%, #06888C 91.9%);
+    border-radius: 1.625rem;
+    padding: 1.75rem;
+    max-width: 31rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    rotate:5deg;
+    position: relative;
+    transform: translate(0, -20%);
+}
+.contentBottom{
+    display: flex;
+    justify-content: center;
+}
+.more{
+    font-family: Montserrat, serif;
+    font-size: 1.875rem;
+    font-weight: 500;
+    text-align: center;
+    color: #222222;
+    padding: 1rem 5rem 1rem 5rem;
+    background-color: #F3F3F3;
+    border-radius: 3rem;
+}
+

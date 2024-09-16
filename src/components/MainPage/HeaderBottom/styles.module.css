@@ -1,0 +1,92 @@
+.headerBottom{
+    display: flex;
+    background-size: cover;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(44, 44, 44, 0.5) 100%), url("../../../assets/bc.png") center ;
+    overflow: hidden;
+    justify-content: space-between;
+}
+.diplayLeft{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2rem;
+}
+.displayLeftTop{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+}
+.leed{
+    color: #F9D267;
+    font-size: 4.5rem;
+    font-weight: 700;
+}
+.leedText{
+    color: white;
+    font-weight: 500;
+    font-size: 2.5rem;
+}
+.line{
+    position: absolute;
+    max-width: 72.625rem;
+    max-height: 60.75rem;
+
+}
+.etap{
+    display: flex;
+    position: relative;
+}
+.displayLeftBottom{
+    display: flex;
+    justify-content: space-around;
+    top: 34rem;
+    left: 12rem;
+    gap: 2rem;
+}
+.displayLeftBottomFirst, .displayLeftBottomSecond{
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+}
+.displayRight{
+    display: flex;
+    flex-direction: column;
+}
+.contact{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+    padding: 2em;
+}
+.location{
+    display: flex;
+    gap: 1rem;
+}
+.subscribe{
+    display: flex;
+    gap: 1rem;
+}
+.Number{
+    color:#F9D267;
+    font-weight: 700;
+    text-decoration: underline 0.01em;
+    font-size: 1.825rem;
+}
+.address{
+    font-family: Open Runde, 'Montserrat', serif;
+    font-weight: 700;
+    font-size: 0.875rem;
+    color: #EFEFEF;
+}
+.aboutProject{
+    display: flex;
+    flex-direction: column;
+}
+.ourProject{
+    padding-left: 8rem;
+    font-family: Montserrat, serif;
+    font-weight: 600;
+    font-size: 1.875rem;
+}

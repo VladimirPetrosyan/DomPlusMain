@@ -1,111 +1,28 @@
-import style from "./styles.module.css";
-import image39 from "../../../assets/image 39.png"
-const Projects = () => {
-    return(
+import { FC } from "react";
+import Card from "./Cards/Card";
+import cardData from "./Cards/cardData";
+import style from "./project.module.css";
+
+const Projects: FC<{ onProjectSelect: (projectId: number) => void }> = ({ onProjectSelect }) => {
+    return (
         <div className={style.main}>
             <div className={style.projects}>
-                <div className={style.oneProject}>
-                    <img className={style.projectImage} src={image39}/>
-                    <div className={style.overlay}></div>
-                    <div className={style.textContainer}>
-                        <p className={style.imageTopText}>82,6М^2</p>
-                        <p className={style.imageBottomText}>14 150 ₽/мес</p>
-                    </div>
-                </div>
-                <div className={style.oneProject}>
-                    <img className={style.projectImage} src={image39}/>
-                    <div className={style.overlay}></div>
-                    <div className={style.textContainer}>
-                        <p className={style.imageTopText}>82,6М^2</p>
-                        <p className={style.imageBottomText}>14 150 ₽/мес</p>
-                    </div>
-                </div>
-                <div className={style.oneProject}>
-                    <img className={style.projectImage} src={image39}/>
-                    <div className={style.overlay}></div>
-                    <div className={style.textContainer}>
-                        <p className={style.imageTopText}>82,6М^2</p>
-                        <p className={style.imageBottomText}>14 150 ₽/мес</p>
-                    </div>
-                </div>
-                <div className={style.oneProject}>
-                    <img className={style.projectImage} src={image39}/>
-                    <div className={style.overlay}></div>
-                    <div className={style.textContainer}>
-                        <p className={style.imageTopText}>82,6М^2</p>
-                        <p className={style.imageBottomText}>14 150 ₽/мес</p>
-                    </div>
-                </div>
+                {cardData.map((card) => (
+                    <Card
+                        key={card.id}
+                        image={card.mainImage}
+                        text={card.text}
+                        onClick={() => onProjectSelect(card.id)}
+                    />
+                ))}
             </div>
-            <div className={style.projects}>
-                <div className={style.oneProject}>
-                    <img className={style.projectImage} src={image39}/>
-                    <div className={style.overlay}></div>
-                    <div className={style.textContainer}>
-                        <p className={style.imageTopText}>82,6М^2</p>
-                        <p className={style.imageBottomText}>14 150 ₽/мес</p>
-                    </div>
-                </div>
-                <div className={style.oneProject}>
-                    <img className={style.projectImage} src={image39}/>
-                    <div className={style.overlay}></div>
-                    <div className={style.textContainer}>
-                        <p className={style.imageTopText}>82,6М^2</p>
-                        <p className={style.imageBottomText}>14 150 ₽/мес</p>
-                    </div>
-                </div>
-                <div className={style.oneProject}>
-                    <img className={style.projectImage} src={image39}/>
-                    <div className={style.overlay}></div>
-                    <div className={style.textContainer}>
-                        <p className={style.imageTopText}>82,6М^2</p>
-                        <p className={style.imageBottomText}>14 150 ₽/мес</p>
-                    </div>
-                </div>
-                <div className={style.oneProject}>
-                    <img className={style.projectImage} src={image39}/>
-                    <div className={style.overlay}></div>
-                    <div className={style.textContainer}>
-                        <p className={style.imageTopText}>82,6М^2</p>
-                        <p className={style.imageBottomText}>14 150 ₽/мес</p>
-                    </div>
-                </div>
-            </div>
-            <div className={style.projects}>
-                <div className={style.oneProject}>
-                    <img className={style.projectImage} src={image39}/>
-                    <div className={style.overlay}></div>
-                    <div className={style.textContainer}>
-                        <p className={style.imageTopText}>82,6М^2</p>
-                        <p className={style.imageBottomText}>14 150 ₽/мес</p>
-                    </div>
-                </div>
-                <div className={style.oneProject}>
-                    <img className={style.projectImage} src={image39}/>
-                    <div className={style.overlay}></div>
-                    <div className={style.textContainer}>
-                        <p className={style.imageTopText}>82,6М^2</p>
-                        <p className={style.imageBottomText}>14 150 ₽/мес</p>
-                    </div>
-                </div>
-                <div className={style.oneProject}>
-                    <img className={style.projectImage} src={image39}/>
-                    <div className={style.overlay}></div>
-                    <div className={style.textContainer}>
-                        <p className={style.imageTopText}>82,6М^2</p>
-                        <p className={style.imageBottomText}>14 150 ₽/мес</p>
-                    </div>
-                </div>
-                <div className={style.oneProject}>
-                    <img className={style.projectImage} src={image39}/>
-                    <div className={style.overlay}></div>
-                    <div className={style.textContainer}>
-                        <p className={style.imageTopText}>82,6М^2</p>
-                        <p className={style.imageBottomText}>14 150 ₽/мес</p>
-                    </div>
-                </div>
+            <div className={style.buttonContainer}>
+                <button className={style.submitButton}>
+                    Заказать индивидуальный проект
+                </button>
             </div>
         </div>
-    )
-}
+    );
+};
+
 export default Projects;

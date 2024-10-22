@@ -1,75 +1,137 @@
+import { useState, useRef, useEffect, FC } from 'react';
 import style from "./styles.module.css";
-
-import imageMain from "../../../assets/imageMain.png";
-import littleHouse from "../../../assets/littleHouse.png";
-import littleHouse2 from "../../../assets/littleHouse2.png";
-import plan1 from "../../../assets/plan1.png";
-import plan2 from "../../../assets/plan2.png";
-import plan3 from "../../../assets/plan3.png";
-import plan4 from "../../../assets/plan4.png";
-import galochka from "../../../assets/galochka.png";
+import { motion } from "framer-motion";
 import Navigation from "../Navigation/Navigation.tsx";
+import cardData from "../Projects/Cards/cardData.ts";  // импортируем данные проектов
+import galochka from "../../../assets/galochka.png";
 
+type MainWindowProps = {
+    selectedProjectId: number | null;  // Пропс с типом number или null
+};
 
-const MainWindow = () => {
-    return(
-        <div className={style.main}>
-            <Navigation/>
+const MainWindow: FC<MainWindowProps> = ({ selectedProjectId }) => {
+    // Состояние для текущего выбранного проекта
+    const [activeProject, setActiveProject] = useState(cardData[0]);
+    const [mainImage, setMainImage] = useState(activeProject.images[0]);
+    
+    // Ref для скролла
+    const mainWindowRef = useRef<HTMLDivElement>(null);
+
+    // Функция для смены проекта
+    const handleProjectChange = (projectId: number) => {
+        const selectedProject = cardData.find(card => card.id === projectId);
+        if (selectedProject) {
+            setActiveProject(selectedProject);
+            setMainImage(selectedProject.images[0]);
+            mainWindowRef.current?.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
+    // Отслеживаем изменения selectedProjectId
+    useEffect(() => {
+        if (selectedProjectId !== null) {
+            handleProjectChange(selectedProjectId);
+        }
+    }, [selectedProjectId]);
+
+    const handleImageClick = (image: string) => {
+        setMainImage(image);
+    };
+
+    return (
+        <div ref={mainWindowRef} className={style.main}>
+            <Navigation />
             <div className={style.middleContent}>
                 <div className={style.contentLeft}>
                     <div className={style.contentOne}>
-                        <img className={style.amg} src={imageMain}/>
+                        <motion.img
+                                key={mainImage}
+                                className={style.amg}
+                                src={mainImage}
+                                alt="Main Project Image"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ duration: 1 }}
+                        />
                         <div className={style.slider}>
-                            <img src={littleHouse}/>
-                            <img src={littleHouse2}/>
-                            <img src={plan1}/>
-                            <img src={plan2}/>
-                            <img src={plan3}/>
-                            <img src={plan4}/>
+                            {activeProject.images.map((image, index) => (
+                                <img 
+                                    key={index} 
+                                    src={image} 
+                                    onClick={() => handleImageClick(image)} 
+                                    alt={`Image ${index}`} 
+                                />
+                            ))}
                         </div>
                         <div className={style.contentRight}>
-                            <div className={style.contentRightTop} >
-                                <div>
-                                    <p className={style.contentRightTopFirstText}>Двухэтажный дом
-                                    </p>
-                                    <p className={style.contentRightTopSecondText}>
-                                        с просторными жилыми комнатами
-                                    </p>
-                                </div>
-                                <div>
-                                    <p className={style.contentRightTopThirdText}>
-                                        366,66 м2
-                                    </p>
-                                    <p className={style.contentRightTopFourthlyText}>14 150 000 ₽
-                                    </p>
-                                </div>
-                            </div >
+                            <div className={style.contentRightTop}>
+                                <motion.p
+                                    className={style.contentRightTopFirstText}
+                                    initial={{ opacity: 0, x: 100 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 1 }}
+                                >
+                                    {activeProject.title}
+                                </motion.p>
+                                <motion.p
+                                    className={style.contentRightTopSecondText}
+                                    initial={{ opacity: 0, x: 100 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 1, delay: 0.2 }}
+                                >
+                                    {activeProject.description}
+                                </motion.p>
+                                <motion.p
+                                    className={style.contentRightTopThirdText}
+                                    initial={{ opacity: 0, x: 100 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 1, delay: 0.4 }}
+                                >
+                                    {activeProject.text}
+                                </motion.p>
+                                <motion.p
+                                    className={style.contentRightTopFourthlyText}
+                                    initial={{ opacity: 0, x: 100 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 1, delay: 0.6 }}
+                                >
+                                </motion.p>
+                            </div>
                             <div className={style.contentRightMiddle}>
-                                <div className={style.contentRightManager}>
-                                    <img src={galochka}/>
-                                    <p className={style.contentMiddleText}>3 спальни и кабинет</p>
-                                </div>
-                                <div className={style.contentRightManager}>
-                                    <img src={galochka}/>
-                                    <p className={style.contentMiddleText}>Просторная кухня и гостиная</p>
-                                </div>
-                                <div className={style.contentRightManager}>
-                                    <img src={galochka}/>
-                                    <p className={style.contentMiddleText}>Отделка в стиле минимализм</p>
-                                </div>
-                                <div className={style.contentRightManager}>
-                                    <img src={galochka}/>
-                                    <p className={style.contentMiddleText}>Панорамные окна</p>
-                                </div>
+                                {[...Array(4)].map((_, index) => (
+                                    <motion.div
+                                        key={index}
+                                        className={style.contentRightManager}
+                                        initial={{ opacity: 0, x: 100 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ duration: 1, delay: 0.2 * index }}
+                                    >
+                                        <img src={galochka} alt="Checkmark" />
+                                        <p className={style.contentMiddleText}>
+                                            {[
+                                                "3 спальни и кабинет",
+                                                "Просторная кухня и гостиная",
+                                                "Отделка в стиле минимализм",
+                                                "Панорамные окна"
+                                            ][index]}
+                                        </p>
+                                    </motion.div>
+                                ))}
                             </div>
-                            <div className={style.contentRightBottom}>
+                            <motion.div
+                                className={style.contentRightBottom}
+                                initial={{ opacity: 0, x: 100 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 1, delay: 1 }}
+                            >
                                 <button className={style.bottomButton}>Посчитать ипотеку</button>
-                            </div>
+                            </motion.div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
+
 export default MainWindow;

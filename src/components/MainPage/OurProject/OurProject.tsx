@@ -1,32 +1,45 @@
+import { FC } from "react";
 import style from "./styles.module.css";
-const OurProject = () =>{
-    return(
+import Card from "./OurProjectCard";
+import { useInView } from 'react-intersection-observer';
+import { motion } from "framer-motion";
+import ourProjectCardData from "./ourProjectCardData"; // Импортируем данные карточек
+
+const OurProject: FC = () => {
+    const { ref: headerRef, inView: headerInView } = useInView({ triggerOnce: true });
+    const { ref: buttonRef, inView: buttonInView } = useInView({ triggerOnce: true });
+
+    return (
         <div className={style.main}>
-            <div className={style.mainName}>
+            <motion.div
+                ref={headerRef}
+                initial={{ opacity: 0, y: 50 }}
+                animate={headerInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 1 }}
+                className={style.mainName}
+            >
                 <p className={style.ourProjects}>Наши Проекты</p>
-            </div>
+            </motion.div>
             <div className={style.projects}>
-                <div className={style.oneProject}>
-                    <p className={style.imageTopText}>82,6М^2</p>
-                    <p className={style.imageBottomText}>14 150 ₽/мес</p>
-                </div>
-                <div className={style.oneProject}>
-                    <p className={style.imageTopText}>82,6М^2</p>
-                    <p className={style.imageBottomText}>14 150 ₽/мес</p>
-                </div>
-                <div className={style.oneProject}>
-                    <p className={style.imageTopText}>82,6М^2</p>
-                    <p className={style.imageBottomText}>14 150 ₽/мес</p>
-                </div>
-                <div className={style.oneProject}>
-                    <p className={style.imageTopText}>82,6М^2</p>
-                    <p className={style.imageBottomText}>14 150 ₽/мес</p>
-                </div>
+                {ourProjectCardData.map((card) => (
+                    <Card
+                        key={card.id}
+                        topText={card.topText}
+                        bottomText={card.bottomText}
+                    />
+                ))}
             </div>
-            <div className={style.contentBottom}>
+            <motion.div
+                ref={buttonRef}
+                className={style.contentBottom}
+                initial={{ opacity: 0, y: 50 }}
+                animate={buttonInView ? { opacity: 0.8, y: 0 } : {}}
+                transition={{ duration: 1.2 }}
+            >
                 <button className={style.more}>Больше</button>
-            </div>
+            </motion.div>
         </div>
-    )
-}
+    );
+};
+
 export default OurProject;

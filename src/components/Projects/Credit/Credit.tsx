@@ -1,22 +1,41 @@
+import { FC, ChangeEvent } from "react";
+import { motion } from "framer-motion";
+import { useInView } from 'react-intersection-observer';
 import style from "./styles.module.css";
-import { ChangeEvent } from 'react';
-function updateSlider(event: ChangeEvent<HTMLInputElement>) {
-    const polzunok = event.target;  // получаем сам элемент ползунка
-    const value = parseFloat(polzunok.value);  // значение ползунка
-    const min = parseFloat(polzunok.min);      // минимальное значение
-    const max = parseFloat(polzunok.max);      // максимальное значение
-    const percentage = ((value - min) / (max - min)) * 100;  // процент заполнения
 
-    // обновление фона ползунка
+function updateSlider(event: ChangeEvent<HTMLInputElement>) {
+    const polzunok = event.target;
+    const value = parseFloat(polzunok.value);
+    const min = parseFloat(polzunok.min);
+    const max = parseFloat(polzunok.max);
+    const percentage = ((value - min) / (max - min)) * 100;
+
     polzunok.style.background = `linear-gradient(to right, #FFD700 ${percentage}%, #ccc ${percentage}%)`;
 }
-const Credit = () =>{
-    return(
+
+const Credit: FC = () => {
+    const { ref: headerRef, inView: headerInView } = useInView({ triggerOnce: true });
+    const { ref: sliderRef, inView: sliderInView } = useInView({ triggerOnce: true });
+    const { ref: paymentRef, inView: paymentInView } = useInView({ triggerOnce: true });
+
+    return (
         <div className={style.main}>
-            <div className={style.topContent}>
+            <motion.div
+                ref={headerRef}
+                initial={{ opacity: 0, y: -50 }}
+                animate={headerInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 1 }}
+                className={style.topContent}
+            >
                 <p className={style.topText}>РАССЧИТАТЬ ИПОТЕКУ</p>
-            </div>
-            <div className={style.window}>
+            </motion.div>
+            <motion.div
+                ref={sliderRef}
+                initial={{ opacity: 0, y: 50 }}
+                animate={sliderInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 1.2 }}
+                className={style.window}
+            >
                 <div className={style.middleContent}>
                     <div className={style.leftContent}>
                         <div className={style.firstContent}>
@@ -25,11 +44,17 @@ const Credit = () =>{
                                     Сумма ипотеки
                                 </p>
                                 <p className={style.firstP}>
-                                    30 000 000 ₽
+                                    30 000 000 ₽
                                 </p>
                             </div>
                             <div className={style.line}>
-                                <input className={style.polzunok} min="30 000000" max="100000000"  onChange={updateSlider} type={"range"}/>
+                                <input
+                                    className={style.polzunok}
+                                    min="500000"
+                                    max="100000000"
+                                    onChange={updateSlider}
+                                    type={"range"}
+                                />
                             </div>
                             <div className={style.sumBottom}>
                                 <p className={style.secondP}>
@@ -50,7 +75,13 @@ const Credit = () =>{
                                 </p>
                             </div>
                             <div className={style.line}>
-                                <input className={style.polzunok} min="300000" max="100000000"  onChange={updateSlider} type={"range"}/>
+                                <input
+                                    className={style.polzunok}
+                                    min="5"
+                                    max="30"
+                                    onChange={updateSlider}
+                                    type={"range"}
+                                />
                             </div>
                             <div className={style.sumBottom}>
                                 <p className={style.secondP}>
@@ -71,7 +102,13 @@ const Credit = () =>{
                                 </p>
                             </div>
                             <div className={style.line}>
-                                <input className={style.polzunok} min="500000" max="100000000" onChange={updateSlider} type={"range"}/>
+                                <input
+                                    className={style.polzunok}
+                                    min="0.1"
+                                    max="30"
+                                    onChange={updateSlider}
+                                    type={"range"}
+                                />
                             </div>
                             <div className={style.sumBottom}>
                                 <p className={style.secondP}>
@@ -83,7 +120,13 @@ const Credit = () =>{
                             </div>
                         </div>
                     </div>
-                    <div className={style.rightContent}>
+                    <motion.div
+                        ref={paymentRef}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={paymentInView ? { opacity: 1, scale: 1 } : {}}
+                        transition={{ duration: 1 }}
+                        className={style.rightContent}
+                    >
                         <div className={style.payment}>
                             <p className={style.paymentText}>
                                 Ежемесячный платеж
@@ -97,20 +140,25 @@ const Credit = () =>{
                                 Получить консультацию
                             </p>
                             <p className={style.helpText}>
-                                +7 (903) 400-03-61
+                                +7 (903) 400-03-61
                             </p>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
-
-            </div>
-            <div className={style.bottomContent}>
+            </motion.div>
+            <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1.5 }}
+                className={style.bottomContent}
+            >
                 <p className={style.bottomText}>
                     “ Конечный расчёт основан на средней процентной ставке. Точная процентная ставка и сумма ипотечного кредита будут определены при заключении договора.
                     Банк оставляет за собой право отказать в предоставлении ипотеки без указания причин.
                 </p>
-            </div>
+            </motion.div>
         </div>
-    )
-}
+    );
+};
+
 export default Credit;

@@ -1,0 +1,40 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem 8rem 4rem 8rem;
+    background-color: #F3F3F3;
+    padding-top: 50px;
+}
+
+.projects {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-between;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem; /* Отступ сверху для разделения кнопки и карточек */
+}
+
+.submitButton {
+    padding: 0.8rem;
+    background-color: #F9D267;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #000;
+    transition: box-shadow 0.3s ease, transform 0.1s ease;
+}
+
+.submitButton:hover {
+    box-shadow: 0 0 0.7125rem #FFD83A;
+}
+
+.submitButton:active {
+    transform: scale(0.95);
+}

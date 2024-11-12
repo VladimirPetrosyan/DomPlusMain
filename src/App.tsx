@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MainProjects from "./components/Projects/Main/MainProjects.tsx";
 import Services from "./components/ServicesPage/Services/Services.tsx";
 import ReviewsPage from "./components/Reviews/ReviewsPage/ReviewsPage.tsx";
+import ConstructorPage from "./components/Constructor/ConstructorPage/ConstructorPage.tsx";
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
             <Route path="/services" element={<Services/>}/>
             <Route path="/projects" element={<MainProjects/>}/>
             <Route path="/reviews" element={<ReviewsPage/>}/>
+            <Route path="/constructor" element={<ConstructorPage/>}/>
         </Routes>
 
     </Router>

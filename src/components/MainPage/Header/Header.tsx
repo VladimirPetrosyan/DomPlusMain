@@ -39,7 +39,9 @@ const Header: FC = () => {
                     <p>
                         <Link to={"/projects"}>Проекты</Link>
                     </p>
-                    <p>Собрать свой дом</p>
+                    <p>
+                        <Link to={"/constructor"}>Собрать свой дом</Link>
+                    </p>
                     <p>Расчет стоимости</p>
                     <p>О нас</p>
                 </div>

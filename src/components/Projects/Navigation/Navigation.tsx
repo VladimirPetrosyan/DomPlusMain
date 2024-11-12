@@ -11,6 +11,7 @@ const Navigation: FC = () => {
     const isProjectsPage = location.pathname === '/projects';
     const isServicesPage = location.pathname === '/services';
     const isReviewsPage = location.pathname === '/reviews';
+    const isConstructorPage = location.pathname === '/constructor'; // Новый путь для конструктора
 
     const { ref, inView } = useInView({ triggerOnce: true });
 
@@ -31,6 +32,8 @@ const Navigation: FC = () => {
                         <Link className={style.address} to={'/services'}>Услуги</Link>
                     ) : isReviewsPage ? (
                         <Link className={style.address} to={'/reviews'}>Отзывы</Link>
+                    ) : isConstructorPage ? (
+                        <Link className={style.address} to={'/constructor'}>Собрать свой дом</Link>
                     ) : null}
                 </motion.p>
                 <motion.p
@@ -39,7 +42,7 @@ const Navigation: FC = () => {
                     animate={inView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.8, delay: 0.1 }}
                 >
-                    {isProjectsPage ? 'Проекты' : isServicesPage ? 'Услуги' : isReviewsPage ? 'Отзывы' : ''}
+                    {isProjectsPage ? 'Проекты' : isServicesPage ? 'Услуги' : isReviewsPage ? 'Отзывы' : isConstructorPage ? 'Собрать свой дом' : ''}
                 </motion.p>
                 <motion.div
                     className={style.imgRectangle}
@@ -66,8 +69,10 @@ const Navigation: FC = () => {
                             : isServicesPage
                                 ? '"Полный спектр строительных услуг для вашего идеального проекта"'
                                 : isReviewsPage
-                                    ? '"От фундамента до крыши – профессиональный подход к каждому проекту!"'
-                                    : ''}
+                                    ? '"Наши клиенты говорят за нас!"'
+                                    : isConstructorPage
+                                        ? '"Соберите дом своей мечты с нашей помощью!"'
+                                        : ''}
                     </motion.p>
                 </motion.div>
             </div>

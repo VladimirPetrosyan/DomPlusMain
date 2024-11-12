@@ -2,22 +2,19 @@ import { useState, useRef, useEffect, FC } from 'react';
 import style from "./styles.module.css";
 import { motion } from "framer-motion";
 import Navigation from "../Navigation/Navigation.tsx";
-import cardData from "../Projects/Cards/cardData.ts";  // импортируем данные проектов
+import cardData from "../Projects/Cards/cardData.ts";
 import galochka from "../../../assets/galochka.png";
 
 type MainWindowProps = {
-    selectedProjectId: number | null;  // Пропс с типом number или null
+    selectedProjectId: number | null; 
 };
 
 const MainWindow: FC<MainWindowProps> = ({ selectedProjectId }) => {
-    // Состояние для текущего выбранного проекта
     const [activeProject, setActiveProject] = useState(cardData[0]);
     const [mainImage, setMainImage] = useState(activeProject.images[0]);
     
-    // Ref для скролла
     const mainWindowRef = useRef<HTMLDivElement>(null);
 
-    // Функция для смены проекта
     const handleProjectChange = (projectId: number) => {
         const selectedProject = cardData.find(card => card.id === projectId);
         if (selectedProject) {
@@ -27,7 +24,6 @@ const MainWindow: FC<MainWindowProps> = ({ selectedProjectId }) => {
         }
     };
 
-    // Отслеживаем изменения selectedProjectId
     useEffect(() => {
         if (selectedProjectId !== null) {
             handleProjectChange(selectedProjectId);
@@ -89,16 +85,9 @@ const MainWindow: FC<MainWindowProps> = ({ selectedProjectId }) => {
                                 >
                                     {activeProject.text}
                                 </motion.p>
-                                <motion.p
-                                    className={style.contentRightTopFourthlyText}
-                                    initial={{ opacity: 0, x: 100 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ duration: 1, delay: 0.6 }}
-                                >
-                                </motion.p>
                             </div>
                             <div className={style.contentRightMiddle}>
-                                {[...Array(4)].map((_, index) => (
+                                {activeProject.features.map((feature, index) => (
                                     <motion.div
                                         key={index}
                                         className={style.contentRightManager}
@@ -107,14 +96,7 @@ const MainWindow: FC<MainWindowProps> = ({ selectedProjectId }) => {
                                         transition={{ duration: 1, delay: 0.2 * index }}
                                     >
                                         <img src={galochka} alt="Checkmark" />
-                                        <p className={style.contentMiddleText}>
-                                            {[
-                                                "3 спальни и кабинет",
-                                                "Просторная кухня и гостиная",
-                                                "Отделка в стиле минимализм",
-                                                "Панорамные окна"
-                                            ][index]}
-                                        </p>
+                                        <p className={style.contentMiddleText}>{feature}</p>
                                     </motion.div>
                                 ))}
                             </div>

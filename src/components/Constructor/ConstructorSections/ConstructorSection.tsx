@@ -115,29 +115,24 @@ import roofDvukhskatnaya from "../../../assets/constructor/roof/2.png";
 import roofChetyrekhskatnaya from "../../../assets/constructor/roof/4.png";
 
 
-const groupAnimationDelay = (index, animationKey) => {
-    // Группируем объекты с общим префиксом (например, "wallKirpich11")
-    const groups = {
+const groupAnimationDelay = (index: number, animationKey: string) => {
+    const groups: Record<string, string[]> = {
         "10": ["wallKirpich10_0", "wallKirpich10_1", "wallKirpich10_2", "wallKirpich10_3"],
-        "11": ["wallKirpich11_1", "wallKirpich11_2", "wallKirpich11_3", "wallKirpich11_4"],
-        "12": ["wallKirpich12_1", "wallKirpich12_2"],
-        "13": ["wallKirpich13_1", "wallKirpich13_2"],
-        // Добавьте другие группы по необходимости
+        // Другие группы...
     };
-    
+
     for (const groupKey in groups) {
         if (groups[groupKey].includes(animationKey)) {
-            // Возвращаем фиксированное значение задержки для всей группы
-            return parseInt(groupKey) * 0.3; // Задержка для групп с ключами
+            return parseInt(groupKey) * 0.3;
         }
     }
-    return index * 0.3; // Обычная задержка для элементов, не входящих в группы
+    return index * 0.3;
 };
 
 const ConstructorSection = () => {
     const [step, setStep] = useState<"foundation" | "walls" | "exterior" | "interior" | "roof">("foundation");
     const [selectedFoundation, setSelectedFoundation] = useState<"lentochniy" | "svainiy" | "plitochniy" | null>(null);
-    const [selectedWalls, setSelectedWalls] = useState<"gazoblok" | "kirpich" | null>(null);
+    const [selectedWalls, setSelectedWalls] = useState<"gazoblock" | "kirpich" | null>(null);
     const [selectedExterior, setSelectedExterior] = useState<"yes" | "no" | null>(null);
     const [selectedInterior, setSelectedInterior] = useState<"yes" | "no" | null>(null);
     const [selectedRoof, setSelectedRoof] = useState<"dvukhskatnaya" | "chetyrekhskatnaya" | null>(null);
@@ -151,7 +146,6 @@ const ConstructorSection = () => {
         roof: false
     });
     const [animationsActive, setAnimationsActive] = useState(true);
-    const [foundationAnimationCompleted, setFoundationAnimationCompleted] = useState(false); // Новое состояние
 
     const animationCoordinates = {
         lentochniy: [{ x: 0, y: 5 }, { x: 0, y: 4 }, { x: -160, y: 82 }, { x: 137, y: 75 }, { x: 0, y: 4 }, { x: 0, y: 4 }],
@@ -215,7 +209,7 @@ const ConstructorSection = () => {
     };
 
     const wallAnimations = {
-        gazoblok: [wallGazoblock1, wallGazoblock2, wallGazoblock3, wallGazoblock4, wallGazoblock5, wallGazoblock6, wallGazoblock7, wallGazoblock8, wallGazoblock9, wallGazoblock10_0, wallGazoblock10_1, wallGazoblock10_2, wallGazoblock10_3, wallGazoblock10_4, wallGazoblock11_1, wallGazoblock11_2, wallGazoblock11_3, wallGazoblock11_4, wallGazoblock12_1, wallGazoblock12_2, wallGazoblock13_1, wallGazoblock13_2, wallGazoblock14],
+        gazoblock: [wallGazoblock1, wallGazoblock2, wallGazoblock3, wallGazoblock4, wallGazoblock5, wallGazoblock6, wallGazoblock7, wallGazoblock8, wallGazoblock9, wallGazoblock10_0, wallGazoblock10_1, wallGazoblock10_2, wallGazoblock10_3, wallGazoblock10_4, wallGazoblock11_1, wallGazoblock11_2, wallGazoblock11_3, wallGazoblock11_4, wallGazoblock12_1, wallGazoblock12_2, wallGazoblock13_1, wallGazoblock13_2, wallGazoblock14],
         kirpich: [wallKirpich1, wallKirpich2, wallKirpich3, wallKirpich4, wallKirpich5, wallKirpich6, wallKirpich7, wallKirpich8, wallKirpich9, wallKirpich10_0, wallKirpich10_1, wallKirpich10_2, wallKirpich10_3, wallKirpich10_4, wallKirpich11_1, wallKirpich11_2, wallKirpich11_3, wallKirpich11_4, wallKirpich12_1, wallKirpich12_2, wallKirpich13_1, wallKirpich13_2, wallKirpich14 ]
     };
 
@@ -249,7 +243,7 @@ const ConstructorSection = () => {
         }
     };
 
-    const handleWallSelect = (option: "gazoblok" | "kirpich") => {
+    const handleWallSelect = (option: "gazoblock" | "kirpich") => {
         setSelectedWalls(option);
         setAnimationsActive(false);
         setTimeout(() => setAnimationsActive(true), 100);
@@ -316,17 +310,6 @@ const ConstructorSection = () => {
         }
     };
 
-    const renderNavigationButtons = () => (
-        <div className={style.navigationButtons}>
-            {step !== "foundation" && (
-                <p className={style.backButton} onClick={handleBack}>Назад</p>
-            )}
-            {/* Добавлено условие для "roof" */}
-            {step !== "roof" && (
-                <p className={style.nextButton} onClick={handleNext}>Далее</p>
-            )}
-        </div>
-    );
     
 
     const renderFoundationAnimations = () => {
@@ -637,7 +620,7 @@ const ConstructorSection = () => {
                 {step === "walls" && (
                     <>
                         <h2 style={{ marginBottom: '20px' }}>Выберите стены</h2>
-                        <p onClick={() => handleWallSelect("gazoblok")} className={`${style.option} ${selectedWalls === "gazoblok" ? style.selected : ""}`}>Газоблок</p>
+                        <p onClick={() => handleWallSelect("gazoblock")} className={`${style.option} ${selectedWalls === "gazoblock" ? style.selected : ""}`}>Газоблок</p>
                         <p onClick={() => handleWallSelect("kirpich")} className={`${style.option} ${selectedWalls === "kirpich" ? style.selected : ""}`}>Кирпич</p>
                     </>
                 )}

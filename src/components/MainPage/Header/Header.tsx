@@ -43,7 +43,6 @@ const Header: FC = () => {
                         <Link to={"/constructor"}>Собрать свой дом</Link>
                     </p>
                     <Link to={"/reviews"}>Отзывы</Link>
-                    {/*<p>О нас</p>*/}
                 </div>
 
                 <div className={style.bid} onClick={togglePopup}>
@@ -70,30 +69,13 @@ const Header: FC = () => {
                         <button className={style.closeButton} onClick={togglePopup}>
                             ✕
                         </button>
-                        <p className={style.popupTitle}>Оставьте заявку</p>
-                        <p className={style.popupSubtitle}>
-                            Специалист свяжется с вами и даст конечный результат
-                        </p>
-                        <form className={style.form}>
-                            <input
-                                type="text"
-                                className={style.inputField}
-                                placeholder="Номер телефона"
-                            />
-                            <input
-                                type="text"
-                                className={style.inputField}
-                                placeholder="ФИО"
-                            />
-                            <input
-                                type="email"
-                                className={style.inputField}
-                                placeholder="E-mail"
-                            />
-                            <button type="submit" className={style.submitButton}>
-                                Оставить заявку
-                            </button>
-                        </form>
+                        <iframe
+                            src="../../../../form_1.html"
+                            title="AmoCRM Form"
+                            width="100%"
+                            height="600px"
+                            style={{ border: "none" }}
+                        ></iframe>
                         <p className={style.contactSocial}>
                             - Или обратитесь к нам в соцсетях -
                         </p>

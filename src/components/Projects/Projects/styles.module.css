@@ -34,6 +34,7 @@
     border-radius: 2.344rem;
     position: relative;
     width: calc(33.33% - 2rem); /* Ширина каждой карточки 33.33% - с учетом промежутка */
+    height: 26rem;
     overflow: hidden;
     box-sizing: border-box;
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;

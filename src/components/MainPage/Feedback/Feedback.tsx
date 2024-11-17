@@ -4,6 +4,7 @@ import quotes from "../../../assets/quotes.png";
 import quotesEnd from "../../../assets/quotesEnd.png";
 import { motion } from "framer-motion";
 import { useInView } from 'react-intersection-observer';
+import {Link} from "react-router-dom";
 
 const Feedback = () => {
     const { ref: topRef, inView: topInView } = useInView({ triggerOnce: true });
@@ -79,7 +80,7 @@ const Feedback = () => {
                 animate={buttonInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 1.2 }}
             >
-                <button className={style.more}>Больше</button>
+                <button className={style.more}><Link to={"/reviews"} style={{color: "black"}}>Больше</Link></button>
             </motion.div>
         </div>
     );

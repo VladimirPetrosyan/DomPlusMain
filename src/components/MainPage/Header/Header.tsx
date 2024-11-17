@@ -42,8 +42,8 @@ const Header: FC = () => {
                     <p>
                         <Link to={"/constructor"}>Собрать свой дом</Link>
                     </p>
-                    <p>Расчет стоимости</p>
-                    <p>О нас</p>
+                    <Link to={"/reviews"}>Отзывы</Link>
+                    {/*<p>О нас</p>*/}
                 </div>
 
                 <div className={style.bid} onClick={togglePopup}>

@@ -1,131 +1,141 @@
-import  { useState } from "react";
+import { useState, useEffect } from "react";
 import style from "./styles.module.css";
 import { slidesData } from "./slidesData";
-import { motion, AnimatePresence } from "framer-motion"; // Добавляем framer-motion
 
-const ProjectAsistance = () => {
+const ProjectAssistance = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [direction, setDirection] = useState(0); // Направление слайда
+  const [visibleRange, setVisibleRange] = useState([0, 3]);
+  const [direction, setDirection] = useState(1);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      handleNextSlide();
+    }, 6000); // Автопрокрутка каждые 6 секунд
+    return () => clearInterval(interval);
+  }, [currentSlide]);
 
   const handleNextSlide = () => {
     setDirection(1);
-    setCurrentSlide((prevSlide) => (prevSlide + 1) % slidesData.length);
+    const newSlide = (currentSlide + 1) % slidesData.length;
+    setCurrentSlide(newSlide);
+    updateVisibleRange(newSlide);
   };
 
   const handlePrevSlide = () => {
     setDirection(-1);
-    setCurrentSlide((prevSlide) =>
-      prevSlide === 0 ? slidesData.length - 1 : prevSlide - 1
-    );
+    const newSlide =
+        currentSlide === 0 ? slidesData.length - 1 : currentSlide - 1;
+    setCurrentSlide(newSlide);
+    updateVisibleRange(newSlide);
   };
 
-  const handleSelectSlide = (index: number) => {
+  const handleSelectSlide = (index) => {
     setDirection(index > currentSlide ? 1 : -1);
     setCurrentSlide(index);
+    updateVisibleRange(index);
   };
 
-  const getVisibleSlides = () => {
-    const visibleSlides = [];
-    for (let i = -1; i <= 1; i++) {
-      const slideIndex = (currentSlide + i + slidesData.length) % slidesData.length;
-      visibleSlides.push(slideIndex);
+  const updateVisibleRange = (newSlide) => {
+    let [start, end] = visibleRange;
+    if (newSlide >= end) {
+      start = newSlide - 2;
+      end = newSlide + 1;
+    } else if (newSlide < start) {
+      start = newSlide;
+      end = newSlide + 3;
     }
-    return visibleSlides;
+    if (start < 0) {
+      start = 0;
+      end = 3;
+    }
+    if (end > slidesData.length) {
+      end = slidesData.length;
+      start = end - 3;
+    }
+    setVisibleRange([start, end]);
   };
 
   return (
-    <div className={style.main}>
-      <div className={style.headerText}>
-        <p className={style.topText}>От идеи до воплощения —</p>
-        <p className={style.bottomText}>каждый шаг под контролем</p>
-      </div>
-
-      <div className={style.window}>
-        <AnimatePresence initial={false} custom={direction}>
-          <motion.div
-            key={currentSlide}
-            className={style.leftContent}
-            initial={{ opacity: 1, x: direction === 1 ? 100 : -100 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: direction === 1 ? -100 : 100 }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className={style.helpText}>
-              <p className={style.helpTextTop}>{slidesData[currentSlide].title}</p>
-              <p className={style.helpTextBottom}>
-                {slidesData[currentSlide].subtitle}
-              </p>
-            </div>
-            <div className={style.helpIco}>
-              {slidesData[currentSlide].items.map((item, index) => (
-                <div className={style.globalIco} key={index}>
-                  <img src={item.icon} alt={item.text} />
-                  <p className={style.icoText}>{item.text}</p>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        </AnimatePresence>
-
-        <AnimatePresence initial={false} custom={direction}>
-          <motion.div
-            className={style.rightContent}
-            key={currentSlide}
-            initial={{ opacity: 0, x: direction === 1 ? 100 : -100 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: direction === 1 ? -100 : 100 }}
-            transition={{ duration: 0.8 }}
-          >
-            <img
-              className={style.imageDom}
-              src={slidesData[currentSlide].image}
-              alt="Slide"
-            />
-          </motion.div>
-        </AnimatePresence>
-      </div>
-
-      <div className={style.bottomContent}>
-        <div className={style.slider}>
-          <button className={style.sliderArrow} onClick={handlePrevSlide}>
-            {"<"}
-          </button>
-
-          {getVisibleSlides().map((index) => (
-            <motion.div
-              key={index}
-              className={
-                index === currentSlide
-                  ? style.sliderSelectedContent
-                  : style.sliderContent
-              }
-              onClick={() => handleSelectSlide(index)}
-              whileHover={{ scale: 1.1 }}
-              transition={{ duration: 0.2 }}
-            >
-              <p
-                className={
-                  index === currentSlide
-                    ? style.sliderContentTextSelected
-                    : style.sliderContentText
-                }
-              >
-                {index + 1}
-              </p>
-            </motion.div>
-          ))}
-
-          <button className={style.sliderArrow} onClick={handleNextSlide}>
-            {">"}
-          </button>
+      <div className={style.main}>
+        <div className={style.headerText}>
+          <p className={style.topText}>От идеи до воплощения —</p>
+          <p className={style.bottomText}>каждый шаг под контролем</p>
         </div>
-
-        <p className={style.quote}>
-          " Учитываем <b>каждый</b> ваш запрос"
-        </p>
+        <div className={style.window}>
+          <div
+              key={currentSlide}
+              className={`${style.windowContent} ${
+                  direction === 1 ? style.slideInFromRight : style.slideInFromLeft
+              }`}
+          >
+            <div className={style.leftContent}>
+              <div className={style.helpText}>
+                <p className={style.helpTextTop}>
+                  {slidesData[currentSlide].title}
+                </p>
+                <p className={style.helpTextBottom}>
+                  {slidesData[currentSlide].subtitle}
+                </p>
+              </div>
+              <div className={style.helpIco}>
+                {slidesData[currentSlide].items.map((item, index) => (
+                    <div className={style.globalIco} key={index}>
+                      <img src={item.icon} alt={item.text} />
+                      <p className={style.icoText}>{item.text}</p>
+                    </div>
+                ))}
+              </div>
+            </div>
+            <div className={style.rightContent}>
+              <img
+                  className={style.imageDom}
+                  src={slidesData[currentSlide].image}
+                  alt="Slide"
+              />
+            </div>
+          </div>
+        </div>
+        <div className={style.bottomContent}>
+          <div className={style.slider}>
+            <button className={style.sliderArrow} onClick={handlePrevSlide}>
+              {"<"}
+            </button>
+            {slidesData.map((_, index) => {
+              if (index >= visibleRange[0] && index < visibleRange[1]) {
+                return (
+                    <div
+                        key={index}
+                        className={
+                          index === currentSlide
+                              ? style.sliderSelectedContent
+                              : style.sliderContent
+                        }
+                        onClick={() => handleSelectSlide(index)}
+                    >
+                      <p
+                          className={
+                            index === currentSlide
+                                ? style.sliderContentTextSelected
+                                : style.sliderContentText
+                          }
+                      >
+                        {index + 1}
+                      </p>
+                    </div>
+                );
+              }
+              return null;
+            })}
+            <button className={style.sliderArrow} onClick={handleNextSlide}>
+              {">"}
+            </button>
+          </div>
+          <p className={style.quote}>
+            " Учитываем <b>каждый</b> ваш запрос"
+          </p>
+        </div>
       </div>
-    </div>
   );
 };
 
-export default ProjectAsistance;
+export default ProjectAssistance;

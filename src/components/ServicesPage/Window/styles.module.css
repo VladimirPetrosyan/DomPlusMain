@@ -27,6 +27,13 @@
     max-width: 100%;
     height: auto;
     object-fit: cover;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    cursor: pointer;
+    border-radius: 3rem;
+}
+.rightRec2:hover {
+    transform: scale(1.05); /* Увеличивает изображение при наведении */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Добавляет тень при наведении */
 }
 .adaptive{
     max-width: 100%;
@@ -34,6 +41,12 @@
     object-fit: cover;
     position: relative;
     top: -80%;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    cursor: pointer;
+}
+.adaptive:hover {
+    transform: scale(1.05); /* Увеличивает изображение при наведении */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Добавляет тень при наведении */
 }
 .firstContainerLeft{
     max-width: 100%;
@@ -41,13 +54,20 @@
     object-fit: cover;
     position: relative;
     background-color: #97D4F2;
-    border-radius: 2.344rem;
+    border-radius: 3.344rem;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.firstContainerLeft:hover {
+    transform: scale(1.05); /* Увеличивает изображение при наведении */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Добавляет тень при наведении */
 }
 .leftRec{
     object-fit: cover;
     position: relative;
     max-width: 100%;
     height: 100%;
+    cursor: pointer; /* Делает элементы кликабельными */
+    border-radius: 3rem;
 }
 .secondLeftContainer,.secondRightContainer{
     display: flex;
@@ -81,9 +101,23 @@
     flex-direction: column;
     gap: 1rem;
 }
-.imgCont{
+.imgCont {
     object-fit: cover;
     position: relative;
     max-width: 100%;
     height: 100%;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    cursor: pointer; /* Делает элементы кликабельными */
+    border-radius: 3rem;
+}
+
+.imgCont:hover {
+    transform: scale(1.05); /* Увеличивает изображение при наведении */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Добавляет тень при наведении */
+}
+
+.imgCont.active, .leftRec.active, .rightRec.active, .rightRec2.active {
+    border: 2px solid #007BFF; /* Подсветка выбранных карточек */
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4); /* Подсветка при выборе */
+    transform: scale(0.95); /* Сжатие при выборе */
 }

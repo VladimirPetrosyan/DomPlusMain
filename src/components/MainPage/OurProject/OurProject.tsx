@@ -25,7 +25,6 @@ const OurProject: FC = () => {
                 {ourProjectCardData.map((card) => (
                     <Card
                         key={card.id}
-                        topText={card.topText}
                         bottomText={card.bottomText}
                     />
                 ))}

@@ -1,23 +1,19 @@
 const ourProjectCardData = [
     {
         id: 1,
-        topText: "82,6М^2",
-        bottomText: "14 150 ₽/мес"
+        bottomText: "60М^2",
     },
     {
         id: 2,
-        topText: "120М^2",
-        bottomText: "18 300 ₽/мес"
+        bottomText: "80М^2",
     },
     {
         id: 3,
-        topText: "150М^2",
-        bottomText: "25 500 ₽/мес"
+        bottomText: "110М^2",
     },
     {
         id: 4,
-        topText: "90М^2",
-        bottomText: "15 000 ₽/мес"
+        bottomText: "140М^2",
     }
 ];
 

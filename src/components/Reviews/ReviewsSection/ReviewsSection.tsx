@@ -3,7 +3,6 @@ import style from "./styles.module.css";
 import StarFilled from "./StarFilled.svg";
 import StarEmpty from "./StarEmpty.svg";
 
-
 type Review = {
     author: string;
     rating: number;
@@ -19,7 +18,6 @@ interface ReviewsSectionProps {
 const ReviewsSection: React.FC<ReviewsSectionProps> = ({ reviews }) => {
     return (
         <div className={style.main}>
-            <p className={style.topText}>Отзывы</p>
             <div className={style.reviewsContainer}>
                 {reviews.map((review, index) => (
                     <div key={index} className={style.reviewCard}>
@@ -40,9 +38,6 @@ const ReviewsSection: React.FC<ReviewsSectionProps> = ({ reviews }) => {
                             </div>
                         </div>
                         <p className={style.author}>{review.author}</p>
-                        <blockquote className={style.reviewTitle}>
-                            "{review.text.split('.')[0]}"
-                        </blockquote>
                         <p className={style.reviewText}>{review.text}</p>
                     </div>
                 ))}

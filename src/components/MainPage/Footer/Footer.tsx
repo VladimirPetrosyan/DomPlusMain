@@ -8,10 +8,10 @@ const Footer = () =>{
         <div className={style.main}>
             <div className={style.firstRow}>
                 <p className={style.topText}>
-                    ИП Тут нужно заполнить
+                    ИП КИБАЛЬНИКОВА ВИКТОРИЯ АРТЕМОВНА
                 </p>
                 <p className={style.middleText}>
-                    ОГРН хзхзхзхзхзхзхзхзхзхзх
+                    ИНН 236007648639
                 </p>
                 <div className={style.bottomContent}>
                     <img src={tg}/>
@@ -25,7 +25,7 @@ const Footer = () =>{
                     КОНТАКТЫ
                 </p>
                 <p className={style.contactNumber}>
-                    +7 (903) 400-03-61
+                    {("+7 (903) 400-03-61")}
                 </p>
                 <p className={style.secondRowText}>
                     Консультации и расчет
@@ -36,7 +36,7 @@ const Footer = () =>{
                     ЭЛЕКТРОННАЯ ПОЧТА
                 </p>
                 <p className={style.secondRowText}>
-                    neznau@gmail.com
+                    dom.pluse.expert1@yandex.ru
                 </p>
                 <p className={style.secondRowText}>
                     Напишите нам

@@ -14,18 +14,28 @@
     text-align: center;
 
 }
-.oneProject{
+.oneProject {
     background: linear-gradient(180deg, rgba(12, 12, 12, 0.3) 0%, rgba(0, 0, 0, 0.4) 100%), url("../../../assets/image 39.png") center;
     width: 35.125rem;
     height: 26.625rem;
     border-radius: 2.344rem;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Добавление плавной анимации */
+    cursor: pointer; /* Указатель для обозначения кликабельности */
+}
 
+.oneProject:hover {
+    transform: scale(1.05); /* Увеличение на 5% при наведении */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Добавление тени для эффекта */
+}
+
+.oneProject:active {
+    transform: scale(0.95); /* Уменьшение при нажатии */
 }
 .projects{
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    gap: 1rem;
+    gap: 6rem;
     justify-content: center;
 }
 .imageTopText{

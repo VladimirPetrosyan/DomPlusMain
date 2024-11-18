@@ -4,21 +4,21 @@ import MainProjects from "./components/Projects/Main/MainProjects.tsx";
 import Services from "./components/ServicesPage/Services/Services.tsx";
 import ReviewsPage from "./components/Reviews/ReviewsPage/ReviewsPage.tsx";
 import ConstructorPage from "./components/Constructor/ConstructorPage/ConstructorPage.tsx";
+import ScrollToTop from './ScrollToTop'; // Импортируем компонент
 
 function App() {
-
   return (
     <Router>
-        <Routes>
-            <Route path="/" element={<Main/>}/>
-            <Route path="/services" element={<Services/>}/>
-            <Route path="/projects" element={<MainProjects/>}/>
-            <Route path="/reviews" element={<ReviewsPage/>}/>
-            <Route path="/constructor" element={<ConstructorPage/>}/>
-        </Routes>
-
+      <ScrollToTop /> {/* Добавляем компонент для сброса скролла */}
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/projects" element={<MainProjects />} />
+        <Route path="/reviews" element={<ReviewsPage />} />
+        <Route path="/constructor" element={<ConstructorPage />} />
+      </Routes>
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;

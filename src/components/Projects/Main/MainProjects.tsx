@@ -26,7 +26,7 @@ const MainProjects = () => {
         <div>
             <Header />
             <div>
-                <MainWindow selectedProjectId={selectedProjectId} />
+            <MainWindow selectedProjectId={selectedProjectId} isRealized={view === "realized"} />
                 <div className={style.tabContainer}>
                     <button
                         className={`${style.tabButton} ${view === "projects" ? style.activeTab : ""}`}

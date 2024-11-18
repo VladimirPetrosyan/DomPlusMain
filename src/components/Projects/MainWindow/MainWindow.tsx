@@ -3,20 +3,25 @@ import style from "./styles.module.css";
 import { motion } from "framer-motion";
 import Navigation from "../Navigation/Navigation.tsx";
 import cardData from "../Projects/Cards/cardData.ts";
+import cardDataRealized from "../Projects/RealizedProjects/realizedCardData.ts"; // Импорт данных для реализованных проектов
 import galochka from "../../../assets/galochka.png";
 
 type MainWindowProps = {
     selectedProjectId: number | null; 
+    isRealized: boolean; // Новое свойство для определения типа контента (реализованные или обычные проекты)
 };
 
-const MainWindow: FC<MainWindowProps> = ({ selectedProjectId }) => {
-    const [activeProject, setActiveProject] = useState(cardData[0]);
+const MainWindow: FC<MainWindowProps> = ({ selectedProjectId, isRealized }) => {
+    // Выбор данных на основе текущей вкладки
+    const data = isRealized ? cardDataRealized : cardData;
+
+    const [activeProject, setActiveProject] = useState(data[0]);
     const [mainImage, setMainImage] = useState(activeProject.images[0]);
-    
+
     const mainWindowRef = useRef<HTMLDivElement>(null);
 
     const handleProjectChange = (projectId: number) => {
-        const selectedProject = cardData.find(card => card.id === projectId);
+        const selectedProject = data.find(card => card.id === projectId);
         if (selectedProject) {
             setActiveProject(selectedProject);
             setMainImage(selectedProject.images[0]);
@@ -28,7 +33,7 @@ const MainWindow: FC<MainWindowProps> = ({ selectedProjectId }) => {
         if (selectedProjectId !== null) {
             handleProjectChange(selectedProjectId);
         }
-    }, [selectedProjectId]);
+    }, [selectedProjectId, data]); // Добавлено data в зависимости, чтобы менять контент при изменении isRealized
 
     const handleImageClick = (image: string) => {
         setMainImage(image);
@@ -41,13 +46,13 @@ const MainWindow: FC<MainWindowProps> = ({ selectedProjectId }) => {
                 <div className={style.contentLeft}>
                     <div className={style.contentOne}>
                         <motion.img
-                                key={mainImage}
-                                className={style.amg}
-                                src={mainImage}
-                                alt="Main Project Image"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ duration: 1 }}
+                            key={mainImage}
+                            className={style.amg}
+                            src={mainImage}
+                            alt="Main Project Image"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 1 }}
                         />
                         <div className={style.slider}>
                             {activeProject.images.map((image, index) => (

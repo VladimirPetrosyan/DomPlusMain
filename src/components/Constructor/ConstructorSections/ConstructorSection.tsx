@@ -114,19 +114,32 @@ import interiorFinish27 from "../../../assets/constructor/interior_vnutr/animati
 import roofDvukhskatnaya from "../../../assets/constructor/roof/2.png";
 import roofChetyrekhskatnaya from "../../../assets/constructor/roof/4.png";
 
+import additionalAnimation1 from "../../../assets/constructor/additional/animation1.png";
+import additionalAnimation2 from "../../../assets/constructor/additional/animation2.png";
+import additionalAnimation3 from "../../../assets/constructor/additional/animation3.png";
+import additionalAnimation4 from "../../../assets/constructor/additional/animation4.png";
+import additionalAnimation5 from "../../../assets/constructor/additional/animation5.png";
+import additionalAnimation6 from "../../../assets/constructor/additional/animation6.png";
+import additionalAnimation7 from "../../../assets/constructor/additional/animation7.png";
+import additionalAnimation8 from "../../../assets/constructor/additional/animation8.png";
+import additionalAnimation9 from "../../../assets/constructor/additional/animation8.png";
 
-const groupAnimationDelay = (index: number, animationKey: string) => {
-    const groups: Record<string, string[]> = {
-        "10": ["wallKirpich10_0", "wallKirpich10_1", "wallKirpich10_2", "wallKirpich10_3"],
-        // Другие группы...
-    };
 
+const groupAnimationDelay = (index: number, animationKey: string, groups: Record<string, string[]>): number => {
+    // Находим группу, к которой принадлежит текущий ключ
     for (const groupKey in groups) {
         if (groups[groupKey].includes(animationKey)) {
-            return parseInt(groupKey) * 0.3;
+            return parseInt(groupKey) * 0.3; // Устанавливаем одинаковую задержку для всей группы
         }
     }
-    return index * 0.3;
+    return index * 0.3; // Если анимация не в группе, используем стандартную задержку
+};
+
+const groups: Record<string, string[]> = {
+    "10": ["wallKirpich10_0", "wallKirpich10_1", "wallKirpich10_2", "wallKirpich10_3", "wallKirpich10_4"],
+    "11": ["wallGazoblock11_1", "wallGazoblock11_2", "wallGazoblock11_3", "wallGazoblock11_4"],
+    "12": ["wallGazoblock12_1", "wallGazoblock12_2"],
+    "13": ["wallGazoblock12_1", "wallGazoblock13_2"],
 };
 
 const ConstructorSection = () => {
@@ -163,12 +176,12 @@ const ConstructorSection = () => {
             { x: 0, y: 2 }, { x: 0, y: 1 }
         ],
         gazoblock: [
-            { x: 0, y: 2 }, { x: 0, y: 2 }, { x: 0, y: 2 }, { x: 0, y: 2 },
-            { x: 0, y: 2 }, { x: 0, y: 2 }, { x: 0, y: 2 }, { x: 0, y: 2 },
-            { x: 0, y: 2 }, { x: -1, y: 5 }, { x: -2, y: 5 }, { x: 0, y: 5 },
-            { x: 0, y: 5 }, { x: 0, y: 5 }, { x: 0, y: 5 }, { x: 0, y: 5 },
-            { x: 0, y: 6}, { x: 0, y: 5 }, { x: 0, y: 5 }, { x: 0, y: 5 },
-            { x: 0, y: 6 }, { x: 0, y: 5 }
+            { x: 0, y: -2 }, { x: 0, y: -2 }, { x: 0, y: -2 }, { x: 0, y: -2 },
+            { x: 0, y: -2 }, { x: 0, y: -2 }, { x: 0, y: -2 }, { x: 0, y: -2 },
+            { x: 0, y: -2 }, { x: -1, y: -2 }, { x: -2, y: 1 }, { x: 0, y: 1 },
+            { x: 0, y: 1 }, { x: 0, y: 1 }, { x: 0, y: 1 }, { x: 0, y: 1 },
+            { x: 0, y: 2}, { x: 0, y: 1 }, { x: 0, y: 1 }, { x: 0, y: 1 },
+            { x: 0, y: 2 }, { x: 0, y: 1 }
         ]
     };
 
@@ -202,6 +215,14 @@ const ConstructorSection = () => {
         ]
     };
 
+    const additionalCoordinates = [
+        { x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }, 
+        { x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 },
+        { x: 0, y: 0 }
+    ];
+
+    
+
     const animations = {
         lentochniy: [animation1_1, animation1_2, grass1, grass2, animation1_3, animation1_4],
         svainiy: [animation2_1, animation2_2, grass1, grass2, animation2_3, animation2_4],
@@ -226,10 +247,24 @@ const ConstructorSection = () => {
         chetyrekhskatnaya: [roofChetyrekhskatnaya]
     };
 
+    const additionalAnimations = [
+        additionalAnimation1,
+        additionalAnimation2,
+        additionalAnimation3,
+        additionalAnimation4,
+        additionalAnimation5,
+        additionalAnimation6,
+        additionalAnimation7,
+        additionalAnimation8,
+        additionalAnimation9,
+    ];
+    
+
     const zIndexValuesForWalls = [8, 5, 5, 10, 6, 7, 10, 9, 13, 22, 23, 21, 21, 23, 18, 18, 18, 22, 18, 18, 22, 23, 20];
     const zIndexValuesForExterior = [23, 25, 24, 23, 24, 22, 22, 1, 1, 1, 1, 1, 1];
     const zIndexValuesForInterior = [4, 4, 5, 4, 8, 7, 8, 4, 4, 10, 0, 0, 18, 18, 18, 18, 18, 18, 18, 20, 21, 18, 22, 21, 24, 18, 22];
     const zIndexValuesForRoof = [25, 26];
+    const zIndexValuesForAdditional = [10, 10, 26, 8, 10, 10, 10, 22]; 
 
     const handleOptionSelect = (option: "lentochniy" | "svainiy" | "plitochniy") => {
         if (selectedFoundation !== option) {
@@ -402,8 +437,14 @@ const ConstructorSection = () => {
         if (selectedWalls && animationsActive && step === "walls") {
             // Выполняем анимацию только на этапе выбора стен, если анимации активны
             return wallAnimations[selectedWalls]?.map((animation: string, index: number) => {
-                // Определяем измененные координаты в зависимости от выбранного материала
                 const coordinates = wallCoordinates[selectedWalls]?.[index] || { x: 0, y: 0 };
+                const animationKey = `wall${selectedWalls}${index}`; // Генерация ключа анимации
+                const groupKey = Object.keys(groups).find((key) =>
+                    groups[key].includes(animationKey)
+                );
+    
+                // Если элемент принадлежит группе, используем ту же задержку
+                const delay = groupKey ? groupAnimationDelay(index, animationKey, groups) : index * 0.3;
     
                 return (
                     <motion.img
@@ -412,16 +453,16 @@ const ConstructorSection = () => {
                         className={style.animatedElement}
                         initial={{
                             x: coordinates.x,
-                            y: -200, // Начальная позиция для предотвращения "мелькания"
-                            opacity: 0 // Начальная прозрачность
+                            y: -200,
+                            opacity: 0
                         }}
                         animate={{
                             x: coordinates.x,
                             y: coordinates.y,
                             opacity: 1,
-                            transition: { delay: groupAnimationDelay(index, `wall${selectedWalls}${index}`), duration: 0.5 }
+                            transition: { delay, duration: 0.4 }
                         }}
-                        exit={{ opacity: 0, y: 100 }} // Убираем стены при выходе
+                        exit={{ opacity: 0, y: 100 }}
                         style={{ zIndex: zIndexValuesForWalls[index] }}
                         alt={`Стена элемент ${index}`}
                     />
@@ -431,7 +472,6 @@ const ConstructorSection = () => {
             // Мгновенное отображение стен на всех остальных этапах
             return wallAnimations[selectedWalls]?.map((animation: string, index: number) => {
                 const coordinates = wallCoordinates[selectedWalls]?.[index] || { x: 0, y: 0 };
-    
                 return (
                     <motion.img
                         key={`wall-static-${index}`}
@@ -440,9 +480,9 @@ const ConstructorSection = () => {
                         animate={{
                             x: coordinates.x,
                             y: coordinates.y,
-                            opacity: 1, // Полная непрозрачность
+                            opacity: 1
                         }}
-                        transition={{ duration: 0 }} // Убираем анимацию
+                        transition={{ duration: 0 }}
                         style={{ zIndex: zIndexValuesForWalls[index] }}
                         alt={`Стена элемент ${index}`}
                     />
@@ -531,36 +571,57 @@ const ConstructorSection = () => {
         }
         return null;
     };
+    
+    const renderAdditionalAnimations = () => {
+        return additionalAnimations.map((animation: string, index: number) => (
+            <motion.img
+                key={`additional-${index}`}
+                src={animation}
+                className={style.animatedElement}
+                initial={{ opacity: 0, scale: 0.8, x: additionalCoordinates[index].x, y: additionalCoordinates[index].y }}
+                animate={{ opacity: 1, scale: 1, transition: { delay: index * 0.2, duration: 0.5 }, x: additionalCoordinates[index].x, y: additionalCoordinates[index].y }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                style={{ zIndex: zIndexValuesForAdditional[index] }}
+                alt={`Дополнительная анимация ${index}`}
+            />
+        ));
+    };
 
     const renderRoofAnimations = () => {
         if (selectedRoof && animationsActive && step === "roof") {
-            return roofAnimations[selectedRoof]?.map((animation: string, index: number) => {
-                const coordinates = roofCoordinates[selectedRoof]?.[index] || { x: 0, y: 0 };
+            // Отображение дополнительных анимаций перед крышей
+            return (
+                <>
+                    {renderAdditionalAnimations()}
+                    {roofAnimations[selectedRoof]?.map((animation, index) => {
+                        const coordinates = roofCoordinates[selectedRoof]?.[index] || { x: 0, y: 0 };
     
-                return (
-                    <motion.img
-                        key={`roof-${index}`}
-                        src={animation}
-                        className={style.animatedElement}
-                        initial={{
-                            x: coordinates.x,
-                            y: -200, // Начальная позиция для предотвращения "мелькания"
-                            opacity: 0 // Начальная прозрачность
-                        }}
-                        animate={{
-                            x: coordinates.x,
-                            y: coordinates.y,
-                            opacity: 1,
-                            transition: { duration: 0.5 }
-                        }}
-                        exit={{ opacity: 0, y: 100 }}
-                        style={{ zIndex: zIndexValuesForRoof[index] }}
-                        alt={`Крыша элемент ${index}`}
-                    />
-                );
-            });
+                        return (
+                            <motion.img
+                                key={`roof-${index}`}
+                                src={animation}
+                                className={style.animatedElement}
+                                initial={{
+                                    x: coordinates.x,
+                                    y: -200, // Начальная позиция для предотвращения "мелькания"
+                                    opacity: 0 // Начальная прозрачность
+                                }}
+                                animate={{
+                                    x: coordinates.x,
+                                    y: coordinates.y,
+                                    opacity: 1,
+                                    transition: { duration: 0.5 }
+                                }}
+                                exit={{ opacity: 0, y: 100 }}
+                                style={{ zIndex: zIndexValuesForRoof[index] }}
+                                alt={`Крыша элемент ${index}`}
+                            />
+                        );
+                    })}
+                </>
+            );
         } else if (selectedRoof && step !== "roof") {
-            return roofAnimations[selectedRoof]?.map((animation: string, index: number) => {
+            return roofAnimations[selectedRoof]?.map((animation, index) => {
                 const coordinates = roofCoordinates[selectedRoof]?.[index] || { x: 0, y: 0 };
     
                 return (
@@ -582,6 +643,7 @@ const ConstructorSection = () => {
         }
         return null;
     };
+
 
     return (
         <div className={style.constructorContainer}>

@@ -1,4 +1,4 @@
-import { images } from "../Cards/cardImages";
+import { images } from "../Cards/cardImagesRealized";
 
 const realizedCardData = [
     {

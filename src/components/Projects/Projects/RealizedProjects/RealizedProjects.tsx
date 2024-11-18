@@ -10,7 +10,7 @@ const RealizedProjects: FC<{ onProjectSelect: (projectId: number) => void }> = (
                 {realizedCardData.map((card) => (
                     <Card
                         key={card.id}
-                        image={card.mainImage}
+                        image={card.mainImage as string}
                         text={card.text}
                         onClick={() => onProjectSelect(card.id)}
                     />

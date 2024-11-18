@@ -52,6 +52,10 @@ import proj9_3 from "../../../../assets/projects/proj9_140/proj9_3.jpg";
 import proj9_4 from "../../../../assets/projects/proj9_140/proj9_4.jpg";
 import proj9_5 from "../../../../assets/projects/proj9_140/proj9_5.jpg";
 
+
+
+
+
 export const images = {
     //проект 1
     proj1_1,
@@ -107,4 +111,7 @@ export const images = {
     proj9_3,
     proj9_4,
     proj9_5,
+
+
+
 };

@@ -3,7 +3,8 @@ import style from "./styles.module.css";
 import Card from "./OurProjectCard";
 import { useInView } from 'react-intersection-observer';
 import { motion } from "framer-motion";
-import ourProjectCardData from "./ourProjectCardData"; // Импортируем данные карточек
+import ourProjectCardData from "./ourProjectCardData";
+import {Link} from "react-router-dom"; // Импортируем данные карточек
 
 const OurProject: FC = () => {
     const { ref: headerRef, inView: headerInView } = useInView({ triggerOnce: true });
@@ -36,7 +37,7 @@ const OurProject: FC = () => {
                 animate={buttonInView ? { opacity: 0.8, y: 0 } : {}}
                 transition={{ duration: 1.2 }}
             >
-                <button className={style.more}>Больше</button>
+                <button className={style.more}><Link to={"/projects"}>Больше</Link></button>
             </motion.div>
         </div>
     );

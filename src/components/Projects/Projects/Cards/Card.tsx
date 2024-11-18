@@ -10,7 +10,7 @@ type CardProps = {
     key?: number
 };
 
-const Card: FC<CardProps> = ({image, text, onClick, key}) => {
+const Card: FC<CardProps> = ({image, text, onClick}) => {
     const {ref, inView} = useInView({triggerOnce: true});
 
     return (

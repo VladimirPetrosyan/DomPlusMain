@@ -47,7 +47,6 @@ import proj8_4 from "../../../../assets/projects/proj8_120/proj8_4.jpg";
 import proj8_5 from "../../../../assets/projects/proj8_120/proj8_5.jpg";
 
 import proj9_1 from "../../../../assets/projects/proj9_140/proj9_1.jpg";
-import proj9_2 from "../../../../assets/projects/proj9_140/proj9_2.jpg";
 import proj9_3 from "../../../../assets/projects/proj9_140/proj9_3.jpg";
 import proj9_4 from "../../../../assets/projects/proj9_140/proj9_4.jpg";
 import proj9_5 from "../../../../assets/projects/proj9_140/proj9_5.jpg";
@@ -107,7 +106,6 @@ export const images = {
     proj8_5,
     //проект 9
     proj9_1,
-    proj9_2,
     proj9_3,
     proj9_4,
     proj9_5,

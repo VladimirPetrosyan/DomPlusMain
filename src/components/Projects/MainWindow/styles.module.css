@@ -95,14 +95,13 @@
 }
 .slider{
     position: absolute;
-    top: 90%;
-    transform: translate(18%, -50%);
+    top: 80%;
     display: flex;
     flex-direction: row;
     gap: 1rem;
     justify-content: start;
     align-items: center;
-    width: 100%;
+    max-width: 480px;
 }
 
 .amg {

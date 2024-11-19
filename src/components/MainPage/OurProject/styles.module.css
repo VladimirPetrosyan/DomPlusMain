@@ -15,12 +15,29 @@
 
 }
 .oneProject {
-    background: linear-gradient(180deg, rgba(12, 12, 12, 0.3) 0%, rgba(0, 0, 0, 0.4) 100%), url("../../../assets/image 39.png") center;
     width: 35.125rem;
     height: 26.625rem;
     border-radius: 2.344rem;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Добавление плавной анимации */
     cursor: pointer; /* Указатель для обозначения кликабельности */
+}
+.projectBackground1 {
+    background: linear-gradient(180deg, rgba(12, 12, 12, 0.3) 0%, rgba(0, 0, 0, 0.4) 100%), url("../../../assets/projects/proj2_70/proj2_1.jpg") center;
+    background-size: cover;
+}
+
+.projectBackground2 {
+    background: linear-gradient(180deg, rgba(12, 12, 12, 0.3) 0%, rgba(0, 0, 0, 0.4) 100%), url("../../../assets/projects/proj4_80/proj4_1.jpg") center;
+    background-size: cover;
+}
+.projectBackground3 {
+    background: linear-gradient(180deg, rgba(12, 12, 12, 0.3) 0%, rgba(0, 0, 0, 0.4) 100%), url("../../../assets/projects/proj7_110/proj7_1.jpg") center;
+    background-size: cover;
+}
+
+.projectBackground4 {
+    background: linear-gradient(180deg, rgba(12, 12, 12, 0.3) 0%, rgba(0, 0, 0, 0.4) 100%), url("../../../assets/projects/proj9_140/proj9_1.jpg") center;
+    background-size: cover;
 }
 
 .oneProject:hover {

@@ -26,6 +26,7 @@ const OurProject: FC = () => {
                     <Card
                         key={card.id}
                         bottomText={card.bottomText}
+                        className={card.className} // Передаем className
                     />
                 ))}
             </div>

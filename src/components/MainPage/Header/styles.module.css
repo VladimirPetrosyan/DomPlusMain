@@ -162,3 +162,9 @@ button{
     height: 1.2rem;
     margin-right: 0.3rem;
 }
+
+.activeLink {
+    background-color: #808080; /* Серый фон */
+    border-radius: 0.5rem; /* Опционально для скругления */
+    padding: 0.5rem; /* Дополнительное оформление */
+}

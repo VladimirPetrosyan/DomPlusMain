@@ -116,7 +116,7 @@ const cardData = [
     {
         id: 9,
         mainImage: images.proj9_1,
-        images: [images.proj9_1, images.proj9_2, images.proj9_3, images.proj9_4, images.proj9_5],
+        images: [images.proj9_1, images.proj9_3, images.proj9_4, images.proj9_5],
         text: "140 м^2",
         title: "Одноэтажный дом с мансардой и террасой",
         description: "3 спальни, просторная кухня и гостиная",

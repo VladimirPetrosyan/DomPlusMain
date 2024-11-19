@@ -1,48 +1,55 @@
-import { FC, MouseEvent } from "react";
+import { FC } from "react";
 import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../../../assets/Иконка@2x.svg";
 import vkIcon from "../../../assets/vk.svg";
 import telegramIcon from "../../../assets/telegram.svg";
 import whatsappIcon from "../../../assets/whatsapp.svg";
-
 import style from "./styles.module.css";
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const Header: FC = () => {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const location = useLocation();
 
     const togglePopup = () => {
         setIsPopupOpen(!isPopupOpen);
     };
 
-    const handleOverlayClick = (e: MouseEvent<HTMLDivElement>) => {
+    const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
         if ((e.target as HTMLDivElement).classList.contains(style.popupOverlay)) {
             setIsPopupOpen(false);
         }
     };
 
+    // Функция для определения, активен ли маршрут
+    const isActive = (path: string) => location.pathname === path;
+
     return (
         <div>
             <div className={style.header}>
-                <div className={style.logo}>
+            <div className={style.logo}>
+                <Link to="/">
                     <img src={logo} alt="Logo" />
-                </div>
+                </Link>
+            </div>
 
                 <div className={style.controlPanel}>
-                    <p>
+                    <p className={isActive("/") ? style.activeLink : ""}>
                         <Link to={"/"}>Главная</Link>
                     </p>
-                    <p>
+                    <p className={isActive("/services") ? style.activeLink : ""}>
                         <Link to={"/services"}>Услуги</Link>
                     </p>
-                    <p>
+                    <p className={isActive("/projects") ? style.activeLink : ""}>
                         <Link to={"/projects"}>Проекты</Link>
                     </p>
-                    <p>
+                    <p className={isActive("/constructor") ? style.activeLink : ""}>
                         <Link to={"/constructor"}>Собрать свой дом</Link>
                     </p>
-                    <Link to={"/reviews"}>Отзывы</Link>
+                    <p className={isActive("/reviews") ? style.activeLink : ""}>
+                        <Link to={"/reviews"}>Отзывы</Link>
+                    </p>
                 </div>
 
                 <div className={style.bid} onClick={togglePopup}>

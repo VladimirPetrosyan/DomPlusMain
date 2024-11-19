@@ -1,5 +1,4 @@
 import style from "./styles.module.css";
-import imageLogo from "../../../assets/imageLogo.png";
 import quotes from "../../../assets/quotes.png";
 import quotesEnd from "../../../assets/quotesEnd.png";
 import { motion } from "framer-motion";
@@ -39,14 +38,14 @@ const Feedback = () => {
                     transition={{ duration: 1.2 }}
                 >
                     <div className={style.firstFeedbackName}>
-                        <p className={style.name}>Крабов салат</p>
-                        <p className={style.product}>Дом какой-то там</p>
-                        <img className={style.imageLogo} src={imageLogo} />
+                        <p className={style.name}>Оксана Григорьева</p>
+                        <p className={style.product}>Жилой дом</p>
+                        <img className={style.imageLogo} src={"https://avatars.mds.yandex.net/get-yapic/27232/iMIC57MvrzGCHmjSAlUFIjMROw-1/islands-150"} />
                         <img className={style.quotes} src={quotes} />
                     </div>
                     <div className={style.firstFeedbackText}>
                         <p className={style.feedbackTextMain}>
-                            Купил дом через эту компанию — всё сделали на высшем уровне! Быстро, качественно и без лишних проблем. Очень доволен результатом.
+                            Компания прелесть! Строят быстро и качественно, планировки отличные! Всегда идут на контакт! Исправляют ошибки , если есть! Построили зимой, очень довольны! Рекомендую!
                         </p>
                         <img className={style.quotesEnd} src={quotesEnd} />
                     </div>
@@ -60,14 +59,14 @@ const Feedback = () => {
                     transition={{ duration: 1.2 }}
                 >
                     <div className={style.firstFeedbackName}>
-                        <p className={style.name}>Крабов салат</p>
-                        <p className={style.product}>Дом какой-то там</p>
-                        <img className={style.imageLogo} src={imageLogo} />
+                        <p className={style.name}>Валентин Мирный</p>
+                        <p className={style.product}>Жилой дом</p>
+                        <img className={style.imageLogo} src={"https://avatars.mds.yandex.net/get-yapic/47747/jpfjvTlBcdjlySlEajpdJD3QQM-1573280599/islands-150"} />
                         <img className={style.quotes} src={quotes} />
                     </div>
                     <div className={style.firstFeedbackText}>
                         <p className={style.feedbackTextMain}>
-                            Купил дом через эту компанию — всё сделали на высшем уровне! Быстро, качественно и без лишних проблем. Очень доволен результатом.
+                            Обращался за постройкой дома, дали качественную консультацию и отличную стоимость 👍🏻
                         </p>
                         <img className={style.quotesEnd} src={quotesEnd} />
                     </div>

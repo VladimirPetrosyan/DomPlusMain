@@ -6,9 +6,10 @@ import style from "./styles.module.css";
 
 type CardProps = {
     bottomText: string;
+    className: string;
 };
 
-const OurProjectCard: FC<CardProps> = ({ bottomText }) => {
+const OurProjectCard: FC<CardProps> = ({ bottomText, className }) => {
     const { ref, inView } = useInView({ triggerOnce: true });
     const navigate = useNavigate();
 
@@ -18,13 +19,13 @@ const OurProjectCard: FC<CardProps> = ({ bottomText }) => {
 
     return (
         <motion.div
-            className={style.oneProject}
+            className={`${style.oneProject} ${style[className]}`} // Добавляем класс для фона
             ref={ref}
             initial={{ opacity: 0, y: 50 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.2 }}
             onClick={handleCardClick}
-            style={{ cursor: "pointer" }} 
+            style={{ cursor: "pointer" }}
         >
             <p className={style.imageBottomText}>{bottomText}</p>
         </motion.div>

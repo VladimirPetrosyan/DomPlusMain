@@ -444,7 +444,9 @@ const ConstructorSection = () => {
         if (selectedRoof === "dvukhskatnaya") {
             const elementsToRemove = [
                 wallGazoblock10_1, wallGazoblock10_3, wallGazoblock11_2,
-                wallGazoblock11_3, wallGazoblock11_4, wallGazoblock12_2, wallGazoblock13_2
+                wallGazoblock11_3, wallGazoblock11_4, wallGazoblock12_2, wallGazoblock13_2,
+                wallKirpich10_1, wallKirpich10_3, wallKirpich11_2,
+                wallKirpich11_3, wallKirpich11_4, wallKirpich12_2, wallKirpich13_2
             ];
             filteredAnimations.forEach((animation, index) => {
                 if (elementsToRemove.includes(animation)) {

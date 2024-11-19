@@ -16,19 +16,7 @@ const services = [
     "Любые строительные работы",
 ];
 
-const ServicesSelection = () => {
-    const [selectedServices, setSelectedServices] = useState<string[]>([]);
-
-    const toggleService = (service: string) => {
-        if (selectedServices.includes(service)) {
-            setSelectedServices(
-                selectedServices.filter((selected) => selected !== service)
-            );
-        } else {
-            setSelectedServices([...selectedServices, service]);
-        }
-    };
-
+const ServicesSelection = ({ selectedServices, toggleService }) => {
     return (
         <div className={style.main}>
             <p className={style.topText}>ВЫБРАТЬ УСЛУГИ</p>

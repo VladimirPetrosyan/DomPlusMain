@@ -301,12 +301,7 @@ const ConstructorSection = () => {
     };
 
     const handleRoofSelect = (option: "dvukhskatnaya" | "chetyrekhskatnaya") => {
-        if (option === "dvukhskatnaya") {
-            // Временная заглушка для двухскатной крыши
-            console.log("Анимация двухскатной крыши временно отключена."); // Можно использовать уведомление или просто игнорировать выбор
-            return;
-        }
-    
+        renderWallAnimations();
         setSelectedRoof(option);
         setAnimationsActive(false);
         setTimeout(() => setAnimationsActive(true), 100);
@@ -332,20 +327,25 @@ const ConstructorSection = () => {
     const handleBack = () => {
         if (step === "roof") {
             setStep("interior");
+            setSelectedRoof(null); // Сбрасываем выбранную крышу
             setAnimationsCompleted({ ...animationsCompleted, roof: false });
         } else if (step === "interior") {
             setStep("exterior");
+            setSelectedInterior(null); // Сбрасываем выбранную внутреннюю отделку
             setAnimationsCompleted({ ...animationsCompleted, interior: false });
         } else if (step === "exterior") {
             setStep("walls");
+            setSelectedExterior(null); // Сбрасываем выбранную внешнюю отделку
             setAnimationsCompleted({ ...animationsCompleted, exterior: false });
         } else if (step === "walls") {
             setStep("foundation");
+            setSelectedWalls(null); // Сбрасываем выбранные стены
             setAnimationsCompleted({ ...animationsCompleted, walls: false });
         }
     };
 
-    
+
+
 
     const renderFoundationAnimations = () => {
         if (selectedFoundation && step === "foundation" && animationsActive) {
@@ -431,21 +431,39 @@ const ConstructorSection = () => {
         }
         return null;
     };
-    
+
 
     const renderWallAnimations = () => {
-        if (selectedWalls && animationsActive && step === "walls") {
-            // Выполняем анимацию только на этапе выбора стен, если анимации активны
-            return wallAnimations[selectedWalls]?.map((animation: string, index: number) => {
+        if (!selectedWalls) return null;
+
+        // Копируем массив анимаций и zIndex для стен
+        const filteredAnimations = [...wallAnimations[selectedWalls]];
+        const adjustedZIndex = [...zIndexValuesForWalls];
+
+        // Обнуляем zIndex для элементов, если выбрана двухскатная крыша
+        if (selectedRoof === "dvukhskatnaya") {
+            const elementsToRemove = [
+                wallGazoblock10_1, wallGazoblock10_3, wallGazoblock11_2,
+                wallGazoblock11_3, wallGazoblock11_4, wallGazoblock12_2, wallGazoblock13_2
+            ];
+            filteredAnimations.forEach((animation, index) => {
+                if (elementsToRemove.includes(animation)) {
+                    adjustedZIndex[index] = 0; // Устанавливаем zIndex в 0 для скрытия элемента
+                }
+            });
+        }
+
+        // Проверяем, если анимации активны и текущий этап - выбор стен
+        if (animationsActive && step === "walls") {
+            return filteredAnimations.map((animation: string, index: number) => {
                 const coordinates = wallCoordinates[selectedWalls]?.[index] || { x: 0, y: 0 };
-                const animationKey = `wall${selectedWalls}${index}`; // Генерация ключа анимации
+                const animationKey = `wall${selectedWalls}${index}`;
                 const groupKey = Object.keys(groups).find((key) =>
                     groups[key].includes(animationKey)
                 );
-    
-                // Если элемент принадлежит группе, используем ту же задержку
+
                 const delay = groupKey ? groupAnimationDelay(index, animationKey, groups) : index * 0.3;
-    
+
                 return (
                     <motion.img
                         key={`wall-${index}`}
@@ -463,14 +481,14 @@ const ConstructorSection = () => {
                             transition: { delay, duration: 0.4 }
                         }}
                         exit={{ opacity: 0, y: 100 }}
-                        style={{ zIndex: zIndexValuesForWalls[index] }}
+                        style={{ zIndex: adjustedZIndex[index] }} // Применяем измененный zIndex
                         alt={`Стена элемент ${index}`}
                     />
                 );
             });
-        } else if (selectedWalls && step !== "walls") {
+        } else if (step !== "walls") {
             // Мгновенное отображение стен на всех остальных этапах
-            return wallAnimations[selectedWalls]?.map((animation: string, index: number) => {
+            return filteredAnimations.map((animation: string, index: number) => {
                 const coordinates = wallCoordinates[selectedWalls]?.[index] || { x: 0, y: 0 };
                 return (
                     <motion.img
@@ -483,19 +501,37 @@ const ConstructorSection = () => {
                             opacity: 1
                         }}
                         transition={{ duration: 0 }}
-                        style={{ zIndex: zIndexValuesForWalls[index] }}
+                        style={{ zIndex: adjustedZIndex[index] }} // Применяем измененный zIndex
                         alt={`Стена элемент ${index}`}
                     />
                 );
             });
         }
+
         return null;
     };
-    
+
     const renderExteriorAnimations = () => {
-    if (selectedExterior === "yes" && animationsActive && step === "exterior") {
-        // Выполняем анимацию только на этапе выбора внешней отделки, если анимации активны
-        return exteriorAnimations.yes?.map((animation: string, index: number) => (
+        if (selectedExterior !== "yes") return null;
+
+        // Копируем массив анимаций для внешней отделки
+        const filteredAnimations = [...exteriorAnimations.yes];
+        const adjustedZIndex = [...zIndexValuesForExterior];
+
+        // Фильтруем элементы и устанавливаем zIndex в 0, если выбрана двухскатная крыша
+        if (selectedRoof === "dvukhskatnaya") {
+            const elementsToRemove = [
+                exteriorFinish5, exteriorFinish8, exteriorFinish9,
+                exteriorFinish11, exteriorFinish2, exteriorFinish3
+            ];
+            filteredAnimations.forEach((animation, index) => {
+                if (elementsToRemove.includes(animation)) {
+                    adjustedZIndex[index] = 0; // Устанавливаем zIndex в 0
+                }
+            });
+        }
+
+        return filteredAnimations.map((animation: string, index: number) => (
             <motion.img
                 key={`exterior-${index}`}
                 src={animation}
@@ -508,70 +544,52 @@ const ConstructorSection = () => {
                     transition: { duration: 0.5 } // Устанавливаем одинаковую продолжительность для всех элементов
                 }}
                 exit={{ opacity: 0, y: 100 }} // Убираем элементы при переходе назад
-                style={{ zIndex: zIndexValuesForExterior[index] }}
+                style={{ zIndex: adjustedZIndex[index] }}
                 alt={`Внешняя отделка элемент ${index}`}
             />
         ));
-    } else if (selectedExterior === "yes" && step !== "exterior") {
-        // Мгновенное отображение внешней отделки на всех остальных этапах
-        return exteriorAnimations.yes?.map((animation: string, index: number) => (
-            <motion.img
-                key={`exterior-static-${index}`}
-                src={animation}
-                className={style.animatedElement}
-                animate={{
-                    x: exteriorCoordinates.yes[index].x,
-                    y: exteriorCoordinates.yes[index].y,
-                    opacity: 1, // Полная непрозрачность
-                }}
-                transition={{ duration: 0 }} // Убираем анимацию
-                style={{ zIndex: zIndexValuesForExterior[index] }}
-                alt={`Внешняя отделка элемент ${index}`}
-            />
-        ));
-    }
-    return null;
     };
 
+
     const renderInteriorAnimations = () => {
-        if (selectedInterior === "yes" && animationsActive && step === "interior") {
-            return interiorAnimations.yes?.map((animation: string, index: number) => (
-                <motion.img
-                    key={`interior-${index}`}
-                    src={animation}
-                    className={style.animatedElement}
-                    initial={{ x: interiorCoordinates.yes[index].x, y: interiorCoordinates.yes[index].y, opacity: 0 }}
-                    animate={{
-                        x: interiorCoordinates.yes[index].x,
-                        y: interiorCoordinates.yes[index].y,
-                        opacity: 1,
-                        transition: { duration: 0.5 }
-                    }}
-                    exit={{ opacity: 0, y: 100 }}
-                    style={{ zIndex: zIndexValuesForInterior[index] }}
-                    alt={`Внутренняя отделка элемент ${index}`}
-                />
-            ));
-        } else if (selectedInterior === "yes" && step !== "interior") {
-            return interiorAnimations.yes?.map((animation: string, index: number) => (
-                <motion.img
-                    key={`interior-static-${index}`}
-                    src={animation}
-                    className={style.animatedElement}
-                    animate={{
-                        x: interiorCoordinates.yes[index].x,
-                        y: interiorCoordinates.yes[index].y,
-                        opacity: 1
-                    }}
-                    transition={{ duration: 0 }}
-                    style={{ zIndex: zIndexValuesForInterior[index] }}
-                    alt={`Внутренняя отделка элемент ${index}`}
-                />
-            ));
+        if (selectedInterior !== "yes") return null;
+
+        // Копируем массив анимаций для внутренней отделки
+        const filteredAnimations = [...interiorAnimations.yes];
+        const adjustedZIndex = [...zIndexValuesForInterior];
+
+        // Фильтруем элементы и устанавливаем zIndex в 0, если выбрана двухскатная крыша
+        if (selectedRoof === "dvukhskatnaya") {
+            const elementsToRemove = [
+                interiorFinish14, interiorFinish15,
+                interiorFinish17, interiorFinish18, interiorFinish27
+            ];
+            filteredAnimations.forEach((animation, index) => {
+                if (elementsToRemove.includes(animation)) {
+                    adjustedZIndex[index] = 0; // Устанавливаем zIndex в 0
+                }
+            });
         }
-        return null;
+
+        return filteredAnimations.map((animation: string, index: number) => (
+            <motion.img
+                key={`interior-${index}`}
+                src={animation}
+                className={style.animatedElement}
+                initial={{ x: interiorCoordinates.yes[index].x, y: interiorCoordinates.yes[index].y, opacity: 0 }}
+                animate={{
+                    x: interiorCoordinates.yes[index].x,
+                    y: interiorCoordinates.yes[index].y,
+                    opacity: 1,
+                    transition: { duration: 0.5 }
+                }}
+                exit={{ opacity: 0, y: 100 }}
+                style={{ zIndex: adjustedZIndex[index] }}
+                alt={`Внутренняя отделка элемент ${index}`}
+            />
+        ));
     };
-    
+
     const renderAdditionalAnimations = () => {
         return additionalAnimations.map((animation: string, index: number) => (
             <motion.img

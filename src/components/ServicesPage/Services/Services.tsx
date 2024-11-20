@@ -19,15 +19,24 @@ const Services = () => {
         }
     };
 
+    // Функция для обработки отправки данных
+    const handleFormSubmit = (services: string[]) => {
+        console.log("Отправленные услуги: ", services);
+        // Здесь можно добавить логику отправки данных на сервер
+    };
+
     return (
         <div className={style.main}>
             <Header />
             <Navigation />
-            {/* Передаем toggleService в Window */}
+            {/* Передаем selectedServices и toggleService в ServicesSelection */}
             <Window toggleService={toggleService} />
             <div className={style.serv}>
-                {/* Передаем selectedServices и toggleService в ServicesSelection */}
-                <ServicesSelection selectedServices={selectedServices} toggleService={toggleService} />
+                <ServicesSelection
+                    selectedServices={selectedServices}
+                    toggleService={toggleService}
+                    onSubmit={handleFormSubmit}
+                />
             </div>
             <Footer />
         </div>

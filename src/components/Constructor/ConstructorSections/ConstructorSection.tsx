@@ -124,6 +124,10 @@ import additionalAnimation7 from "../../../assets/constructor/additional/animati
 import additionalAnimation8 from "../../../assets/constructor/additional/animation8.png";
 import additionalAnimation9 from "../../../assets/constructor/additional/animation8.png";
 
+import telegramIcon from "../../../assets/telegram.svg";
+import whatsappIcon from "../../../assets/whatsapp.svg";
+import vkIcon from "../../../assets/Vk.svg";
+
 
 const groupAnimationDelay = (index: number, animationKey: string, groups: Record<string, string[]>): number => {
     // Находим группу, к которой принадлежит текущий ключ
@@ -149,6 +153,39 @@ const ConstructorSection = () => {
     const [selectedExterior, setSelectedExterior] = useState<"yes" | "no" | null>(null);
     const [selectedInterior, setSelectedInterior] = useState<"yes" | "no" | null>(null);
     const [selectedRoof, setSelectedRoof] = useState<"dvukhskatnaya" | "chetyrekhskatnaya" | null>(null);
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [formData, setFormData] = useState({
+        phone: '',
+        name: '',
+        email: '',
+        foundation: '',   // Добавьте поле для фундамента
+        walls: '',        // Добавьте поле для стен
+        roof: '',         // Добавьте поле для крыши
+        exterior: '',     // Добавьте поле для внешней отделки (если нужно)
+        interior: '',     // Добавьте поле для внутренней отделки (если нужно)
+    });
+
+    // Открытие/закрытие попапа
+    const togglePopup = () => {
+        setIsPopupOpen(!isPopupOpen);
+    };
+
+    // Обработчик изменения данных в форме
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
+
+    // Обработчик отправки формы
+    const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        console.log(formData); // Вы можете использовать эти данные для отправки, например, через API
+        togglePopup(); // Закрытие попапа после отправки
+    };
+    
 
     
     const [animationsCompleted, setAnimationsCompleted] = useState({
@@ -271,6 +308,10 @@ const ConstructorSection = () => {
             // Сбрасываем выбранный фундамент временно, чтобы перерендерить элементы
             setAnimationsActive(false); // Деактивируем текущие анимации
             setSelectedFoundation(null); // Сбрасываем состояние фундамента
+            setFormData((prevData) => ({
+                ...prevData,
+                foundation: option, // Обновляем выбранный фундамент в formData
+            }));
             setTimeout(() => {
                 setSelectedFoundation(option); // Устанавливаем выбранный фундамент
                 setAnimationsActive(true); // Активируем анимации
@@ -281,11 +322,19 @@ const ConstructorSection = () => {
     const handleWallSelect = (option: "gazoblock" | "kirpich") => {
         setSelectedWalls(option);
         setAnimationsActive(false);
+        setFormData((prevData) => ({
+            ...prevData,
+            walls: option, // Обновляем выбранные стены в formData
+        }));
         setTimeout(() => setAnimationsActive(true), 100);
     };
 
     const handleExteriorSelect = (option: "yes" | "no") => {
         setSelectedExterior(option);
+        setFormData((prevData) => ({
+            ...prevData,
+            exterior: option, // Обновляем внешнюю отделку
+        }));
         if (option === "yes") {
             setAnimationsActive(false);
             setTimeout(() => setAnimationsActive(true), 100);
@@ -294,6 +343,10 @@ const ConstructorSection = () => {
 
     const handleInteriorSelect = (option: "yes" | "no") => {
         setSelectedInterior(option);
+        setFormData((prevData) => ({
+            ...prevData,
+            interior: option, // Обновляем внутреннюю отделку
+        }));
         if (option === "yes") {
             setAnimationsActive(false);
             setTimeout(() => setAnimationsActive(true), 100);
@@ -304,6 +357,10 @@ const ConstructorSection = () => {
         renderWallAnimations();
         setSelectedRoof(option);
         setAnimationsActive(false);
+        setFormData((prevData) => ({
+            ...prevData,
+            roof: option, // Обновляем выбранную крышу в formData
+        }));
         setTimeout(() => setAnimationsActive(true), 100);
     };
     
@@ -727,8 +784,21 @@ const ConstructorSection = () => {
                 {step === "roof" && (
                     <>
                         <h2 style={{ marginBottom: '20px' }}>Выберите крышу</h2>
-                        <p onClick={() => handleRoofSelect("dvukhskatnaya")} className={`${style.option} ${selectedRoof === "dvukhskatnaya" ? style.selected : ""}`}>Двухскатная</p>
-                        <p onClick={() => handleRoofSelect("chetyrekhskatnaya")} className={`${style.option} ${selectedRoof === "chetyrekhskatnaya" ? style.selected : ""}`}>Четырехскатная</p>
+                        <p
+                            onClick={() => handleRoofSelect("dvukhskatnaya")}
+                            className={`${style.option} ${selectedRoof === "dvukhskatnaya" ? style.selected : ""}`}
+                        >
+                            Двухскатная
+                        </p>
+                        <p
+                            onClick={() => handleRoofSelect("chetyrekhskatnaya")}
+                            className={`${style.option} ${selectedRoof === "chetyrekhskatnaya" ? style.selected : ""}`}
+                        >
+                            Четырехскатная
+                        </p>
+
+                        {/* Добавляем кнопку для открытия попапа */}
+                        <p className={style.submitButton} onClick={togglePopup}>Оставить заявку</p>
                     </>
                 )}
     
@@ -742,6 +812,85 @@ const ConstructorSection = () => {
                     )}
                 </div>
             </div>
+            {isPopupOpen && (
+                <motion.div
+                    className={style.popupOverlay}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.5 }}
+                    onClick={(e) => {
+                        const target = e.target as HTMLElement;
+                        if (target.classList.contains(style.popupOverlay)) {
+                            setIsPopupOpen(false);
+                        }
+                    }}
+                >
+                    <motion.div
+                        className={style.popupContent}
+                        initial={{ scale: 0.8 }}
+                        animate={{ scale: 1 }}
+                        exit={{ scale: 0.8 }}
+                        transition={{ duration: 0.5 }}
+                    >
+                        <button className={style.closeButton} onClick={togglePopup}>
+                            ✕
+                        </button>
+                        <p className={style.popupTitle}>Оставьте заявку</p>
+                        <p className={style.popupSubtitle}>
+                            Специалист свяжется с вами и даст конечный результат
+                        </p>
+                        <form className={style.form} onSubmit={handleFormSubmit}>
+                            <input
+                                type="text"
+                                className={style.inputField}
+                                placeholder="Номер телефона"
+                                name="phone"
+                                value={formData.phone}
+                                onChange={handleInputChange}
+                            />
+                            <input
+                                type="text"
+                                className={style.inputField}
+                                placeholder="ФИО"
+                                name="name"
+                                value={formData.name}
+                                onChange={handleInputChange}
+                            />
+                            <input
+                                type="email"
+                                className={style.inputField}
+                                placeholder="E-mail"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleInputChange}
+                            />
+                        
+                            <button type="submit" className={style.submitButton}>
+                                Оставить заявку
+                            </button>
+                        </form>
+                
+                        <p className={style.contactSocial}>
+                            - Или обратитесь к нам в соцсетях -
+                        </p>
+                        <div className={style.socialButtons}>
+                            <button className={style.socialButton}>
+                                <img src={telegramIcon} alt="Telegram" className={style.icon} />
+                                Telegram
+                            </button>
+                            <button className={style.socialButton}>
+                                <img src={whatsappIcon} alt="WhatsApp" className={style.icon} />
+                                WhatsApp
+                            </button>
+                            <button className={style.socialButton}>
+                                <img src={vkIcon} alt="ВКонтакте" className={style.icon} />
+                                ВКонтакте
+                            </button>
+                        </div>
+                    </motion.div>
+                </motion.div>
+            )}
         </div>
     );
     

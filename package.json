@@ -10,7 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mobilon-dev/amotop": "^0.1.46",
     "@pbe/react-yandex-maps": "^1.2.5",
+    "amotop": "^0.1.4",
     "framer-motion": "^11.11.9",
     "puppeteer": "^23.6.0",
     "react": "^18.3.1",

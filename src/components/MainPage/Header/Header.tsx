@@ -7,15 +7,16 @@ import telegramIcon from "../../../assets/telegram.svg";
 import whatsappIcon from "../../../assets/whatsapp.svg";
 import style from "./styles.module.css";
 import { motion } from "framer-motion";
-//import authData from '../../../../backend/amo-widget-server/store/authdata.json'; // Assuming authdata.json is in store folder
+import authData from '../../../../backend/amo-widget-server/store/authdata.json'; // Assuming authdata.json is in store folder
 
 const Header: FC = () => {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [formData, setFormData] = useState({
-        phone: '',
-        name: '',
-        email: ''
+        phone: "",
+        name: "",
+        email: "",
     });
+    const [hasError, setHasError] = useState(false);
     const location = useLocation();
 
     const togglePopup = () => {
@@ -32,34 +33,41 @@ const Header: FC = () => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
             ...prevData,
-            [name]: value
+            [name]: value,
         }));
     };
 
     const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        // Проверка на заполненность телефона
+        if (!formData.phone.trim()) {
+            setHasError(true); // Отображение ошибки, если телефон пустой
+            return;
+        }
+        setHasError(false); // Сбрасываем ошибку, если телефон указан
+
         try {
-            const response = await axios.post(`http://10.8.1.19:4000/create-lead`,
-                {
-                    name: formData.name, // Передача имени
-                    phone: formData.phone, // Передача номера телефона
-                    email: formData.email, // Передача почты
-                });
+            const response = await axios.post(`http://10.8.1.19:4000/create-lead`, {
+                name: formData.name || "Без имени", // Если имя не указано, отправляем "Без имени"
+                phone: formData.phone, // Передача номера телефона
+                email: formData.email || "Не указан", // Если email не указан, отправляем "Не указан"
+            });
 
             if (response.status === 200 || response.status === 201) {
-                console.log('Lead created successfully:', response.data);
-                alert('Заявка успешно отправлена!');
+                alert("Заявка успешно отправлена!");
+                console.log("Lead created successfully:", response.data);
+                togglePopup();
             } else {
-                console.error('Failed to create lead:', response.data);
-                alert('Ошибка при отправке заявки.');
+                alert("Ошибка при отправке заявки.");
+                console.error("Failed to create lead:", response.data);
             }
         } catch (error) {
-            console.error('Error creating lead:', error);
-            alert('Ошибка сети при отправке заявки.');
+            alert("Ошибка сети при отправке заявки.");
+            console.error("Error creating lead:", error);
         }
     };
 
-    // Функция для определения, активен ли маршрут
     const isActive = (path: string) => location.pathname === path;
 
     return (
@@ -120,12 +128,13 @@ const Header: FC = () => {
                         <form className={style.form} onSubmit={handleFormSubmit}>
                             <input
                                 type="text"
-                                className={style.inputField}
+                                className={`${style.inputField} ${hasError ? style.errorField : ""}`}
                                 placeholder="Номер телефона"
                                 name="phone"
                                 value={formData.phone}
                                 onChange={handleInputChange}
                             />
+                            {hasError && <p className={style.errorMessage}>Введите номер телефона</p>}
                             <input
                                 type="text"
                                 className={style.inputField}

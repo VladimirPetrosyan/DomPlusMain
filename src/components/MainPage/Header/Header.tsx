@@ -16,6 +16,7 @@ const Header: FC = () => {
         name: '',
         email: ''
     });
+    const [hasError, setHasError] = useState(false);
     const location = useLocation();
 
     const togglePopup = () => {
@@ -38,20 +39,31 @@ const Header: FC = () => {
 
     const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+    
+        if (!formData.phone.trim()) {
+            setHasError(true);
+            return;
+        }
+    
+        setHasError(false);
+    
         try {
-            const response = await axios.post(`https://${authData.domain}/api/v4/leads`,
+            const response = await axios.post(
+                `https://${authData.domain}/api/v4/leads`,
                 [
                     {
-                        name: formData.name,
+                        name: formData.name || "Без имени",
                         custom_fields_values: [
                             {
-                                field_id: authData.field_id, // Example field_id for phone
+                                field_id: authData.field_id,
                                 values: [{ value: formData.phone }]
                             },
-                            {
-                                field_id: 610923, // Replace with the correct field_id for email if different
-                                values: [{ value: formData.email }]
-                            }
+                            ...(formData.email ? [
+                                {
+                                    field_id: 610923,
+                                    values: [{ value: formData.email }]
+                                }
+                            ] : [])
                         ]
                     }
                 ],
@@ -60,8 +72,9 @@ const Header: FC = () => {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${authData.accessToken}`
                     }
-                });
-
+                }
+            );
+    
             if (response.status === 200 || response.status === 201) {
                 console.log('Lead created successfully:', response.data);
                 alert('Заявка успешно отправлена!');
@@ -74,6 +87,8 @@ const Header: FC = () => {
             alert('Ошибка сети при отправке заявки.');
         }
     };
+    
+    
 
     // Функция для определения, активен ли маршрут
     const isActive = (path: string) => location.pathname === path;
@@ -134,14 +149,15 @@ const Header: FC = () => {
                             Специалист свяжется с вами и даст конечный результат
                         </p>
                         <form className={style.form} onSubmit={handleFormSubmit}>
-                            <input
-                                type="text"
-                                className={style.inputField}
-                                placeholder="Номер телефона"
-                                name="phone"
-                                value={formData.phone}
-                                onChange={handleInputChange}
-                            />
+                        <input
+                            type="text"
+                            className={`${style.inputField} ${hasError ? style.errorField : ""}`}
+                            placeholder="Номер телефона"
+                            name="phone"
+                            value={formData.phone}
+                            onChange={handleInputChange}
+                        />
+
                             <input
                                 type="text"
                                 className={style.inputField}

@@ -158,12 +158,9 @@ const ConstructorSection = () => {
         phone: '',
         name: '',
         email: '',
-        foundation: '',   // Добавьте поле для фундамента
-        walls: '',        // Добавьте поле для стен
-        roof: '',         // Добавьте поле для крыши
-        exterior: '',     // Добавьте поле для внешней отделки (если нужно)
-        interior: '',     // Добавьте поле для внутренней отделки (если нужно)
+        selections: '', // Новое поле для хранения строки выбора
     });
+    const [hasError, setHasError] = useState(false);
 
     // Открытие/закрытие попапа
     const togglePopup = () => {
@@ -182,9 +179,26 @@ const ConstructorSection = () => {
     // Обработчик отправки формы
     const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(formData); // Вы можете использовать эти данные для отправки, например, через API
-        togglePopup(); // Закрытие попапа после отправки
+    
+        if (!formData.phone.trim()) {
+            setHasError(true);
+            return;
+        }
+    
+        setHasError(false);
+    
+        updateSelectionsString();
+    
+        console.log({
+            phone: formData.phone,
+            name: formData.name,
+            email: formData.email,
+            selections: formData.selections,
+        });
+    
+        togglePopup();
     };
+    
     
 
     
@@ -308,10 +322,7 @@ const ConstructorSection = () => {
             // Сбрасываем выбранный фундамент временно, чтобы перерендерить элементы
             setAnimationsActive(false); // Деактивируем текущие анимации
             setSelectedFoundation(null); // Сбрасываем состояние фундамента
-            setFormData((prevData) => ({
-                ...prevData,
-                foundation: option, // Обновляем выбранный фундамент в formData
-            }));
+            updateSelectionsString();
             setTimeout(() => {
                 setSelectedFoundation(option); // Устанавливаем выбранный фундамент
                 setAnimationsActive(true); // Активируем анимации
@@ -319,22 +330,28 @@ const ConstructorSection = () => {
         }
     };
 
+    const updateSelectionsString = () => {
+        const selections = `Фундамент: ${selectedFoundation || "не выбран"}, 
+                            Стены: ${selectedWalls || "не выбраны"}, 
+                            Внешняя отделка: ${selectedExterior || "не выбрана"}, 
+                            Внутренняя отделка: ${selectedInterior || "не выбрана"}, 
+                            Крыша: ${selectedRoof || "не выбрана"}`;
+        setFormData((prevData) => ({
+            ...prevData,
+            selections,
+        }));
+    };
+
     const handleWallSelect = (option: "gazoblock" | "kirpich") => {
         setSelectedWalls(option);
         setAnimationsActive(false);
-        setFormData((prevData) => ({
-            ...prevData,
-            walls: option, // Обновляем выбранные стены в formData
-        }));
+        updateSelectionsString();
         setTimeout(() => setAnimationsActive(true), 100);
     };
 
     const handleExteriorSelect = (option: "yes" | "no") => {
         setSelectedExterior(option);
-        setFormData((prevData) => ({
-            ...prevData,
-            exterior: option, // Обновляем внешнюю отделку
-        }));
+        updateSelectionsString();
         if (option === "yes") {
             setAnimationsActive(false);
             setTimeout(() => setAnimationsActive(true), 100);
@@ -343,10 +360,7 @@ const ConstructorSection = () => {
 
     const handleInteriorSelect = (option: "yes" | "no") => {
         setSelectedInterior(option);
-        setFormData((prevData) => ({
-            ...prevData,
-            interior: option, // Обновляем внутреннюю отделку
-        }));
+        updateSelectionsString();
         if (option === "yes") {
             setAnimationsActive(false);
             setTimeout(() => setAnimationsActive(true), 100);
@@ -357,10 +371,7 @@ const ConstructorSection = () => {
         renderWallAnimations();
         setSelectedRoof(option);
         setAnimationsActive(false);
-        setFormData((prevData) => ({
-            ...prevData,
-            roof: option, // Обновляем выбранную крышу в formData
-        }));
+        updateSelectionsString();
         setTimeout(() => setAnimationsActive(true), 100);
     };
     
@@ -841,14 +852,14 @@ const ConstructorSection = () => {
                             Специалист свяжется с вами и даст конечный результат
                         </p>
                         <form className={style.form} onSubmit={handleFormSubmit}>
-                            <input
-                                type="text"
-                                className={style.inputField}
-                                placeholder="Номер телефона"
-                                name="phone"
-                                value={formData.phone}
-                                onChange={handleInputChange}
-                            />
+                        <input
+                            type="text"
+                            className={`${style.inputField} ${hasError ? style.errorField : ""}`}
+                            placeholder="Номер телефона"
+                            name="phone"
+                            value={formData.phone}
+                            onChange={handleInputChange}
+                        />
                             <input
                                 type="text"
                                 className={style.inputField}

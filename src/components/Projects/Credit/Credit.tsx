@@ -19,6 +19,7 @@ const Credit: FC<CreditProps> = ({ selectedProjectId }) => {
         email: "",
         projectId: selectedProjectId,
     });
+    const [hasError, setHasError] = useState(false); // Для отображения ошибки
 
     const togglePopup = () => {
         setIsPopupOpen(!isPopupOpen);
@@ -40,8 +41,24 @@ const Credit: FC<CreditProps> = ({ selectedProjectId }) => {
 
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // Отправка данных на сервер, включая выбранный проект
-        alert("Заявка отправлена!");
+
+        // Проверка на заполненность телефона
+        if (!formData.phone.trim()) {
+            setHasError(true); // Устанавливаем ошибку
+            return;
+        }
+        setHasError(false); // Сбрасываем ошибку, если телефон указан
+
+        // Имитация отправки данных на сервер
+        console.log({
+            phone: formData.phone,
+            name: formData.name || "Без имени", // Если имя не указано, используем "Без имени"
+            email: formData.email || "Не указан", // Если email не указан, используем "Не указан"
+            projectId: formData.projectId || "Не выбран",
+        });
+
+        alert("Заявка успешно отправлена!");
+        togglePopup(); // Закрываем попап после отправки
     };
 
     const popupContent = (
@@ -71,16 +88,17 @@ const Credit: FC<CreditProps> = ({ selectedProjectId }) => {
                 <form className={style.form} onSubmit={handleFormSubmit}>
                     <input
                         type="text"
-                        className={style.inputField}
-                        placeholder="Номер телефона"
+                        className={`${style.inputField} ${hasError ? style.errorField : ""}`}
+                        placeholder="Номер телефона (обязательно)"
                         name="phone"
                         value={formData.phone}
                         onChange={handleInputChange}
                     />
+                    {hasError && <p className={style.errorMessage}>Пожалуйста, введите номер телефона</p>}
                     <input
                         type="text"
                         className={style.inputField}
-                        placeholder="ФИО"
+                        placeholder="ФИО (необязательно)"
                         name="name"
                         value={formData.name}
                         onChange={handleInputChange}
@@ -88,7 +106,7 @@ const Credit: FC<CreditProps> = ({ selectedProjectId }) => {
                     <input
                         type="email"
                         className={style.inputField}
-                        placeholder="E-mail"
+                        placeholder="E-mail (необязательно)"
                         name="email"
                         value={formData.email}
                         onChange={handleInputChange}
@@ -145,7 +163,7 @@ const Credit: FC<CreditProps> = ({ selectedProjectId }) => {
                     <li>IT-ипотека 6%</li>
                     <li>Военная ипотека (рассчитывается индивидуально)</li>
                 </ul>
-                <button onClick={togglePopup} className={style.submitButton}>
+                <button onClick={togglePopup} className={style.buttonApply}>
                     Оставить заявку
                 </button>
             </div>

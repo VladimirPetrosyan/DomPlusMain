@@ -211,3 +211,8 @@
     height: 1.2rem;
     margin-right: 0.3rem;
 }
+
+.errorField {
+    border: 2px solid red;
+    background-color: #ffe6e6;
+}

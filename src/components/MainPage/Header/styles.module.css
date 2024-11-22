@@ -168,3 +168,8 @@ button{
     border-radius: 0.5rem; /* Опционально для скругления */
     padding: 0.5rem; /* Дополнительное оформление */
 }
+
+.errorField {
+    border: 2px solid red;
+    background-color: #ffe6e6;
+}

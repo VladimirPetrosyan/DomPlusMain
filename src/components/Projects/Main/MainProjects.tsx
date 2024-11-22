@@ -9,18 +9,33 @@ import style from "./styles.module.css";
 import { motion } from "framer-motion";
 
 const MainProjects = () => {
-    const [selectedProjectId, setSelectedProjectId] = useState<number | null>(null);
-    const [view, setView] = useState<"projects" | "realized">("projects");
+    const [selectedProjectId, setSelectedProjectId] = useState<number | null>(() => {
+        // Читаем сохраненный выбор из localStorage
+        const savedProjectId = localStorage.getItem("selectedProjectId");
+        return savedProjectId ? parseInt(savedProjectId, 10) : null;
+    });
+
+    const [view, setView] = useState<"projects" | "realized">(() => {
+        // Читаем сохраненный выбор вкладки из localStorage
+        const savedView = localStorage.getItem("view");
+        return savedView === "realized" ? "realized" : "projects";
+    });
 
     const mainWindowRef = useRef<HTMLDivElement>(null); // Создаем ref для MainWindow
 
     const handleProjectSelect = (projectId: number) => {
         setSelectedProjectId(projectId);
+        localStorage.setItem("selectedProjectId", projectId.toString()); // Сохраняем выбранный ID в localStorage
 
         // Скроллим к MainWindow, если есть ref
         if (mainWindowRef.current) {
             mainWindowRef.current.scrollIntoView({ behavior: 'smooth' });
         }
+    };
+
+    const handleViewChange = (newView: "projects" | "realized") => {
+        setView(newView);
+        localStorage.setItem("view", newView); // Сохраняем выбор вкладки в localStorage
     };
 
     const transitionVariants = {
@@ -37,13 +52,13 @@ const MainProjects = () => {
                 <div className={style.tabContainer}>
                     <button
                         className={`${style.tabButton} ${view === "projects" ? style.activeTab : ""}`}
-                        onClick={() => setView("projects")}
+                        onClick={() => handleViewChange("projects")}
                     >
                         Проекты
                     </button>
                     <button
                         className={`${style.tabButton} ${view === "realized" ? style.activeTab : ""}`}
-                        onClick={() => setView("realized")}
+                        onClick={() => handleViewChange("realized")}
                     >
                         Реализованные проекты
                     </button>

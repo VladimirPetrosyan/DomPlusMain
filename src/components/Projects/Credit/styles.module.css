@@ -280,3 +280,34 @@
     height: 1.2rem;
     margin-right: 0.3rem;
 }
+
+.buttonApply {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F9D267; /* Цвет кнопки */
+    border-radius: 3.125rem; /* Радиус для скругления */
+    padding: 1em; /* Отступы внутри кнопки */
+    max-height: 3rem; /* Ограничение по высоте */
+    cursor: pointer; /* Курсор указателя при наведении */
+    transition: box-shadow 0.3s ease, transform 0.1s ease; /* Анимация */
+    color: #EFEFEF; /* Цвет текста */
+    font-size: 1em; /* Размер шрифта */
+    text-decoration: none; /* Убираем подчеркивание, если это ссылка */
+    font-family: 'Montserrat', serif; /* Шрифт */
+    border: none; /* Убираем рамку */
+    color: #000;
+}
+
+.buttonApply:hover {
+    box-shadow: 0 0 0.7125rem #FFD83A; /* Тень при наведении */
+}
+
+.buttonApply:active {
+    transform: scale(0.95); /* Уменьшение кнопки при нажатии */
+}
+
+.errorField {
+    border: 2px solid red;
+    background-color: #ffe6e6;
+}

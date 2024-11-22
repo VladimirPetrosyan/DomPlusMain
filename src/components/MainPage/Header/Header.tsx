@@ -7,7 +7,6 @@ import telegramIcon from "../../../assets/telegram.svg";
 import whatsappIcon from "../../../assets/whatsapp.svg";
 import style from "./styles.module.css";
 import { motion } from "framer-motion";
-import authData from '../../../../backend/amo-widget-server/store/authdata.json'; // Assuming authdata.json is in store folder
 
 const Header: FC = () => {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -39,35 +38,17 @@ const Header: FC = () => {
     const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`https://${authData.domain}/api/v4/leads`,
-                [
-                    {
-                        name: formData.name,
-                        custom_fields_values: [
-                            {
-                                field_id: authData.field_id, // Example field_id for phone
-                                values: [{ value: formData.phone }]
-                            },
-                            {
-                                field_id: 610923, // Replace with the correct field_id for email if different
-                                values: [{ value: formData.email }]
-                            }
-                        ]
-                    }
-                ],
+            const response = await axios.post(`http://10.8.1.19:4000/create-lead`,
                 {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${authData.accessToken}`
-                    }
+                    name: formData.name, // Передача имени
+                    phone: formData.phone, // Передача номера телефона
+                    email: formData.email, // Передача почты
                 });
 
             if (response.status === 200 || response.status === 201) {
                 console.log('Lead created successfully:', response.data);
-                alert('Заявка успешно отправлена!');
             } else {
                 console.error('Failed to create lead:', response.data);
-                alert('Ошибка при отправке заявки.');
             }
         } catch (error) {
             console.error('Error creating lead:', error);

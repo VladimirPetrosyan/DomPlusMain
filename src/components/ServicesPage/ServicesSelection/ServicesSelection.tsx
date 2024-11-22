@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import vkIcon from "../../../assets/vk.svg";
 import telegramIcon from "../../../assets/telegram.svg";
 import whatsappIcon from "../../../assets/whatsapp.svg";
+import axios from "axios";
 
 const services = [
     "Поиск земельных участков",
@@ -23,7 +24,7 @@ const services = [
 interface ServicesSelectionProps {
     selectedServices: string[];
     toggleService: (service: string) => void;
-    onSubmit: (services: { phone: string, name: string, email: string, servicesString: string }) => void;
+    onSubmit: (services: { phone: string, name: string, email: string, servicesString: string }) => (services: string[]) => void;
 }
 
 const ServicesSelection: React.FC<ServicesSelectionProps> = ({ selectedServices, toggleService, onSubmit }) => {
@@ -57,9 +58,36 @@ const ServicesSelection: React.FC<ServicesSelectionProps> = ({ selectedServices,
 
     const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        onSubmit(formData);  // Отправляем данные в родительский компонент
-        togglePopup();  // Закрытие попапа после отправки
+
+        try {
+            // Формируем данные для отправки
+            const payload = {
+                name: formData.name,
+                phone: formData.phone,
+                email: formData.email,
+                services: formData.servicesString, // Отправляем услуги как строку
+            };
+
+            // Отправляем данные на сервер
+            const response = await axios.post('http://10.8.1.19:4000/create-lead', payload);
+
+            // Проверяем ответ
+            if (response.status === 200 || response.status === 201) {
+                console.log('Заявка отправлена успешно:', response.data);
+                alert('Заявка успешно отправлена!');
+            } else {
+                console.error('Ошибка при отправке заявки:', response.data);
+                alert('Ошибка при отправке заявки.');
+            }
+
+            // Закрытие попапа после отправки
+            togglePopup();
+        } catch (error) {
+            console.error('Ошибка при отправке:', error);
+            alert('Ошибка сети при отправке заявки.');
+        }
     };
+
 
     return (
         <div className={style.main}>
@@ -80,7 +108,7 @@ const ServicesSelection: React.FC<ServicesSelectionProps> = ({ selectedServices,
                 </div>
                 <div className={style.requestSection}>
                     <div className={style.contentRight}>
-                        <div className={style.textRequest}>
+                        <div>
                             <p className={style.firstText}>Оставьте заявку</p>
                             <p className={style.secondText}>чтобы специалист связался с вами и дал конечный результат</p>
                         </div>
@@ -146,7 +174,6 @@ const ServicesSelection: React.FC<ServicesSelectionProps> = ({ selectedServices,
                                 value={formData.email}
                                 onChange={handleInputChange}
                             />
-
                             <div className={style.checkboxContainer}>
                                 {services.map((service) => (
                                     <label key={service} className={style.checkboxLabel}>

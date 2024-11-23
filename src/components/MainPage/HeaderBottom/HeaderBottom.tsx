@@ -2,7 +2,6 @@ import { FC } from "react";
 import { motion } from "framer-motion";
 import style from "./styles.module.css";
 import galochka from "../../../assets/Vector.svg";
-import etap from "../../../assets/Group 358.png";
 // import strelka from "../../../assets/Strelka vniz.png";
 import dom from "../../../assets/image.png";
 import map from "../../../assets/Map.png";
@@ -55,16 +54,24 @@ const HeaderBottom: FC = () => {
         transition={{ duration: 1.3 }}
       >
         <div className={style.contact}>
-          <p className={style.Number}>+7 (903) 400-03-61</p>
+          <p className={style.Number}>{("+7 (903) 400-03-61")}</p>
           <div className={style.location}>
             <img src={map} />
             <p className={style.address}>Шолохова 11б, Ростов-на-Дону</p>
           </div>
           <div className={style.subscribe}>
-            <img src={tg} />
-            <img src={Vk} />
-            <img src={inst} />
-            <img src={Vb} />
+            <a href="https://t.me/dom_plus_rnd" target="_blank" rel="noopener noreferrer">
+              <img src={tg} alt="Telegram" />
+            </a>
+            <a href="https://vk.com/dompluse" target="_blank" rel="noopener noreferrer">
+              <img src={Vk} alt="ВКонтакте" />
+            </a>
+            <a href="https://instagram.com/dom_plus_rnd/" target="_blank" rel="noopener noreferrer">
+              <img src={inst} alt="Instagram" />
+            </a>
+            <a href="https://wa.me/79034000361" target="_blank" rel="noopener noreferrer">
+              <img src={Vb} alt="Viber" />
+            </a>
           </div>
         </div>
         <div className={style.aboutProject}>

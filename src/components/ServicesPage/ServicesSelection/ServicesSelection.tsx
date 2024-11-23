@@ -196,18 +196,33 @@ const ServicesSelection: React.FC<ServicesSelectionProps> = ({ selectedServices,
                             - Или обратитесь к нам в соцсетях -
                         </p>
                         <div className={style.socialButtons}>
-                            <button className={style.socialButton}>
-                                <img src={telegramIcon} alt="Telegram" className={style.icon} />
-                                Telegram
-                            </button>
-                            <button className={style.socialButton}>
-                                <img src={whatsappIcon} alt="WhatsApp" className={style.icon} />
-                                WhatsApp
-                            </button>
-                            <button className={style.socialButton}>
+                            <a 
+                                href="https://vk.com/dompluse" 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                className={style.socialButton}
+                            >
                                 <img src={vkIcon} alt="ВКонтакте" className={style.icon} />
                                 ВКонтакте
-                            </button>
+                            </a>
+                            <a 
+                                href="https://t.me/dom_plus_rnd" 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                className={style.socialButton}
+                            >
+                                <img src={telegramIcon} alt="Telegram" className={style.icon} />
+                                Telegram
+                            </a>
+                            <a 
+                                href="https://wa.me/79034000361" 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                className={style.socialButton}
+                            >
+                                <img src={whatsappIcon} alt="WhatsApp" className={style.icon} />
+                                WhatsApp
+                            </a>
                         </div>
                     </motion.div>
                 </motion.div>

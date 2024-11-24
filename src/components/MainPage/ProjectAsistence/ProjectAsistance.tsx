@@ -29,13 +29,13 @@ const ProjectAssistance = () => {
     updateVisibleRange(newSlide);
   };
 
-  const handleSelectSlide = (index) => {
+  const handleSelectSlide = (index:number) => {
     setDirection(index > currentSlide ? 1 : -1);
     setCurrentSlide(index);
     updateVisibleRange(index);
   };
 
-  const updateVisibleRange = (newSlide) => {
+  const updateVisibleRange = (newSlide:number) => {
     let [start, end] = visibleRange;
     if (newSlide >= end) {
       start = newSlide - 2;

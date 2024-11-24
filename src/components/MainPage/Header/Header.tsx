@@ -2,12 +2,11 @@ import { FC, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from 'axios';
 import logo from "../../../assets/Иконка@2x.svg";
-import vkIcon from "../../../assets/vk.svg";
+import vkIcon2 from "../../../assets/Vk2.svg";
 import telegramIcon from "../../../assets/telegram.svg";
 import whatsappIcon from "../../../assets/whatsapp.svg";
 import style from "./styles.module.css";
 import { motion } from "framer-motion";
-import authData from '../../../../backend/amo-widget-server/store/authdata.json'; // Assuming authdata.json is in store folder
 
 const Header: FC = () => {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -165,7 +164,7 @@ const Header: FC = () => {
                                 rel="noopener noreferrer" 
                                 className={style.socialButton}
                             >
-                                <img src={vkIcon} alt="ВКонтакте" className={style.icon} />
+                                <img src={vkIcon2} alt="ВКонтакте" className={style.icon} />
                                 ВКонтакте
                             </a>
                             <a 

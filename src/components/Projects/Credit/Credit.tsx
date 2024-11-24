@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import style from "./styles.module.css";
 import telegramIcon from "../../../assets/telegram.svg";
 import whatsappIcon from "../../../assets/whatsapp.svg";
-import vkIcon from "../../../assets/vk.svg";
+import vkIcon from "../../../assets/vk2.svg";
 import banks from "../../../assets/banks.jpg";
 
 interface CreditProps {

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import geo from "../../../assets/Geo1.svg";
 import leftRec from "../../../assets/leftRectangle.svg";
 import mej from "../../../assets/Mej.svg";
@@ -29,7 +28,7 @@ const serviceMapping = {
 };
 
 const Window = ({ toggleService }) => {
-    const handleImageClick = (key) => {
+    const handleImageClick = (key:any) => {
         if (serviceMapping[key]) {
             toggleService(serviceMapping[key]);
         }

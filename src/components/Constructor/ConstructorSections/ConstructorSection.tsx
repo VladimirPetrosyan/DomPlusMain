@@ -126,7 +126,8 @@ import additionalAnimation9 from "../../../assets/constructor/additional/animati
 
 import telegramIcon from "../../../assets/telegram.svg";
 import whatsappIcon from "../../../assets/whatsapp.svg";
-import vkIcon from "../../../assets/Vk.svg";
+import vkIcon from "../../../assets/Vk2.svg";
+import axios from "axios";
 
 
 const groupAnimationDelay = (index: number, animationKey: string, groups: Record<string, string[]>): number => {
@@ -179,26 +180,35 @@ const ConstructorSection = () => {
     // Обработчик отправки формы
     const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-    
+
         if (!formData.phone.trim()) {
             setHasError(true);
             return;
         }
-    
+
         setHasError(false);
-    
         updateSelectionsString();
-    
-        console.log({
+
+        // Подготовка данных для отправки
+        const payload = {
             phone: formData.phone,
             name: formData.name,
             email: formData.email,
-            selections: formData.selections,
-        });
-    
-        togglePopup();
+            svoi_dom: formData.selections, // Замена selections на фиксированное значение
+        };
+
+        try {
+            // Отправка данных на сервер
+            const response = await axios.post('http://localhost:4000/create-lead', payload);
+
+            console.log('Ответ сервера:', response.data);
+
+            // Очистка формы и закрытие попапа
+            togglePopup();
+        } catch (error) {
+            console.error('Ошибка при отправке формы:', error);
+        }
     };
-    
     
 
     
@@ -331,11 +341,14 @@ const ConstructorSection = () => {
     };
 
     const updateSelectionsString = () => {
-        const selections = `Фундамент: ${selectedFoundation || "не выбран"}, 
-                            Стены: ${selectedWalls || "не выбраны"}, 
-                            Внешняя отделка: ${selectedExterior || "не выбрана"}, 
-                            Внутренняя отделка: ${selectedInterior || "не выбрана"}, 
-                            Крыша: ${selectedRoof || "не выбрана"}`;
+        const selections = [
+            `Фундамент: ${selectedFoundation?.trim() || "не выбран"}`,
+            `Стены: ${selectedWalls?.trim() || "не выбраны"}`,
+            `Внешняя отделка: ${selectedExterior?.trim() || "не выбрана"}`,
+            `Внутренняя отделка: ${selectedInterior?.trim() || "не выбрана"}`,
+            `Крыша: ${selectedRoof?.trim() || "не выбрана"}`,
+        ].join(", "); // Объединяем части строки с помощью запятой и пробела
+
         setFormData((prevData) => ({
             ...prevData,
             selections,

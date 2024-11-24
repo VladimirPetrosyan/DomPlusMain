@@ -7,7 +7,8 @@ import cardDataRealized from "../Projects/RealizedProjects/realizedCardData.ts";
 import galochka from "../../../assets/galochka.png";
 import telegramIcon from "../../../assets/telegram.svg";
 import whatsappIcon from "../../../assets/whatsapp.svg";
-import vkIcon from "../../../assets/vk.svg";
+import vkIcon2 from "../../../assets/vk2.svg";
+import axios from "axios";
 
 interface MainWindowProps {
     selectedProjectId: number | null;
@@ -81,23 +82,37 @@ const MainWindow = forwardRef<HTMLDivElement, MainWindowProps>(({ selectedProjec
         }));
     };
 
-    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!formData.phone.trim()) {
             setHasError(true); // Устанавливаем ошибку, если телефон не заполнен
             return;
         }
         setHasError(false); // Сбрасываем ошибку при корректном вводе телефона
-    
+
         console.log({
             phone: formData.phone,
             name: formData.name || "Без имени", // Если имя не указано
             email: formData.email || "Не указан", // Если email не указан
             project: selectedProject || "Проект не выбран", // Передача выбранного проекта
         });
-    
-        alert("Заявка успешно отправлена!");
-        togglePopup(); // Закрываем попап после отправки
+        const payload = {
+            phone: formData.phone,
+            name: formData.name || "Без имени", // Если имя не указано
+            email: formData.email || "Не указан", // Если email не указан
+            project: selectedProject || "Проект не выбран", // Передача выбранного проекта
+        };
+        try {
+            // Отправка данных на сервер
+            const response = await axios.post('http://localhost:4000/create-lead', payload);
+
+            console.log('Ответ сервера:', response.data);
+
+            // Очистка формы и закрытие попапа
+            togglePopup();
+        } catch (error) {
+            console.error('Ошибка при отправке формы:', error);
+        }
     };
 
     if (!activeProject) {
@@ -306,7 +321,7 @@ const MainWindow = forwardRef<HTMLDivElement, MainWindowProps>(({ selectedProjec
                                 rel="noopener noreferrer" 
                                 className={style.socialButton}
                             >
-                                <img src={vkIcon} alt="ВКонтакте" className={style.icon} />
+                                <img src={vkIcon2} alt="ВКонтакте" className={style.icon} />
                                 ВКонтакте
                             </a>
                             <a 

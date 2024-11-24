@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import style from "./styles.module.css";
 import { motion } from "framer-motion";
-import vkIcon from "../../../assets/vk.svg";
+import vkIcon from "../../../assets/vk2.svg";
 import telegramIcon from "../../../assets/telegram.svg";
 import whatsappIcon from "../../../assets/whatsapp.svg";
 import axios from "axios";
@@ -24,10 +24,9 @@ const services = [
 interface ServicesSelectionProps {
     selectedServices: string[];
     toggleService: (service: string) => void;
-    onSubmit: (services: { phone: string, name: string, email: string, servicesString: string }) => (services: string[]) => void;
 }
 
-const ServicesSelection: React.FC<ServicesSelectionProps> = ({ selectedServices, toggleService, onSubmit }) => {
+const ServicesSelection: React.FC<ServicesSelectionProps> = ({ selectedServices, toggleService }) => {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [formData, setFormData] = useState({
         phone: '',

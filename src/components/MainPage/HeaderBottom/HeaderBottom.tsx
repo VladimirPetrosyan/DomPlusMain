@@ -22,8 +22,8 @@ const HeaderBottom: FC = () => {
           transition={{duration: 1.3}}
       >
         <div className={style.displayLeftTop}>
-          <p className={style.leed}>ЛИДЕР</p>
-          <p className={style.leedText}>В СТРОИТЕЛЬСТВЕ ДОМОВ И ПРОДАЖЕ КВАРТИР</p>
+          <p className={style.leed}>ДОМ+</p>
+          <p className={style.leedText}>СТРОИТЕЛЬСТВО ДОМОВ И ПРОДАЖА КВАРТИР</p>
         </div>
         <div className={style.personalProject}>
           <img className={style.polosa} src={polosa} alt="" />
@@ -43,7 +43,7 @@ const HeaderBottom: FC = () => {
           <div className={style.displayLeftBottomSecond}>
             <div className={style.garant}>
               <img src={galochka} />
-              <p>Гарантия до 25 лет</p>
+              <p>Гарантия качества</p>
             </div>
             <div>
               <img src={galochka} />

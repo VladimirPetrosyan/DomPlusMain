@@ -2,46 +2,52 @@ import { FC } from "react";
 import { motion } from "framer-motion";
 import style from "./styles.module.css";
 import galochka from "../../../assets/Vector.svg";
-// import strelka from "../../../assets/Strelka vniz.png";
 import dom from "../../../assets/image.png";
 import map from "../../../assets/Map.png";
 import tg from "../../../assets/Tg.png";
 import Vk from "../../../assets/Vk.svg";
 import Vb from "../../../assets/Viber.png";
 import inst from "../../../assets/Inst.png";
+import polosa from "../../../assets/Rectangle 5.png";
+import { Link } from "react-router-dom";
+
 
 const HeaderBottom: FC = () => {
   return (
     <div className={style.headerBottom}>
       <motion.div
-          className={style.diplayLeft}
+          className={style.displayLeft}
           initial={{x: '-100vw'}}
           animate={{x: 0}}
           transition={{duration: 1.3}}
       >
         <div className={style.displayLeftTop}>
-          <p className={style.leed}>Лидер</p>
-          <p className={style.leedText}>В строительстве домов и продаж квартир</p>
+          <p className={style.leed}>ЛИДЕР</p>
+          <p className={style.leedText}>В СТРОИТЕЛЬСТВЕ ДОМОВ И ПРОДАЖЕ КВАРТИР</p>
+        </div>
+        <div className={style.personalProject}>
+          <img className={style.polosa} src={polosa} alt="" />
+          <p className={style.projectText}>Сделаем ваш личный проект для <br/> строительства частного дома</p>
         </div>
         <div className={style.displayLeftBottom}>
           <div className={style.displayLeftBottomFirst}>
             <div>
-              <img src={galochka}/>
+              <img src={galochka} />
               <p>Надежность и профессионализм</p>
             </div>
             <div>
-              <img src={galochka}/>
+              <img src={galochka} />
               <p>Индивидуальный подход к каждому проекту</p>
             </div>
           </div>
           <div className={style.displayLeftBottomSecond}>
-            <div>
-              <img src={galochka}/>
+            <div className={style.garant}>
+              <img src={galochka} />
               <p>Гарантия до 25 лет</p>
             </div>
             <div>
-              <img src={galochka}/>
-              <p>Тут можно чота еще придумать я не придумал</p>
+              <img src={galochka} />
+              <p>Качественная консультация и отличная стоимость</p>
             </div>
           </div>
         </div>
@@ -50,8 +56,8 @@ const HeaderBottom: FC = () => {
       <motion.div
           className={style.displayRight}
           initial={{x: '100vw'}}
-          animate={{ x: 0 }}
-        transition={{ duration: 1.3 }}
+          animate={{x: 0}}
+          transition={{duration: 1.3}}
       >
         <div className={style.contact}>
           <p className={style.Number}>{("+7 (903) 400-03-61")}</p>
@@ -76,7 +82,9 @@ const HeaderBottom: FC = () => {
         </div>
         <div className={style.aboutProject}>
           <p className={style.ourProject}>Наши проекты</p>
-          <img className={style.dom} src={dom} />
+          <Link to="/projects">
+            <img className={style.dom} src={dom} alt="Дом" />
+          </Link>
         </div>
       </motion.div>
     </div>

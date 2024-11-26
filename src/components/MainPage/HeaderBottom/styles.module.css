@@ -1,30 +1,32 @@
-.headerBottom{
+.headerBottom {
     display: flex;
     background-size: cover;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(44, 44, 44, 0.5) 100%), url("../../../assets/bc.png") center ;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(44, 44, 44, 0.5) 100%), url("../../../assets/bc.png") center;
     overflow: hidden;
     justify-content: space-between;
 }
-.diplayLeft{
+.displayLeft {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
 }
-.displayLeftTop{
+.displayLeftTop {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 0 4rem 6rem 12rem;
+    max-width: 900px;
+    padding: 0 0rem 0.5rem 4rem;
 }
-.leed{
+
+.leed {
     color: #F9D267;
     font-size: 4.5rem;
     font-weight: 700;
 }
-.leedText{
+.leedText {
     color: white;
     font-weight: 500;
-    font-size: 3.5rem;
+    font-size: 3rem;
 }
 .line{
     top: -22rem;
@@ -50,7 +52,12 @@
     justify-content: space-around;
     top: 34rem;
     left: 12rem;
-    gap: 2rem;
+    gap: 3rem;
+    padding-left: 40px;
+    padding-bottom: 20px;
+    font-size: 20px;
+}
+.displayLeftBottom div{
 }
 .displayLeftBottomFirst, .displayLeftBottomSecond{
     display: flex;
@@ -93,8 +100,42 @@
     flex-direction: column;
 }
 .ourProject{
-    padding-left: 8rem;
+    padding-left: 18rem;
     font-family: Montserrat, serif;
     font-weight: 600;
     font-size: 1.875rem;
+    font-style: italic;
+}
+
+.dom{
+    padding-right: 50px;
+}
+.personalProject {
+    position: relative; /* Контейнер становится контекстом для позиционирования */
+    width: fit-content; /* Подгон ширины под содержимое */
+    margin: 2rem auto;
+    text-align: center;
+}
+
+.polosa {
+    width: 100%; /* Полоса занимает всю ширину */
+    height: auto; /* Пропорциональная высота */
+    position: relative; /* Позиционирование относительно родителя */
+    left: -5%; /* Сдвиг полосы левее на 10% */
+}
+
+.projectText {
+    position: absolute; /* Абсолютное позиционирование внутри контейнера */
+    top: 50%; /* Центрирование по вертикали */
+    left: 50%; /* Центрирование по горизонтали */
+    transform: translate(-50%, -50%); /* Коррекция смещения для точного центрирования */
+    color: #000; /* Цвет текста */
+    font-size: 20px; /* Размер шрифта */
+    font-weight: 600; /* Толщина шрифта */
+    white-space: nowrap; /* Предотвращение переноса текста */
+    text-align: right;
+    font-style: italic;
+}
+.garant{
+    padding-bottom: 20px;
 }

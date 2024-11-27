@@ -26,7 +26,7 @@
 }
 
 .serviceButton:hover {
-    background-color: #f0f0f0;
+    background-color: #e0a839;
 }
 
 .selected {
@@ -163,6 +163,7 @@
 
 .submitButton:hover {
     box-shadow: 0 0 0.7125rem #FFD83A;
+
 }
 
 .submitButton:active {
@@ -251,6 +252,7 @@
 
 .submitButton:hover {
     box-shadow: 0 0 0.7125rem #FFD83A;
+
 }
 
 .submitButton:active {

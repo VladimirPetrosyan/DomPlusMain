@@ -5,10 +5,7 @@ import Navigation from "../Navigation/Navigation.tsx";
 import cardData from "../Projects/Cards/cardData.ts";
 import cardDataRealized from "../Projects/RealizedProjects/realizedCardData.ts";
 import galochka from "../../../assets/galochka.png";
-import telegramIcon from "../../../assets/telegram.svg";
-import whatsappIcon from "../../../assets/whatsapp.svg";
-import vkIcon2 from "../../../assets/vk2.svg";
-import axios from "axios";
+import Form from "../../../widgets/Form/Form.tsx"; // Импортируем компонент Form
 
 interface MainWindowProps {
     selectedProjectId: number | null;
@@ -31,14 +28,6 @@ const MainWindow = forwardRef<HTMLDivElement, MainWindowProps>(({ selectedProjec
     const [activeProject, setActiveProject] = useState<Project | null>(null);
     const [mainImage, setMainImage] = useState<string>("");
     const [isPopupOpen, setIsPopupOpen] = useState(false);
-    const [formData, setFormData] = useState({
-        phone: "",
-        name: "",
-        email: "",
-    });
-    const [hasError, setHasError] = useState(false); // Для проверки ошибки в телефоне
-
-    const [selectedProject, setSelectedProject] = useState<string | null>(null); // сохранение выбора проекта
 
     useEffect(() => {
         if (selectedProjectId !== null) {
@@ -47,22 +36,12 @@ const MainWindow = forwardRef<HTMLDivElement, MainWindowProps>(({ selectedProjec
                 setActiveProject(selectedProject);
                 setMainImage(selectedProject.images[0]);
     
-                // Устанавливаем выбранный проект
-                setSelectedProject(
-                    isRealized ? data[0].text : data[0].title || "Без названия"
-                );
             }
         } else if (data && data.length > 0) {
             // Если проект не выбран, используем первый проект
             setActiveProject(data[0]);
             setMainImage(data[0].images[0]);
-    
-            // Устанавливаем проект по умолчанию
-            setSelectedProject(
-                isRealized
-                    ? data[0].text // Для реализованных проектов
-                    : data[0].title || "Без названия" // Для обычных проектов
-            );
+
         }
     }, [isRealized, selectedProjectId, data]);
 
@@ -74,46 +53,6 @@ const MainWindow = forwardRef<HTMLDivElement, MainWindowProps>(({ selectedProjec
         setIsPopupOpen(!isPopupOpen);
     };
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: value,
-        }));
-    };
-
-    const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if (!formData.phone.trim()) {
-            setHasError(true); // Устанавливаем ошибку, если телефон не заполнен
-            return;
-        }
-        setHasError(false); // Сбрасываем ошибку при корректном вводе телефона
-
-        console.log({
-            phone: formData.phone,
-            name: formData.name || "Без имени", // Если имя не указано
-            email: formData.email || "Не указан", // Если email не указан
-            project: selectedProject || "Проект не выбран", // Передача выбранного проекта
-        });
-        const payload = {
-            phone: formData.phone,
-            name: formData.name || "Без имени", // Если имя не указано
-            email: formData.email || "Не указан", // Если email не указан
-            project: selectedProject || "Проект не выбран", // Передача выбранного проекта
-        };
-        try {
-            // Отправка данных на сервер
-            const response = await axios.post('http://localhost:4000/create-lead', payload);
-
-            console.log('Ответ сервера:', response.data);
-
-            // Очистка формы и закрытие попапа
-            togglePopup();
-        } catch (error) {
-            console.error('Ошибка при отправке формы:', error);
-        }
-    };
 
     if (!activeProject) {
         return <div>Загрузка...</div>;
@@ -245,106 +184,11 @@ const MainWindow = forwardRef<HTMLDivElement, MainWindowProps>(({ selectedProjec
 
             {/* Popup форма */}
             {isPopupOpen && (
-                <motion.div
-                    className={style.popupOverlay}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.5 }}
-                    onClick={() => setIsPopupOpen(false)}
-                >
-                    <motion.div
-                        className={style.popupContent}
-                        initial={{ scale: 0.8 }}
-                        animate={{ scale: 1 }}
-                        exit={{ scale: 0.8 }}
-                        transition={{ duration: 0.5 }}
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <button className={style.closeButton} onClick={togglePopup}>
-                            ✕
-                        </button>
-
-                        {/* Отображение выбранного проекта */}
-                        {activeProject && (
-                            <div className={style.projectInfo}>
-                                <p className={style.projectTitle}>
-                                    {/* Если проект реализованный, берем `text`, иначе `title` */}
-                                    Проект: {isRealized ? activeProject.text : activeProject.title || "Без названия"}
-                                </p>
-                            </div>
-                        )}
-
-                        <p className={style.popupTitle}>Оставьте заявку</p>
-                        <form className={style.form} onSubmit={handleFormSubmit}>
-                            <input
-                                type="text"
-                                className={`${style.inputField} ${hasError ? style.errorField : ""}`}
-                                placeholder="Номер телефона (обязательно)"
-                                name="phone"
-                                value={formData.phone}
-                                onChange={handleInputChange}
-                            />
-                            {hasError && <p className={style.errorMessage}>Пожалуйста, введите номер телефона</p>}
-                            <input
-                                type="text"
-                                className={style.inputField}
-                                placeholder="ФИО (необязательно)"
-                                name="name"
-                                value={formData.name}
-                                onChange={handleInputChange}
-                            />
-                            <input
-                                type="email"
-                                className={style.inputField}
-                                placeholder="E-mail (необязательно)"
-                                name="email"
-                                value={formData.email}
-                                onChange={handleInputChange}
-                            />
-                            <input
-                                type="hidden"
-                                name="projectId"
-                                value={selectedProject || "Проект не выбран"}
-                            />
-                            <button type="submit" className={style.submitButton}>
-                                Отправить
-                            </button>
-                        </form>
-                    
-                        {/* Блок с кнопками социальных сетей */}
-                        <p className={style.contactSocial}>- Или обратитесь к нам в соцсетях -</p>
-                        <div className={style.socialButtons}>
-                            <a 
-                                href="https://vk.com/dompluse" 
-                                target="_blank" 
-                                rel="noopener noreferrer" 
-                                className={style.socialButton}
-                            >
-                                <img src={vkIcon2} alt="ВКонтакте" className={style.icon} />
-                                ВКонтакте
-                            </a>
-                            <a 
-                                href="https://t.me/dom_plus_rnd" 
-                                target="_blank" 
-                                rel="noopener noreferrer" 
-                                className={style.socialButton}
-                            >
-                                <img src={telegramIcon} alt="Telegram" className={style.icon} />
-                                Telegram
-                            </a>
-                            <a 
-                                href="https://wa.me/79034000361" 
-                                target="_blank" 
-                                rel="noopener noreferrer" 
-                                className={style.socialButton}
-                            >
-                                <img src={whatsappIcon} alt="WhatsApp" className={style.icon} />
-                                WhatsApp
-                            </a>
-                        </div>
-                    </motion.div>
-                </motion.div>
+                <Form
+                    onClose={togglePopup}
+                    formType="project"
+                    project={isRealized ? activeProject.text : activeProject.title || "Без названия"}
+                />
             )}
         </div>
     );

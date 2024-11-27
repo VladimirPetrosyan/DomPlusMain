@@ -123,11 +123,7 @@ import additionalAnimation6 from "../../../assets/constructor/additional/animati
 import additionalAnimation7 from "../../../assets/constructor/additional/animation7.png";
 import additionalAnimation8 from "../../../assets/constructor/additional/animation8.png";
 import additionalAnimation9 from "../../../assets/constructor/additional/animation8.png";
-
-import telegramIcon from "../../../assets/telegram.svg";
-import whatsappIcon from "../../../assets/whatsapp.svg";
-import vkIcon from "../../../assets/Vk2.svg";
-import axios from "axios";
+import Form from "../../../widgets/Form/Form.tsx"; // Импортируем компонент Form
 
 
 const groupAnimationDelay = (index: number, animationKey: string, groups: Record<string, string[]>): number => {
@@ -155,61 +151,20 @@ const ConstructorSection = () => {
     const [selectedInterior, setSelectedInterior] = useState<"yes" | "no" | null>(null);
     const [selectedRoof, setSelectedRoof] = useState<"dvukhskatnaya" | "chetyrekhskatnaya" | null>(null);
     const [isPopupOpen, setIsPopupOpen] = useState(false);
-    const [formData, setFormData] = useState({
-        phone: '',
-        name: '',
-        email: '',
-        selections: '', // Новое поле для хранения строки выбора
-    });
-    const [hasError, setHasError] = useState(false);
 
-    // Открытие/закрытие попапа
     const togglePopup = () => {
         setIsPopupOpen(!isPopupOpen);
     };
 
-    // Обработчик изменения данных в форме
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: value,
-        }));
+    const getSelectionsString = () => {
+        return [
+            `Фундамент: ${selectedFoundation || "не выбран"}`,
+            `Стены: ${selectedWalls || "не выбраны"}`,
+            `Внешняя отделка: ${selectedExterior || "не выбрана"}`,
+            `Внутренняя отделка: ${selectedInterior || "не выбрана"}`,
+            `Крыша: ${selectedRoof || "не выбрана"}`,
+        ].join(", ");
     };
-
-    // Обработчик отправки формы
-    const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        if (!formData.phone.trim()) {
-            setHasError(true);
-            return;
-        }
-
-        setHasError(false);
-        updateSelectionsString();
-
-        // Подготовка данных для отправки
-        const payload = {
-            phone: formData.phone,
-            name: formData.name,
-            email: formData.email,
-            svoi_dom: formData.selections, // Замена selections на фиксированное значение
-        };
-
-        try {
-            // Отправка данных на сервер
-            const response = await axios.post('http://localhost:4000/create-lead', payload);
-
-            console.log('Ответ сервера:', response.data);
-
-            // Очистка формы и закрытие попапа
-            togglePopup();
-        } catch (error) {
-            console.error('Ошибка при отправке формы:', error);
-        }
-    };
-    
 
     
     const [animationsCompleted, setAnimationsCompleted] = useState({
@@ -332,7 +287,6 @@ const ConstructorSection = () => {
             // Сбрасываем выбранный фундамент временно, чтобы перерендерить элементы
             setAnimationsActive(false); // Деактивируем текущие анимации
             setSelectedFoundation(null); // Сбрасываем состояние фундамента
-            updateSelectionsString();
             setTimeout(() => {
                 setSelectedFoundation(option); // Устанавливаем выбранный фундамент
                 setAnimationsActive(true); // Активируем анимации
@@ -340,31 +294,14 @@ const ConstructorSection = () => {
         }
     };
 
-    const updateSelectionsString = () => {
-        const selections = [
-            `Фундамент: ${selectedFoundation?.trim() || "не выбран"}`,
-            `Стены: ${selectedWalls?.trim() || "не выбраны"}`,
-            `Внешняя отделка: ${selectedExterior?.trim() || "не выбрана"}`,
-            `Внутренняя отделка: ${selectedInterior?.trim() || "не выбрана"}`,
-            `Крыша: ${selectedRoof?.trim() || "не выбрана"}`,
-        ].join(", "); // Объединяем части строки с помощью запятой и пробела
-
-        setFormData((prevData) => ({
-            ...prevData,
-            selections,
-        }));
-    };
-
     const handleWallSelect = (option: "gazoblock" | "kirpich") => {
         setSelectedWalls(option);
         setAnimationsActive(false);
-        updateSelectionsString();
         setTimeout(() => setAnimationsActive(true), 100);
     };
 
     const handleExteriorSelect = (option: "yes" | "no") => {
         setSelectedExterior(option);
-        updateSelectionsString();
         if (option === "yes") {
             setAnimationsActive(false);
             setTimeout(() => setAnimationsActive(true), 100);
@@ -373,7 +310,6 @@ const ConstructorSection = () => {
 
     const handleInteriorSelect = (option: "yes" | "no") => {
         setSelectedInterior(option);
-        updateSelectionsString();
         if (option === "yes") {
             setAnimationsActive(false);
             setTimeout(() => setAnimationsActive(true), 100);
@@ -384,7 +320,6 @@ const ConstructorSection = () => {
         renderWallAnimations();
         setSelectedRoof(option);
         setAnimationsActive(false);
-        updateSelectionsString();
         setTimeout(() => setAnimationsActive(true), 100);
     };
     
@@ -837,98 +772,11 @@ const ConstructorSection = () => {
                 </div>
             </div>
             {isPopupOpen && (
-                <motion.div
-                    className={style.popupOverlay}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.5 }}
-                    onClick={(e) => {
-                        const target = e.target as HTMLElement;
-                        if (target.classList.contains(style.popupOverlay)) {
-                            setIsPopupOpen(false);
-                        }
-                    }}
-                >
-                    <motion.div
-                        className={style.popupContent}
-                        initial={{ scale: 0.8 }}
-                        animate={{ scale: 1 }}
-                        exit={{ scale: 0.8 }}
-                        transition={{ duration: 0.5 }}
-                    >
-                        <button className={style.closeButton} onClick={togglePopup}>
-                            ✕
-                        </button>
-                        <p className={style.popupTitle}>Оставьте заявку</p>
-                        <p className={style.popupSubtitle}>
-                            Специалист свяжется с вами и даст конечный результат
-                        </p>
-                        <form className={style.form} onSubmit={handleFormSubmit}>
-                        <input
-                            type="text"
-                            className={`${style.inputField} ${hasError ? style.errorField : ""}`}
-                            placeholder="Номер телефона"
-                            name="phone"
-                            value={formData.phone}
-                            onChange={handleInputChange}
-                        />
-                            <input
-                                type="text"
-                                className={style.inputField}
-                                placeholder="ФИО"
-                                name="name"
-                                value={formData.name}
-                                onChange={handleInputChange}
-                            />
-                            <input
-                                type="email"
-                                className={style.inputField}
-                                placeholder="E-mail"
-                                name="email"
-                                value={formData.email}
-                                onChange={handleInputChange}
-                            />
-                        
-                            <button type="submit" className={style.submitButton}>
-                                Оставить заявку
-                            </button>
-                        </form>
-                
-                        <p className={style.contactSocial}>
-                            - Или обратитесь к нам в соцсетях -
-                        </p>
-                        <div className={style.socialButtons}>
-                            <a 
-                                href="https://vk.com/dompluse" 
-                                target="_blank" 
-                                rel="noopener noreferrer" 
-                                className={style.socialButton}
-                            >
-                                <img src={vkIcon} alt="ВКонтакте" className={style.icon} />
-                                ВКонтакте
-                            </a>
-                            <a 
-                                href="https://t.me/dom_plus_rnd" 
-                                target="_blank" 
-                                rel="noopener noreferrer" 
-                                className={style.socialButton}
-                            >
-                                <img src={telegramIcon} alt="Telegram" className={style.icon} />
-                                Telegram
-                            </a>
-                            <a 
-                                href="https://wa.me/79034000361" 
-                                target="_blank" 
-                                rel="noopener noreferrer" 
-                                className={style.socialButton}
-                            >
-                                <img src={whatsappIcon} alt="WhatsApp" className={style.icon} />
-                                WhatsApp
-                            </a>
-                        </div>
-                    </motion.div>
-                </motion.div>
+                <Form
+                    onClose={togglePopup}
+                    formType="constructor" // Новый тип формы
+                    project={getSelectionsString()} // Передаём строку с выбором
+                />
             )}
         </div>
     );

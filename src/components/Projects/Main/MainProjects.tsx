@@ -82,6 +82,7 @@ const MainProjects = () => {
                     variants={transitionVariants}
                 >
                     <RealizedProjects onProjectSelect={handleProjectSelect} />
+                    <Credit selectedProjectId={selectedProjectId} />
                 </motion.div>
             )}
             <Footer />

@@ -109,3 +109,17 @@
     height: 1.2rem;
     margin-right: 0.3rem;
 }
+
+.successMessage {
+    text-align: center;
+    font-size: 18px;
+    color: green;
+    margin-top: 20px;
+}
+
+.errorMessage {
+    text-align: center;
+    font-size: 18px;
+    color: red;
+    margin-top: 20px;
+}

@@ -4,7 +4,7 @@ import vkIcon2 from "../../assets/Vk2.svg";
 import telegramIcon from "../../assets/telegram.svg";
 import whatsappIcon from "../../assets/whatsapp.svg";
 import { useState } from "react";
-import apiClient from "../../axiosConfig"; // Импортируем настроенный Axios
+import apiClient from "../../../axiosConfig"; // Импортируем настроенный Axios
 
 interface FormProps {
     onClose: () => void;

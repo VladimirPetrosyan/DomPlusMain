@@ -10,39 +10,34 @@
     gap: 0; /* Убираем отступ между блоками */
     height: auto; /* Высота подстраивается под содержимое */
     margin: 0 auto;
-    padding-top: 50px;
+    padding: 50px 50px 20px 50px;
 }
-.contentLeft{
-    width: 100%;
+.contentLeft {
+    flex: 0 0 60%; /* Левый блок занимает фиксированные 60% */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .contentOne {
     display: flex;
-    position: relative;
-    align-items: stretch; /* Гарантируем одинаковую высоту */
-    overflow: hidden;
-    border-radius: 2.11rem 0 0 2.11rem;
-    height: auto; /* Высота подстраивается под содержимое */
-    padding-left: 100px;
-    max-height: 430px;
+    align-items: stretch; /* Позволяет растянуть вложенные элементы */
+    gap: 0; /* Убираем зазоры */
+    width: 100%; /* Полная ширина */
 }
 .amg {
-    width: 100%; /* Изображение заполняет весь блок */
-    height: 100%; /* Высота заполняет весь контейнер */
+    max-width: 750px; /* Изображение заполняет весь блок */
+    height: 100%;
     object-fit: cover; /* Увеличиваем и обрезаем лишнее */
     overflow: hidden; /* Убираем всё, что выходит за границы */
-    border-radius: 2.11rem 0 0 2.11rem;
+    padding-left:10px;
 }
 .contentRight {
-    background-color: #E9E9E9;
-    border: 0.043rem solid #BFBFBF;
-    padding: 2rem;
+    flex: 1; /* Правый блок занимает оставшееся пространство */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 1rem;
+    padding: 2rem;
     border-radius: 0 2.11rem 0 0;
-    max-height: 440px;
-    flex-shrink: 0; /* Предотвращаем уменьшение */
 }
 .contentRightTop{
     display: flex;
@@ -100,50 +95,39 @@
     padding: 1rem;
     border-radius: 2.344rem;
 }
-.slider{
-    position: absolute;
-    top: 80%;
+.slider {
+    position: relative; /* Чтобы корректно размещать внутри блока */
     display: flex;
-    flex-direction: row;
-    gap: 1rem;
-    justify-content: start;
-    align-items: center;
-    max-width: 480px;
+    flex-direction: column; /* Меняем направление на вертикальное */
+    gap: 10px; /* Отступы между изображениями */
+    height: 450px; /* Фиксированная высота слайдера */
+    overflow-y: auto; /* Включаем вертикальную прокрутку */
+    overflow-x: hidden;
 }
 
 .amg {
     flex-grow: 1; /* Заставляет изображение занимать всё пространство */
     height: auto; /* Убираем фиксированную высоту */
-    max-height: 500px; /* Ограничиваем максимальную высоту */
     width: 100%; /* Автоматически растягиваем по ширине */
     object-fit: cover; /* Сохраняем пропорции, обрезая лишнее */
-    overflow: hidden; /* Прячем излишки изображения */
 }
 
-.slider {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    gap: 1rem;
-    overflow-x: auto;
-    padding: 1rem;
-}
 
 .slider img {
-    height: 60px; 
-    width: 75px;
-    border-radius: 10px; 
-    cursor: pointer; 
+    height: 80px; /* Высота изображения в слайдере */
+    width: auto; /* Сохраняем пропорции */
+    border-radius: 10px; /* Скругленные углы */
+    cursor: pointer; /* Указатель при наведении */
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Мягкая тень */
 }
 
 .slider img:hover {
-    transform: scale(1.1);
+    transform: scale(1.01); /* Увеличение при наведении */
 }
 
 .slider img:active {
-    transform: scale(0.95);
+    transform: scale(0.95); /* Уменьшение при нажатии */
 }
 
 .buttonApply {

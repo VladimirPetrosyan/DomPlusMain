@@ -64,125 +64,120 @@ const MainWindow = forwardRef<HTMLDivElement, MainWindowProps>(({ selectedProjec
             <div className={style.middleContent}>
                 <div className={style.contentLeft}>
                     <div className={style.contentOne}>
-                        <div style={{ height: "max-content", width: "max-content" }}>
-                            <motion.img
-                                key={mainImage}
-                                className={style.amg}
-                                src={mainImage}
-                                alt="Main Project Image"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ duration: 1 }}
-                            />
-                            <div className={style.slider}>
-                                {activeProject.images && activeProject.images.length > 0 ? (
-                                    activeProject.images.map((image, index) => (
-                                        <img
-                                            key={index}
-                                            src={image}
-                                            onClick={() => handleImageClick(image)}
-                                            alt={`Image ${index}`}
-                                        />
-                                    ))
-                                ) : (
-                                    <p>Нет изображений для отображения</p>
-                                )}
-                            </div>
+                        <div className={style.slider}>
+                            {activeProject.images && activeProject.images.length > 0 ? (
+                                activeProject.images.map((image, index) => (
+                                    <img
+                                        key={index}
+                                        src={image}
+                                        onClick={() => handleImageClick(image)}
+                                        alt={`Image ${index}`}
+                                    />
+                                ))
+                            ) : (
+                                <p>Нет изображений для отображения</p>
+                            )}
                         </div>
-                        <div className={style.contentRight}>
-                        {isRealized ? (
-                            <>
+                        <motion.img
+                            key={mainImage}
+                            className={style.amg}
+                            src={mainImage}
+                            alt="Main Project Image"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 1 }}
+                        />
+                    </div>
+                </div>
+                <div className={style.contentRight}>
+                    {isRealized ? (
+                        <>
+                            <motion.p
+                                className={style.contentRightTopThirdText}
+                                initial={{ opacity: 0, x: 100 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 1, delay: 0.4 }}
+                            >
+                                {activeProject.text}
+                            </motion.p>
+                            <motion.div
+                                className={style.contentRightBottom}
+                                initial={{ opacity: 0, x: 100 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 1, delay: 1 }}
+                            >
+                                <button
+                                    className={style.buttonApply}
+                                    onClick={togglePopup}
+                                >
+                                    Оставить заявку
+                                </button>
+                            </motion.div>
+                        </>
+                    ) : (
+                        <>
+                            <div className={style.contentRightTop}>
+                                <motion.p
+                                    className={style.contentRightTopFirstText}
+                                    initial={{ opacity: 0, x: 100 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 1 }}
+                                >
+                                    {activeProject.title}
+                                </motion.p>
+                                <motion.p
+                                    className={style.contentRightTopSecondText}
+                                    initial={{ opacity: 0, x: 100 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 1, delay: 0.2 }}
+                                >
+                                    {activeProject.description}
+                                </motion.p>
                                 <motion.p
                                     className={style.contentRightTopThirdText}
                                     initial={{ opacity: 0, x: 100 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ duration: 1, delay: 0.4 }}
                                 >
-                                    {/* Отображение названия проекта из `text` */}
                                     {activeProject.text}
                                 </motion.p>
-                                {/* Кнопка "Оставить заявку" для реализованных проектов */}
-                                <motion.div
-                                    className={style.contentRightBottom}
-                                    initial={{ opacity: 0, x: 100 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ duration: 1, delay: 1 }}
+                            </div>
+                            <div className={style.contentRightMiddle}>
+                                {activeProject.features && activeProject.features.length > 0 ? (
+                                    activeProject.features.map((feature, index) => (
+                                        <motion.div
+                                            key={index}
+                                            className={style.contentRightManager}
+                                            initial={{ opacity: 0, x: 100 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            transition={{ duration: 1, delay: 0.2 * index }}
+                                        >
+                                            <img src={galochka} alt="Checkmark" />
+                                            <p className={style.contentMiddleText}>{feature}</p>
+                                        </motion.div>
+                                    ))
+                                ) : (
+                                    <p>Нет доступных характеристик</p>
+                                )}
+                            </div>
+                            <motion.div
+                                className={style.contentRightBottom}
+                                initial={{ opacity: 0, x: 100 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 1, delay: 1 }}
+                            >
+                                <button
+                                    className={style.buttonApply}
+                                    onClick={togglePopup}
                                 >
-                                    <button
-                                        className={style.buttonApply}
-                                        onClick={togglePopup}
-                                    >
-                                        Оставить заявку
-                                    </button>
-                                </motion.div>
-                            </>
-                        ) : (
-                            <>
-                                <div className={style.contentRightTop}>
-                                    <motion.p
-                                        className={style.contentRightTopFirstText}
-                                        initial={{ opacity: 0, x: 100 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        transition={{ duration: 1 }}
-                                    >
-                                        {activeProject.title}
-                                    </motion.p>
-                                    <motion.p
-                                        className={style.contentRightTopSecondText}
-                                        initial={{ opacity: 0, x: 100 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        transition={{ duration: 1, delay: 0.2 }}
-                                    >
-                                        {activeProject.description}
-                                    </motion.p>
-                                    <motion.p
-                                        className={style.contentRightTopThirdText}
-                                        initial={{ opacity: 0, x: 100 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        transition={{ duration: 1, delay: 0.4 }}
-                                    >
-                                        {activeProject.text}
-                                    </motion.p>
-                                </div>
-                                <div className={style.contentRightMiddle}>
-                                    {activeProject.features && activeProject.features.length > 0 ? (
-                                        activeProject.features.map((feature, index) => (
-                                            <motion.div
-                                                key={index}
-                                                className={style.contentRightManager}
-                                                initial={{ opacity: 0, x: 100 }}
-                                                animate={{ opacity: 1, x: 0 }}
-                                                transition={{ duration: 1, delay: 0.2 * index }}
-                                            >
-                                                <img src={galochka} alt="Checkmark" />
-                                                <p className={style.contentMiddleText}>{feature}</p>
-                                            </motion.div>
-                                        ))
-                                    ) : (
-                                        <p>Нет доступных характеристик</p>
-                                    )}
-                                </div>
-                                <motion.div
-                                    className={style.contentRightBottom}
-                                    initial={{ opacity: 0, x: 100 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ duration: 1, delay: 1 }}
-                                >
-                                    <button
-                                        className={style.buttonApply}
-                                        onClick={togglePopup}
-                                    >
-                                        Оставить заявку
-                                    </button>
-                                </motion.div>
-                            </>
-                        )}
-                        </div>
-                    </div>
+                                    Оставить заявку
+                                </button>
+                            </motion.div>
+                        </>
+                    )}
                 </div>
             </div>
-
-            {/* Popup форма */}
+    
             {isPopupOpen && (
                 <Form
                     onClose={togglePopup}
@@ -191,7 +186,7 @@ const MainWindow = forwardRef<HTMLDivElement, MainWindowProps>(({ selectedProjec
                 />
             )}
         </div>
-    );
+    );    
 });
 
 export default MainWindow;

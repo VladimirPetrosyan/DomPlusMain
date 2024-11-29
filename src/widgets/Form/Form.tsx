@@ -4,12 +4,12 @@ import vkIcon2 from "../../assets/Vk2.svg";
 import telegramIcon from "../../assets/telegram.svg";
 import whatsappIcon from "../../assets/whatsapp.svg";
 import { useState } from "react";
-import apiClient from "../../../axiosConfig"; // Импортируем настроенный Axios
+import apiClient from "../../../axiosConfig.ts"; // Импортируем настроенный Axios
 
 interface FormProps {
     onClose: () => void;
     formType?: "default" | "project" | "constructor" | "services";
-    project?: string | null; // Название проекта, этапы конструктора или список услуг
+    project?: string | null;// Название проекта
 }
 
 const Form: React.FC<FormProps> = ({ onClose, formType = "default", project }) => {
@@ -19,7 +19,7 @@ const Form: React.FC<FormProps> = ({ onClose, formType = "default", project }) =
         email: "",
     });
     const [hasError, setHasError] = useState(false);
-    const [formStatus, setFormStatus] = useState<"idle" | "success" | "error">("idle"); // Состояние для управления статусом формы
+    const [formStatus, setFormStatus] = useState<"idle" | "success" | "error">("idle");
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -31,30 +31,39 @@ const Form: React.FC<FormProps> = ({ onClose, formType = "default", project }) =
 
     const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-    
+
         if (!formData.phone.trim()) {
             setHasError(true);
             return;
         }
         setHasError(false);
-    
-        const payload = {
+
+        // Формируем данные для отправки
+        const payload: any = {
             name: formData.name || "Без имени",
             phone: formData.phone,
             email: formData.email || "Не указан",
-            project: project || "Не указано",
         };
-    
+
+        // Добавляем поле в зависимости от типа формы
+        if (formType === "services") {
+            payload.services = project || "Не указано"; // Услуги
+        } else if (formType === "project") {
+            payload.project = project || "Не указано"; // Проекты
+        } else if (formType === "constructor") {
+            payload.constructor = project || "Не указано"; // Конструктор
+        }
+
         try {
-            const response = await apiClient.post("/create-lead", payload); // Используем настроенный экземпляр
-    
+            const response = await apiClient.post("/create-lead", payload);
+
             if (response.status === 200 || response.status === 201) {
-                setFormStatus("success"); // Успешная отправка
+                setFormStatus("success");
             } else {
-                setFormStatus("error"); // Ошибка сервера
+                setFormStatus("error");
             }
         } catch {
-            setFormStatus("error"); // Ошибка сети
+            setFormStatus("error");
         }
     };
 
@@ -83,7 +92,6 @@ const Form: React.FC<FormProps> = ({ onClose, formType = "default", project }) =
                     ✕
                 </button>
 
-                {/* Вывод сообщения в зависимости от статуса */}
                 {formStatus === "success" ? (
                     <p className={style.successMessage}>Спасибо за заявку, наш специалист с вами свяжется!</p>
                 ) : formStatus === "error" ? (
@@ -96,11 +104,11 @@ const Form: React.FC<FormProps> = ({ onClose, formType = "default", project }) =
                                 Выбранный проект: <strong>{project}</strong>
                             </p>
                         )}
-
                         {formType === "constructor" && project && (
-                            <p className={style.popupSubtitle}></p>
+                            <p className={style.popupSubtitle}>
+                                Выбранный конструктор: <strong>{project}</strong>
+                            </p>
                         )}
-
                         {formType === "services" && project && (
                             <p className={style.popupSubtitle}>
                                 Выбранные услуги: <strong>{project}</strong>
@@ -180,5 +188,4 @@ const Form: React.FC<FormProps> = ({ onClose, formType = "default", project }) =
         </motion.div>
     );
 };
-
 export default Form;

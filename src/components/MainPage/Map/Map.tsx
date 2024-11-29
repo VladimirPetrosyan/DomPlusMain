@@ -1,7 +1,7 @@
 import style from "./styles.module.css";
 import { YMaps, Map, Placemark } from '@pbe/react-yandex-maps';
 const Maps = () => {
-    const mapCenter = [47.239890, 39.748888]; //
+    const mapCenter = [47.235332, 39.754646]; //
     const zoomLevel = 16;
     return(
         <YMaps>

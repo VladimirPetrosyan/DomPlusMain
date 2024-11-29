@@ -38,14 +38,14 @@ const Feedback = () => {
                     transition={{ duration: 1.2 }}
                 >
                     <div className={style.firstFeedbackName}>
-                        <p className={style.name}>Оксана Григорьева</p>
+                        <p className={style.name}>Виктория К.</p>
                         <p className={style.product}>Жилой дом</p>
-                        <img className={style.imageLogo} src={"https://avatars.mds.yandex.net/get-yapic/27232/iMIC57MvrzGCHmjSAlUFIjMROw-1/islands-150"} />
+                        <img className={style.imageLogo} src={"https://avatars.mds.yandex.net/get-yapic/54535/4mBNgAq0xxCYBOkJ4HviA96KIE-1/islands-150"} />
                         <img className={style.quotes} src={quotes} />
                     </div>
                     <div className={style.firstFeedbackText}>
                         <p className={style.feedbackTextMain}>
-                            Компания прелесть! Строят быстро и качественно, планировки отличные! Всегда идут на контакт! Исправляют ошибки , если есть! Построили зимой, очень довольны! Рекомендую!
+                            "Все очень понравилось, квалифицированно рассказали о том как строят, посчитали смету, одобрили ипотеку БЕСПЛАТНО, что не может не радовать. Сейчас в ожидании дома, мы на этапе фундамент. Но уже сейчас могу сказать, что работа делается быстро и качественно 🔥🔥🔥Сотрудничеством довольна на 100%"
                         </p>
                         <img className={style.quotesEnd} src={quotesEnd} />
                     </div>
@@ -59,14 +59,14 @@ const Feedback = () => {
                     transition={{ duration: 1.2 }}
                 >
                     <div className={style.firstFeedbackName}>
-                        <p className={style.name}>Валентин Мирный</p>
+                        <p className={style.name}>АЛЕКСАНДР С.</p>
                         <p className={style.product}>Жилой дом</p>
-                        <img className={style.imageLogo} src={"https://avatars.mds.yandex.net/get-yapic/47747/jpfjvTlBcdjlySlEajpdJD3QQM-1573280599/islands-150"} />
+                        <img className={style.imageLogo} src={"https://avatars.mds.yandex.net/get-yapic/31804/enc-47c605f1e52f2504902da4f8375f7b3fec0356e103c3bdaa09ead01d71ca593a/islands-150"} />
                         <img className={style.quotes} src={quotes} />
                     </div>
                     <div className={style.firstFeedbackText}>
                         <p className={style.feedbackTextMain}>
-                            Обращался за постройкой дома, дали качественную консультацию и отличную стоимость 👍🏻
+                            "Ребята,Дом + мечта,а не компания Не покидают и не бросают ни на одном этапе постройки дома! Спасибо большое Александру Кибальникову,человек настоящий профессионал! Объясняет все терпеливо и на пальцах!"
                         </p>
                         <img className={style.quotesEnd} src={quotesEnd} />
                     </div>

@@ -232,9 +232,6 @@ img.imageDom{
     font-size: 2rem; /* Увеличиваем размер стрелок */
     width: 3rem; /* Увеличиваем ширину кнопок */
     height: 3rem; /* Увеличиваем высоту кнопок */
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .sliderContent, .sliderSelectedContent {

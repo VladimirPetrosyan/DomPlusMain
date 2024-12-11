@@ -89,7 +89,7 @@ const Header = () => {
                             <p className={style.phone}>+7 (903) 400-03-61</p>
                             <div className={style.address}>
                                 <img src={map} alt="Location" />
-                                <p>Шолохова 11б, Ростов-на-Дону</p>
+                                <p>14-я линия 50, Ростов-на-Дону</p>
                             </div>
                             <div className={style.socialLinks}>
                                 <a href="https://t.me/dom_plus_rnd" target="_blank" rel="noopener noreferrer">

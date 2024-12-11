@@ -6,6 +6,7 @@ import cardData from "../Projects/Cards/cardData.ts";
 import cardDataRealized from "../Projects/RealizedProjects/realizedCardData.ts";
 import galochka from "../../../assets/galochka.png";
 import Form from "../../../widgets/Form/Form.tsx"; // Импортируем компонент Form
+import useMediaQuery from "./useMediaQuery"; // Импортируем хук
 
 interface MainWindowProps {
     selectedProjectId: number | null;
@@ -29,19 +30,20 @@ const MainWindow = forwardRef<HTMLDivElement, MainWindowProps>(({ selectedProjec
     const [mainImage, setMainImage] = useState<string>("");
     const [isPopupOpen, setIsPopupOpen] = useState(false);
 
+    // Хук для отслеживания ширины экрана
+    const isSmallScreen = useMediaQuery("(max-width: 1000px)");
+
     useEffect(() => {
         if (selectedProjectId !== null) {
             const selectedProject = data.find(card => card.id === selectedProjectId);
             if (selectedProject) {
                 setActiveProject(selectedProject);
                 setMainImage(selectedProject.images[0]);
-    
             }
         } else if (data && data.length > 0) {
             // Если проект не выбран, используем первый проект
             setActiveProject(data[0]);
             setMainImage(data[0].images[0]);
-
         }
     }, [isRealized, selectedProjectId, data]);
 
@@ -53,7 +55,6 @@ const MainWindow = forwardRef<HTMLDivElement, MainWindowProps>(({ selectedProjec
         setIsPopupOpen(!isPopupOpen);
     };
 
-
     if (!activeProject) {
         return <div>Загрузка...</div>;
     }
@@ -61,32 +62,37 @@ const MainWindow = forwardRef<HTMLDivElement, MainWindowProps>(({ selectedProjec
     return (
         <div ref={ref} className={style.main}>
             <Navigation />
-            <div className={style.middleContent}>
+            <div className={style.middleContent} style={{ flexDirection: isSmallScreen ? "column" : "row" }}>
                 <div className={style.contentLeft}>
-                    <div className={style.contentOne}>
-                        <div className={style.slider}>
-                            {activeProject.images && activeProject.images.length > 0 ? (
-                                activeProject.images.map((image, index) => (
-                                    <img
-                                        key={index}
-                                        src={image}
-                                        onClick={() => handleImageClick(image)}
-                                        alt={`Image ${index}`}
-                                    />
-                                ))
-                            ) : (
-                                <p>Нет изображений для отображения</p>
-                            )}
-                        </div>
-                        <motion.img
-                            key={mainImage}
-                            className={style.amg}
-                            src={mainImage}
-                            alt="Main Project Image"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 1 }}
-                        />
+                    <motion.img
+                        key={mainImage}
+                        className={style.amg}
+                        src={mainImage}
+                        alt="Main Project Image"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 1 }}
+                    />
+                    <div
+                        className={style.slider}
+                        style={{
+                            flexDirection: isSmallScreen ? "row" : "column",
+                            justifyContent: isSmallScreen ? "center" : "flex-start",
+                            marginTop: isSmallScreen ? "20px" : "0",
+                        }}
+                    >
+                        {activeProject.images && activeProject.images.length > 0 ? (
+                            activeProject.images.map((image, index) => (
+                                <img
+                                    key={index}
+                                    src={image}
+                                    onClick={() => handleImageClick(image)}
+                                    alt={`Image ${index}`}
+                                />
+                            ))
+                        ) : (
+                            <p>Нет изображений для отображения</p>
+                        )}
                     </div>
                 </div>
                 <div className={style.contentRight}>
@@ -177,7 +183,7 @@ const MainWindow = forwardRef<HTMLDivElement, MainWindowProps>(({ selectedProjec
                     )}
                 </div>
             </div>
-    
+
             {isPopupOpen && (
                 <Form
                     onClose={togglePopup}
@@ -186,7 +192,7 @@ const MainWindow = forwardRef<HTMLDivElement, MainWindowProps>(({ selectedProjec
                 />
             )}
         </div>
-    );    
+    );
 });
 
 export default MainWindow;

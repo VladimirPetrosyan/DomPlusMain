@@ -9,7 +9,7 @@
 }
 .navigate{
     color: black;
-    padding-left: 8.5rem;
+    padding-left: 5.5rem;
 }
 .address{
     color: #000;
@@ -22,7 +22,7 @@
 }
 .pageName{
     color: black;
-    padding-left: 8.5rem;
+    padding-left: 4.5rem;
     font-size: 2.35rem;
     font-family: Montserrat, serif;
     font-weight: 700;
@@ -32,7 +32,7 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    max-width: 39vw;
+    max-width: 800px;
 }
 .rectangle{
     position: relative;
@@ -40,7 +40,23 @@
 .imgText{
     position: absolute;
     top: 18%;
-    left: 26%;
+    left: 10%;
     transform: translate(-7%, -10%);
     color: black;
+    font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+    .imgText{
+        font-size: 0.9rem;
+    }
+    .pageName{
+        font-size: 1.9rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .imgText{
+        font-size: 0.7rem;
+    }
 }

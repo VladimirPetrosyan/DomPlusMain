@@ -365,21 +365,27 @@ const ConstructorSection = () => {
 
     const renderFoundationAnimations = () => {
         if (selectedFoundation && step === "foundation" && animationsActive) {
-            // Выполняем анимацию только на этапе выбора фундамента, если анимации активны
             return animations[selectedFoundation]?.map((animation: string, index: number) => {
                 // Проверяем, является ли элемент травой
                 const isGrass = animation === grass1 || animation === grass2;
     
-                // Если это трава, отображаем через motion.img, но без анимации
                 if (isGrass) {
                     return (
                         <motion.img
-                            key={`static-grass-${index}`}
+                            key={`grass-${index}`}
                             src={animation}
-                            className={style.animatedElement}
-                            initial={{ x: animationCoordinates[selectedFoundation][index].x, y: animationCoordinates[selectedFoundation][index].y, opacity: 1 }}
-                            animate={{ x: animationCoordinates[selectedFoundation][index].x, y: animationCoordinates[selectedFoundation][index].y, opacity: 1 }}
-                            transition={{ duration: 0 }} // Убираем анимацию
+                            className={`${style.animatedElement} ${style.grassElement}`}
+                            initial={{
+                                x: animationCoordinates[selectedFoundation][index].x,
+                                y: animationCoordinates[selectedFoundation][index].y,
+                                opacity: 1
+                            }}
+                            animate={{
+                                x: animationCoordinates[selectedFoundation][index].x,
+                                y: animationCoordinates[selectedFoundation][index].y,
+                                opacity: 1
+                            }}
+                            transition={{ duration: 0 }} // Без анимации
                             alt={`Трава элемент ${index}`}
                         />
                     );
@@ -403,6 +409,7 @@ const ConstructorSection = () => {
                             transition: { delay: index === 2 ? 0.5 : index === 3 ? 0.7 : index * 0.5, duration: 0.5 }
                         }}
                         exit={{ opacity: 0, y: 100 }} // Анимация исчезновения
+                        alt={`Фундамент элемент ${index}`}
                     />
                 );
             });
@@ -411,25 +418,23 @@ const ConstructorSection = () => {
             return animations[selectedFoundation]?.map((animation: string, index: number) => {
                 const isGrass = animation === grass1 || animation === grass2;
     
-                // Если это трава, отображаем через motion.img, но без анимации
                 if (isGrass) {
                     return (
                         <motion.img
-                            key={`static-grass-${index}`}
+                            key={`grass-${index}`}
                             src={animation}
-                            className={style.animatedElement}
+                            className={`${style.animatedElement} ${style.grassElement}`} // Добавляем класс grassElement
                             animate={{
                                 x: animationCoordinates[selectedFoundation][index].x,
                                 y: animationCoordinates[selectedFoundation][index].y,
-                                opacity: 1, // Полная непрозрачность
+                                opacity: 1
                             }}
-                            transition={{ duration: 0 }} // Убираем анимацию
+                            transition={{ duration: 0 }} // Без анимации
                             alt={`Трава элемент ${index}`}
                         />
                     );
                 }
     
-                // Остальные элементы отображаются мгновенно с motion.img
                 return (
                     <motion.img
                         key={`${selectedFoundation}-static-${index}`}
@@ -438,7 +443,7 @@ const ConstructorSection = () => {
                         animate={{
                             x: animationCoordinates[selectedFoundation][index].x,
                             y: animationCoordinates[selectedFoundation][index].y,
-                            opacity: 1, // Полная непрозрачность
+                            opacity: 1
                         }}
                         alt={`Фундамент элемент ${index}`}
                     />

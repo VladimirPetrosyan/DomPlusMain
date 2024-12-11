@@ -23,6 +23,7 @@ const ReviewsSection: React.FC<ReviewsSectionProps> = ({ reviews }) => {
                     <div key={index} className={style.reviewCard}>
                         <div className={style.reviewHeader}>
                             <img src={review.avatarUrl} alt={review.author} className={style.avatar} />
+                            <p className={style.author}>{review.author}</p>
                             <div>
                                 <div className={style.rating}>
                                     {[...Array(5)].map((_, i) => (
@@ -37,7 +38,6 @@ const ReviewsSection: React.FC<ReviewsSectionProps> = ({ reviews }) => {
                                 <p className={style.date}>{review.date}</p>
                             </div>
                         </div>
-                        <p className={style.author}>{review.author}</p>
                         <p className={style.reviewText}>{review.text}</p>
                     </div>
                 ))}

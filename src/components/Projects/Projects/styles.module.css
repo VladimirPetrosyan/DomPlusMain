@@ -5,11 +5,17 @@
     border-radius: 2.344rem;
 }
 
+.projects {
+    display: flex;
+    flex-wrap: wrap; /* Разрешаем перенос элементов на следующую строку */
+    gap: 1rem; /* Устанавливаем отступы между карточками */
+    justify-content: space-between; /* Распределяем карточки равномерно */
+}
 .projectImage {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 2.344rem;
+    border-radius: 20px;
 }
 
 .textContainer {
@@ -50,3 +56,74 @@
     transform: scale(0.98) !important; /* Эффект "щелчка" при клике */
 }
 
+@media (max-width: 1000px) {
+    .main{
+        padding: 10px;
+    }
+    .imageBottomText {
+        font-size: 1.5rem;
+    }
+    .oneProject {
+        width: calc(50% - 1rem); /* Изменяем ширину на 50% */
+        height: 16rem; /* Уменьшаем высоту */
+    }
+
+    .projects {
+        gap: 1rem; /* Уменьшаем промежутки между карточками */
+    }
+
+    .imageBottomText {
+        font-size: 1.5rem; /* Уменьшаем размер текста */
+    }
+
+    .imageTopText {
+        font-size: 1rem; /* Уменьшаем верхний текст */
+    }
+}
+
+@media (max-width: 760px) {
+    .imageBottomText {
+        font-size: 1.1rem;
+    }
+    .main{
+        padding: 10px;
+    }
+    .oneProject {
+        max-width: 300px; /* Изменяем ширину на 50% */
+        max-height: 300px; /* Уменьшаем высоту */
+    }
+}
+
+@media (max-width: 480px) {
+    .imageBottomText {
+        font-size: 1rem;
+    }
+    .main{
+        padding: 10px;
+    }
+    .oneProject {
+        width: 100%; /* Карточка занимает всю ширину */
+        height: 12rem; /* Еще больше уменьшаем высоту */
+    }
+
+    .imageBottomText {
+        font-size: 1.3rem; /* Еще меньше размер текста */
+    }
+
+    .imageTopText {
+        font-size: 0.9rem; /* Меньший верхний текст */
+    }
+}
+
+@media (max-width: 390px) {
+    .imageBottomText {
+        font-size: 1rem;
+    }
+    .main{
+        padding: 10px;
+    }
+    .oneProject {
+        width: 100%; /* Карточка занимает всю ширину */
+        height: 14rem; /* Еще больше уменьшаем высоту */
+    }
+}

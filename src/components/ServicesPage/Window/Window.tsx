@@ -26,9 +26,10 @@ const serviceMapping = {
     Group20: "Строительство коммерч. помещений",
     Group21: "Любые строительные работы",
 };
+type ServiceKeys = keyof typeof serviceMapping;
 
 const Window = ({ toggleService }) => {
-    const handleImageClick = (key:any) => {
+    const handleImageClick = (key: ServiceKeys) => {
         if (serviceMapping[key]) {
             toggleService(serviceMapping[key]);
         }

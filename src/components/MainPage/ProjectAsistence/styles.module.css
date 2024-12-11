@@ -1,43 +1,47 @@
 .main{
     background-color: #F3F3F3;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     padding: 2rem;
     gap: 4rem;
     flex-wrap: wrap;
     justify-content: center;
     overflow-x: hidden !important;
 }
-.headerText{
+.headerText {
     display: flex;
     flex-direction: column;
-    width: 100%;
     align-items: center;
+    gap: 0.5rem;
+    width: 100%;
 }
-.topText{
+.topText {
     color: black;
-    font-size: 2.5rem;
+    font-size: 1.5rem; /* Уменьшение шрифта */
     text-align: center;
     font-weight: 400;
 }
-.bottomText{
+.bottomText {
     background-color: #F9D267;
     color: black;
-    line-height: 2.813rem;
-    font-family: Montserrat, serif;
-    font-size: 2.344rem;
+    font-size: 1.8rem; /* Уменьшение шрифта */
     font-weight: 600;
     text-align: center;
-    max-width: 37rem;
+    max-width: 100%; /* Растягиваем на всю ширину */
+    padding: 0.5rem;
 }
 .leftContent{
     display: flex;
     flex-direction: column;
     gap: 4rem;
 }
-.helpText{
+.helpText {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+    width: 100%;
 }
 .helpTextTop{
     color: black;
@@ -53,14 +57,14 @@
     font-size: 1.563rem;
     font-weight: 500;
 }
-.helpIco{
+.helpIco {
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    width: 80%;
-    justify-content: space-around;
-    align-items: center;
-    gap: 2rem;
+    flex-wrap: wrap; /* Перенос элементов на новую строку, если не помещаются */
+    justify-content: space-evenly; /* Равномерное распределение элементов */
+    align-items: center; /* Выравнивание по вертикали */
+    text-align: center; /* Центрируем текст */
+    gap: 1rem; /* Отступы между элементами */
+    padding: 1rem 0; /* Отступ сверху и снизу */
 }
 .window {
     display: flex;
@@ -71,6 +75,7 @@
     overflow: hidden; /* Добавлено */
     position: relative; /* Убедитесь, что позиционирование включено */
     width: 100%;
+    flex-direction: column;
 }
 .slideInFromRight {
     transform: translateX(100%);
@@ -91,7 +96,6 @@
     transition: transform 1.5s ease-in-out, opacity 1.5s ease-in-out;
     opacity: 1;
     will-change: transform;
-    overflow: hidden; /* Добавлено для предотвращения вылета содержимого */
 }
 @keyframes slideInFromRight {
     from {
@@ -110,10 +114,12 @@
         transform: translateX(0);
     }
 }
-.globalIco{
+.globalIco {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: column; /* Элементы (иконка и текст) располагаются друг под другом */
+    align-items: center; /* Центрируем по горизонтали */
+    text-align: center; /* Центрируем текст */
+    max-width: 100px; /* Ограничиваем ширину блока */
 }
 .globalIco:nth-child(1){
     gap: 0.5rem;
@@ -121,6 +127,8 @@
 .icoText{
     color: black;
     padding-top: 0.5rem;
+    font-size: 0.9rem; /* Размер шрифта текста под иконкой */
+    margin-top: 0.5rem; /* Отступ сверху для текста */
 }
 .rightContent {
     display: flex;
@@ -131,11 +139,12 @@
 }
 
 .imageDom {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* Фиксируем размер изображений */
-    transition: transform 0.3s ease; /* Плавная анимация для изображений */
+    width: 100%; /* Изображение занимает всю ширину */
+    height: auto;
+    max-width: 500px; /* Ограничение на больших экранах */
+    object-fit: contain;
 }
+
 img.imageDom{
     max-height: 355px;
     max-width: 355px;
@@ -217,4 +226,105 @@ img.imageDom{
 
 .windowContent{
     display: flex;
+}
+
+@media screen and (max-width: 768px) {
+    .window {
+        overflow: visible; /* Убедитесь, что содержимое не обрезается */
+    }
+    .headerText .topText {
+        font-size: 1.2rem; /* Уменьшение шрифта для мобильных */
+    }
+    .windowContent {
+        display: flex;
+        flex-direction: column; /* Переключаемся на вертикальное расположение */
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .headerText .bottomText {
+        font-size: 1.5rem;
+    }
+
+    .helpTextTop {
+        font-size: 1rem; /* Уменьшение текста заголовка */
+    }
+
+    .helpTextBottom {
+        font-size: 0.9rem; /* Уменьшение подзаголовка */
+    }
+
+    .imageDom {
+        max-width: 80%; /* Ограничиваем ширину */
+        height: auto;
+        margin: 0 auto;
+        padding-top: 1rem; /* Добавляем дополнительный отступ сверху */
+      }
+    
+    .main {
+        flex-direction: column; /* Переключаемся на колонку */
+        gap: 10rem;
+    }
+
+    .quote{
+        font-size: 1rem;
+    }
+
+    .bottomContent {
+        font-size: 0.8rem; /* Уменьшение цитаты */
+    }
+    .rightContent {
+        order: -1; /* Размещаем картинку выше текста */
+        width: 100%; /* Картинка занимает всю ширину */
+        text-align: center;
+    }
+
+
+    .leftContent {
+      text-align: center;
+      width: 100%; /* Текст занимает всю ширину */
+    }
+    
+    .windowContent {
+    display: flex;
+    flex-direction: column; /* Переключаемся на вертикальное расположение */
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .rightContent {
+    order: -1; /* Размещаем картинку выше текста */
+    width: 100%; /* Картинка занимает всю ширину */
+    text-align: center;
+  }
+
+  .imageDom {
+    max-width: 100%; /* Картинка адаптируется под ширину экрана */
+    height: auto;
+    margin: 0 auto;
+  }
+
+
+  .helpIco {
+      flex-direction: row; /* Горизонтальное расположение элементов */
+      flex-wrap: wrap; /* Перенос на новую строку при нехватке места */
+      gap: 1.5rem; /* Увеличиваем расстояние между элементами */
+      justify-content: center; /* Центрируем все элементы */
+  }
+  
+  .globalIco {
+      max-width: 80px; /* Уменьшаем ширину каждого элемента */
+  }
+  
+  .icoText {
+      font-size: 0.8rem; /* Уменьшаем шрифт текста для мобильных */
+  }
+}
+
+@media screen and (max-width: 1000px) {
+    .bottomContent{
+        padding-left: 0px;
+        flex-direction: column;
+        align-items: center;
+    }
 }

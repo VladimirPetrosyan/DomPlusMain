@@ -1,9 +1,12 @@
 .headerBottom {
     display: flex;
-    background-size: cover;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(44, 44, 44, 0.5) 100%), url("../../../assets/bc.png") center;
+    background-size: cover; /* Фон растягивается на весь блок */
+    background-repeat: no-repeat; /* Убираем повторение фона */
+    background-attachment: fixed; /* Фиксируем фон относительно окна просмотра */
     overflow: hidden;
     justify-content: space-between;
+    padding: 1rem; /* Отступы внутри */
 }
 .displayLeft {
     display: flex;
@@ -68,12 +71,12 @@
     display: flex;
     flex-direction: column;
 }
-.contact{
+.contact {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 1rem;
-    padding: 2em;
+    flex-direction: column; /* Элементы располагаются в колонку */
+    align-items: flex-end; /* Прижимаем элементы к правой стороне */
+    gap: 1rem; /* Расстояние между элементами */
+    padding: 20px 70px 40px 0px; /* Отступы: справа больше для правого прижатия */
 }
 .location{
     display: flex;
@@ -138,4 +141,103 @@
 }
 .garant{
     padding-bottom: 20px;
+}
+
+@media screen and (max-width: 1186px) {
+    .contact {
+        align-items: center; /* Перемещаем элементы влево */
+        padding: 20px 0px 40px 20px; /* Уменьшаем отступы */
+    }
+}
+
+
+@media screen and (max-width: 1070px) {
+    .ourProject{
+        padding-left: 30px;
+    }
+}
+@media screen and (max-width: 855px) {
+    .headerBottom {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .polosa{
+        display:none;
+    }
+    .projectText{
+        display:none;
+    }
+    .ok{
+        display:none;
+    }
+    .inputs{
+        background-color: #F9D267;
+        padding: 6px;
+        color: #000;
+        font-weight: 500;
+        max-width: 488px;
+    }
+    .displayLeftBottomFirst{
+        gap: 30px;
+    }
+    .displayLeftBottom{
+        padding:0;
+    }
+    .displayLeft, .displayRight {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    .leed {
+        font-size: 3rem;
+    }
+
+    .leedText {
+        font-size: 2rem;
+    }
+
+    .displayLeftBottom {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+
+    .Number, .address, .subscribe {
+        display: none; /* Убираем блок контактов */
+    }
+
+    .ourProject {
+        text-align: center;
+        font-size: 1.5rem;
+    }
+    .ourProject{
+        padding-left: 0px;
+        padding-right: 50px;
+    }
+    .contact{
+        display: none;
+    }
+    .projectText{
+        font-size: 15px;
+    }
+
+    .dom {
+        content: url("../../../assets/main_dom2.png"); /* Указываем путь к новой картинке */
+        width: 90%;
+        margin: auto;
+        padding: 0px 0px 0px 20px;
+    }
+    .displayRight{
+        padding: 0px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .projectText{
+        font-size: 11px;
+    }
+    .displayLeftTop{
+        padding: 0;
+    }
 }

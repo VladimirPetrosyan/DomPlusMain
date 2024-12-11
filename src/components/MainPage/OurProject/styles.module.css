@@ -81,3 +81,47 @@
     color: white;
     padding: 1rem 5rem 1rem 5rem;
 }
+
+@media (max-width: 1024px) {
+    .oneProject {
+        width: 20rem; /* Уменьшение ширины карточек */
+        height: 16rem; /* Уменьшение высоты карточек */
+    }
+
+    .imageBottomText{
+        display: none;
+    }
+    .projects {
+        gap: 2rem; /* Уменьшение промежутков между карточками */
+    }
+}
+
+@media (max-width: 768px) {
+    .oneProject {
+        width: 20rem;
+        height: 16rem;
+    }
+
+    .imageBottomText {
+        font-size: 1.8rem;
+    }
+
+    .ourProjects {
+        font-size: 1.5rem; /* Уменьшение размера заголовка */
+    }
+
+    .projects {
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .oneProject {
+        width: 20rem;
+        height: 16rem;
+    }
+
+    .imageBottomText {
+        font-size: 1.5rem;
+    }
+}

@@ -6,17 +6,18 @@
 
 .middleContent {
     display: flex;
-    flex-direction: row;
-    gap: 0; /* Убираем отступ между блоками */
-    height: auto; /* Высота подстраивается под содержимое */
+    flex-direction: row; /* Располагаем элементы горизонтально */
+    gap: 20px; /* Отступ между колонками */
+    height: auto;
     margin: 0 auto;
     padding: 50px 50px 20px 50px;
 }
 .contentLeft {
-    flex: 0 0 60%; /* Левый блок занимает фиксированные 60% */
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row; /* Элементы внутри contentLeft расположены горизонтально */
+    align-items: flex-start;
+    gap: 10px; /* Отступ между слайдером и картинкой */
+    width: 60%; /* Занимает 60% ширины */
 }
 .contentOne {
     display: flex;
@@ -103,6 +104,7 @@
     height: 450px; /* Фиксированная высота слайдера */
     overflow-y: auto; /* Включаем вертикальную прокрутку */
     overflow-x: hidden;
+    order: 1; /* Слайдер первым */
 }
 
 .amg {
@@ -110,6 +112,7 @@
     height: auto; /* Убираем фиксированную высоту */
     width: 100%; /* Автоматически растягиваем по ширине */
     object-fit: cover; /* Сохраняем пропорции, обрезая лишнее */
+    order: 2; /* Изображение вторым */
 }
 
 
@@ -289,4 +292,57 @@
 .projectDescription {
     font-size: 1rem;
     color: #555;
+}
+@media (max-width: 1000px) {
+    .middleContent {
+        flex-direction: column; /* Располагаем элементы вертикально */
+        align-items: center; /* Центрируем содержимое */
+    }
+
+    .contentLeft {
+        display: flex;
+        flex-direction: column; /* Располагаем элементы вертикально */
+        align-items: center; /* Центрируем содержимое */
+        width: 100%; /* Контейнер занимает всю ширину */
+        gap: 10px; /* Отступ между основным изображением и слайдером */
+    }
+
+    .contentRight {
+        width: 100%; /* Занимаем всю ширину */
+        text-align: center; /* Центрируем текст */
+    }
+
+    .slider {
+        order: 2; /* Указываем порядок, чтобы слайдер шел после изображения */
+        flex-direction: row; /* Меняем направление на горизонтальное */
+        flex-wrap: wrap; /* Разрешаем перенос изображений на новую строку */
+        justify-content: center; /* Центрируем миниатюры */
+        gap: 10px; /* Отступы между изображениями */
+        height: auto; /* Автоматическая высота */
+    }
+    .slider img {
+        height: 60px; /* Уменьшаем размер изображений */
+        width: auto; /* Сохраняем пропорции */
+        border-radius: 5px; /* Скругляем углы */
+    }
+
+    .amg {
+        max-width: 100%; /* Основное изображение занимает ширину контейнера */
+        height: auto; /* Автоматическая высота */
+    }
+
+    .buttonApply {
+        margin-top: 20px; /* Отступ сверху */
+        width: 90%; /* Ширина кнопки на маленьких экранах */
+    }
+}
+
+@media (max-width: 500px) {
+    .slider img {
+        height: 50px; /* Уменьшаем размер изображений */
+    }
+    
+    .middleContent {
+        padding: 10px 5px 10px 5px;
+    }
 }

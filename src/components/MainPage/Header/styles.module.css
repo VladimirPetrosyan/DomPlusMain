@@ -1,10 +1,13 @@
-.header{
+.header {
     display: flex;
     background-color: #404944;
-    justify-content: space-around;
-    box-shadow: 0 4rem 4rem rgba(0, 0, 0, 0.25);
-    padding: 0.25rem;
+    justify-content: space-between;
     align-items: center;
+    padding: 0.5rem 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: none; /* Убираем тень */
 }
 a{
     color: #EFEFEF;
@@ -14,10 +17,11 @@ a{
     display: flex;
     align-items: center;
 }
-.controlPanel{
+.controlPanel {
     display: flex;
     align-items: center;
     gap: 1rem;
+
 }
 .bid {
     display: flex;
@@ -38,6 +42,189 @@ a{
 .bid:active {
     transform: scale(0.95);
 }
+
+.burgerMenu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 90%;
+    height: 100%;
+    background-color: #404944;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5); /* Тень слева */
+}
+
+
+.burgerIcon {
+    width: 2rem;
+    height: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    display: none; /* Скрываем бургер-меню для больших экранов */
+    z-index: 20;
+    transition: transform 0.3s ease; /* Для эффекта "убегания" */
+}
+.burgerIcon span {
+    display: block;
+    width: 100%;
+    height: 0.25rem;
+    background-color: #F9D267;
+    transition: transform 0.3s, opacity 0.3s;
+    border-radius: 0.125rem;
+    margin-bottom: 0.3rem; /* Отступ между полосками */
+}
+
+.burgerIcon span:last-child {
+    margin-bottom: 0; /* Убираем последний отступ */
+}
+
+/* Анимация крестика */
+.burgerIcon.open span:nth-child(1) {
+    transform: rotate(45deg) translateY(0.6rem);
+}
+
+.burgerIcon.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.burgerIcon.open span:nth-child(3) {
+    transform: rotate(-45deg) translateY(-0.6rem);
+}
+
+/* Бургер-меню */
+.burgerMenu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 60%;
+    height: 100%;
+    background-color: #404944;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+}
+
+.menuOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Затемнение */
+    z-index: 11;
+}
+
+/* Ссылки в меню */
+.menuContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 30px;
+    height: 100%;
+    position: relative;
+}
+
+.menuContent p a {
+    color: #EFEFEF;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.menuContent p a:hover {
+    color: #FFD83A;
+}
+
+.scrolled .burgerIcon {
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.bidMenu {
+    margin-top: auto;
+    background-color: #F9D267;
+    padding: 1rem 2rem;
+    border-radius: 3rem;
+    text-align: center;
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+
+.closeIcon {
+    align-self: flex-end;
+    cursor: pointer;
+}
+.closeButton {
+    font-size: 2rem;
+    color: #F9D267;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+}
+.controlPanel {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: Montserrat, serif;
+    font-size: 16px;
+}
+.contactInfo {
+    text-align: center;
+    margin-bottom: 1rem;
+    padding-top: 4rem;
+}
+.phone {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #F9D267;
+}
+
+.address {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    color: #EFEFEF;
+}
+
+.socialLinks {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    padding-top: 0.5rem;
+}
+.navLinks p {
+    font-size: 1.5rem;
+    text-align: center;
+    color: #EFEFEF;
+    margin: 0.5rem 0;
+}
+.navLinks hr {
+    width: 70%;
+    border: 0;
+    border-top: 1px solid #EFEFEF;
+    margin: 0 auto;
+}
+
+
+
+.bid {
+    display: flex;
+}
 p{
     font-size: 1em;
     color: #EFEFEF;
@@ -49,7 +236,15 @@ button{
     cursor: pointer;
 }
 
+@media (max-width: 768px) {
+    .controlPanel, .bid {
+        display: none;
+    }
 
+    .burgerIcon {
+        display: block;
+    }
+}
 
 
 

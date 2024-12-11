@@ -120,6 +120,7 @@
     padding: 2rem;
     background-color: #f5f5f5;
     border-radius: 1rem;
+    flex-direction: row; /* Основное направление */
 }
 
 .mortgageImage img {
@@ -144,9 +145,11 @@
     margin-left: 1.5rem;
 }
 
+
 .mortgageText li {
     margin-bottom: 0.5rem;
 }
+
 
 .mortgageText button {
     margin-top: 1rem;
@@ -310,4 +313,42 @@
 .errorField {
     border: 2px solid red;
     background-color: #ffe6e6;
+}
+
+@media (max-width: 768px) {
+    .buttonApply {
+        margin: 0 auto;
+    }
+    .mortgageContainer {
+        flex-direction: column; /* Переводим в колонку */
+        align-items: center; /* Центрируем содержимое */
+        gap: 1rem;
+    }
+
+    .mortgageImage img {
+        max-width: 100%; /* Изображение занимает всю ширину */
+        height: auto; /* Автоматическая высота */
+    }
+
+    .mortgageText {
+        text-align: center; /* Центрируем текст */
+    }
+
+    .mortgageText h2 {
+        font-size: 1.2rem; /* Уменьшаем размер заголовка */
+    }
+
+    .mortgageText ul {
+        margin-left: 0; /* Убираем отступы для списка */
+        list-style-position: inside; /* Сохраняем видимость маркеров */
+    }
+
+    .mortgageText li {
+        font-size: 0.9rem; /* Уменьшаем размер текста */
+    }
+
+    .mortgageText button {
+        font-size: 0.9rem; /* Уменьшаем размер текста в кнопке */
+        padding: 0.6rem 1rem; /* Уменьшаем отступы */
+    }
 }

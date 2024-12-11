@@ -258,3 +258,19 @@
 .submitButton:active {
     transform: scale(0.95);
 }
+
+@media (max-width: 768px) {
+    .selectedContainer {
+        flex-direction: column; /* Переключаемся на колонку */
+        align-items: flex-start; /* Выравниваем по левому краю */
+    }
+
+    .servicesContainer {
+        margin-bottom: 1rem; /* Отступ снизу для пространства */
+    }
+
+    .requestSection {
+        margin-top: 0; /* Убираем лишний отступ */
+        width: 100%; /* Занимаем всю ширину */
+    }
+}

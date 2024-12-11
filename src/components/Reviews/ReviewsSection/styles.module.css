@@ -1,24 +1,20 @@
-.topText {
-    font-size: 24px;
-    font-weight: bold;
-    padding-bottom: 20px;
-    text-align: center;
-}
-
 .reviewsContainer {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Позволяет элементам переходить на новую строку */
     gap: 20px;
-    justify-content: space-between;
-    padding: 100px;
+    justify-content: center; /* Выравнивание отзывов по центру */
+    padding: 20px; /* Уменьшенные отступы */
 }
 
 .reviewCard {
-    width: calc(33.333% - 20px);
-    background-color: #f9f9f9;
-    padding: 20px 80px 20px 80px;
+    background-color: #fff;
+    padding: 20px;
     border-radius: 10px;
+    width: 300px; /* Фиксированная ширина для карточек */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
     transition: transform 0.2s;
 }
 
@@ -28,54 +24,80 @@
 
 .reviewHeader {
     display: flex;
-    align-items: center;
-    margin-bottom: 15px;
+    flex-direction: column; /* Звезды и дата идут под аватаром */
+    align-items: center; /* Центрирование элементов */
+    gap: 10px;
 }
 
 .avatar {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    margin-right: 15px;
-}
-
-.reviewInfo {
-    flex-grow: 1;
+    object-fit: cover;
 }
 
 .author {
-    padding-bottom: 5px;
+    font-size: 1.2rem;
+    font-weight: 500;
     color: #000;
-    font-style: italic;
+    text-align: center; /* Центрирование имени */
 }
 
 .date {
-    font-size: 12px;
+    font-size: 0.9rem;
     color: #999;
+    text-align: center; /* Центрирование даты */
 }
 
 .rating {
     display: flex;
-    padding-bottom: 5px;
+    justify-content: center; /* Центрирование звезд */
+    gap: 5px;
 }
 
 .star {
-    width: 30px;
-    height: 30px;
-    padding-right: 5px;
-
-}
-
-.reviewTitle {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #333;
+    width: 20px;
+    height: 20px;
 }
 
 .reviewText {
-    font-size: 18px;
-    color: #000;
-    font-weight: 500;
-    padding: 20px 0;
+    font-size: 1rem;
+    line-height: 1.5; /* Улучшение читаемости текста */
+    color: #333;
+    text-align: left;
+}
+
+/* Адаптив для мобильных устройств */
+@media (max-width: 768px) {
+    .reviewsContainer {
+        padding: 10px; /* Уменьшенные отступы на мобильных */
+    }
+
+    .reviewCard {
+        width: 100%; /* Карточки занимают всю ширину экрана */
+        padding: 15px;
+    }
+
+    .reviewHeader {
+        flex-direction: column; /* Перевод на мобильный вид */
+        align-items: flex-start; /* Выравнивание по левому краю */
+        gap: 5px;
+    }
+
+    .avatar {
+        width: 50px;
+        height: 50px;
+    }
+
+    .author {
+        font-size: 1rem;
+    }
+
+    .date {
+        font-size: 0.8rem;
+    }
+
+    .reviewText {
+        font-size: 0.9rem; /* Уменьшение текста на мобильных */
+    }
 }

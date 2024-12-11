@@ -1,41 +1,54 @@
-.main{
+.main {
     background: linear-gradient(180deg, #404944 0%, #1E2522 100%);
     padding: 4rem;
     display: flex;
     flex-direction: column;
     gap: 6rem;
+    align-items: center; /* Центрируем содержимое по горизонтали */
+    text-align: center; /* Центрируем текст */
 }
-.contentTop{
+
+.contentTop {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     align-content: center;
     flex-wrap: wrap;
 }
-.quoteTop{
+
+.quoteTop {
     font-family: Montserrat, serif;
     font-size: 1.875rem;
     font-style: italic;
     font-weight: 400;
-    text-align: left;
     color: #C2C2C2;
+    max-width: 90%; /* Ограничиваем ширину текста */
 }
-.quoteBottom{
+
+.quoteBottom {
     font-family: Montserrat, serif;
     font-size: 3.750rem;
     font-weight: 400;
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap; /* Текст переносится на следующую строку при необходимости */
+    justify-content: center; /* Центрируем текст */
+    gap: 0.5rem; /* Отступы между словами */
+    max-width: 90%; /* Ограничиваем ширину текста */
 }
-.client{
+
+.client {
     color: #F9D267;
 }
-.contentMiddle{
+
+.contentMiddle {
     display: flex;
     gap: 2rem;
     justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap; /* Для мобильных устройств отзывы перейдут на следующую строку */
 }
-.feedback{
+
+.feedback {
     background: linear-gradient(99.69deg, #4025ED 6.36%, #2596ED 91.9%);
     border-radius: 1.625rem;
     padding: 1.75rem;
@@ -44,56 +57,95 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    rotate:-5deg;
+    rotate: -5deg;
     gap: 2rem;
-
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
 }
-.firstFeedbackName{
+
+.firstFeedbackName {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     position: relative;
 }
-.imageLogo{
+
+.imageLogo {
     position: absolute;
     right: 0;
     top: 0;
     transform: translate(0%, -50%);
     border-radius: 50%;
+    width: 7rem; /* Размер логотипа */
+    height: 7rem;
 }
-.quotes{
+
+.quotes {
     position: absolute;
     left: 0;
     top: -50%;
     transform: translate(-40%, -50%);
+    width: 2.5rem; /* Размер кавычек */
+    height: auto;
 }
-.firstFeedbackText{
+
+.firstFeedbackText {
     display: flex;
     position: relative;
-
 }
-.quotesEnd{
+
+.quotesEnd {
     position: absolute;
     top: 100%;
     right: 0;
     transform: translate(40%, 50%);
+    width: 2.5rem; /* Размер кавычек */
+    height: auto;
 }
-.name{
+
+.name {
     font-size: 1.625rem;
     font-family: Montserrat, serif;
     font-weight: 600;
 }
-.product{
+
+.product {
     font-family: Montserrat, serif;
     font-size: 1rem;
     font-weight: 300;
 }
-.feedbackTextMain{
+
+.feedbackTextMain {
     font-family: Montserrat, serif;
     font-size: 1rem;
     font-style: italic;
     font-weight: 400;
+    height: 150px;
 }
+
+.contentBottom {
+    display: flex;
+    justify-content: center;
+}
+
+.more {
+    font-family: Montserrat, serif;
+    font-size: 1.875rem;
+    font-weight: 500;
+    text-align: center;
+    color: #222222;
+    padding: 1rem 5rem 1rem 5rem;
+    background-color: #F3F3F3;
+    border-radius: 3rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.more:hover {
+    background-color: #E0E0E0;
+}
+
 .feedbackSecond{
     background: linear-gradient(99.69deg, #068C50 6.36%, #06888C 91.9%);
     border-radius: 1.625rem;
@@ -103,22 +155,78 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    rotate:5deg;
+    margin-top: 20px;
+    rotate: 5deg;
+    gap: 2rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     position: relative;
-    transform: translate(0, -20%);
-}
-.contentBottom{
-    display: flex;
-    justify-content: center;
-}
-.more{
-    font-family: Montserrat, serif;
-    font-size: 1.875rem;
-    font-weight: 500;
-    text-align: center;
-    color: #222222;
-    padding: 1rem 5rem 1rem 5rem;
-    background-color: #F3F3F3;
-    border-radius: 3rem;
 }
 
+@media (max-width: 1024px) {
+    .quoteTop {
+        font-size: 1.5rem; /* Уменьшение для планшетов */
+        max-width: 200px;
+        height: 100%;
+    }
+    .imageLogo{
+        width: 4rem; /* Размер логотипа */
+        height: 4rem;
+    }
+    .feedbackTextMain{
+        font-size: 0.8rem;
+        margin-bottom: 50px;
+    }
+    .name{
+        font-size: 1rem;
+    }
+    .product{
+        font-size: 0.8rem;
+    }
+
+    .quoteBottom {
+        font-size: 3rem; /* Уменьшение для планшетов */
+        max-width: 200px;
+        height: 100%;
+    }
+}
+
+@media (max-width: 358px) {
+    .main{
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .quoteTop {
+        font-size: 1rem;
+    }
+
+    .quoteBottom {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .quoteTop {
+        font-size: 1.5rem; /* Уменьшение размера текста для планшетов */
+    }
+
+    .quoteBottom {
+        font-size: 2.5rem; /* Уменьшение текста для планшетов */
+        line-height: 1.2; /* Регулируем межстрочный интервал */
+    }
+}
+
+@media (max-width: 768px) {
+    .main {
+        padding: 2rem;
+    }
+
+    .quoteTop {
+        font-size: 1.2rem; /* Еще меньше текста для мобильных устройств */
+    }
+
+    .quoteBottom {
+        font-size: 2rem; /* Еще меньше текста для мобильных устройств */
+    }
+}

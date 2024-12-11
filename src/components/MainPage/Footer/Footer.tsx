@@ -47,7 +47,7 @@ const Footer = () =>{
                     АДРЕС:
                 </p>
                 <p className={style.secondRowText}>
-                    Шолохова 11б, Ростов-на-Дону
+                    14-я линия 50, Ростов-на-Дону
                 </p>
             </div>
         </div>

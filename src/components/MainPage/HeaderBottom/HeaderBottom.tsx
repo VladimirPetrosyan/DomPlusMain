@@ -81,7 +81,7 @@ const HeaderBottom: FC = () => {
           <p className={style.Number}>{"+7 (903) 400-03-61"}</p>
           <div className={style.location}>
             <img src={map} />
-            <p className={style.address}>Шолохова 11б, Ростов-на-Дону</p>
+            <p className={style.address}>14-я линия 50, Ростов-на-Дону</p>
           </div>
           <div className={style.subscribe}>
             <a

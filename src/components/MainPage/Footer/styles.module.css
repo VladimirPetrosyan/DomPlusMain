@@ -89,4 +89,7 @@
         font-size: 0.875rem; /* Сохраняем размер для остального текста */
         text-align: center; /* Центрируем текст */
     }
+    .topText{
+        text-align: center;
+    }
 }

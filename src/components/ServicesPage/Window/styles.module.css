@@ -1,3 +1,6 @@
+* {
+    box-sizing: border-box;
+}
 .main{
     padding: 3rem 0 0 0;
     background-color: #F3F3F3;
@@ -56,6 +59,10 @@
     background-color: #97D4F2;
     border-radius: 3.344rem;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    overflow: hidden; /* Добавляем */
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 .firstContainerLeft:hover {
     transform: scale(1.05); /* Увеличивает изображение при наведении */
@@ -68,6 +75,10 @@
     height: 100%;
     cursor: pointer; /* Делает элементы кликабельными */
     border-radius: 3rem;
+    width: 100%; /* Устанавливаем ширину равной контейнеру */
+    height: auto; /* Адаптируем высоту */
+    display: block; /* Убираем лишние пробелы */
+    object-fit: cover; /* Убедимся, что изображение сохраняет пропорции */
 }
 .secondLeftContainer,.secondRightContainer{
     display: flex;
@@ -163,5 +174,8 @@
         top: 0; /* Убираем смещение сверху */
         width: 100%; /* Заполняет всю ширину родительского контейнера */
         height: auto; /* Пропорциональная высота */
+    }
+    .leftRec{
+        overflow: hidden;
     }
 }

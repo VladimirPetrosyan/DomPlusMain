@@ -92,6 +92,9 @@
         max-width: 300px; /* Изменяем ширину на 50% */
         max-height: 300px; /* Уменьшаем высоту */
     }
+    .projects{
+        justify-content: center;
+    }
 }
 
 @media (max-width: 480px) {
@@ -113,6 +116,9 @@
     .imageTopText {
         font-size: 0.9rem; /* Меньший верхний текст */
     }
+    .projects{
+        justify-content: center;
+    }
 }
 
 @media (max-width: 390px) {
@@ -125,5 +131,8 @@
     .oneProject {
         width: 100%; /* Карточка занимает всю ширину */
         height: 14rem; /* Еще больше уменьшаем высоту */
+    }
+    .projects{
+        justify-content: center;
     }
 }

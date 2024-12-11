@@ -297,6 +297,7 @@
     .middleContent {
         flex-direction: column; /* Располагаем элементы вертикально */
         align-items: center; /* Центрируем содержимое */
+        padding:0;
     }
 
     .contentLeft {
@@ -329,6 +330,7 @@
     .amg {
         max-width: 100%; /* Основное изображение занимает ширину контейнера */
         height: auto; /* Автоматическая высота */
+        padding:0;
     }
 
     .buttonApply {

@@ -50,7 +50,7 @@ a{
     width: 90%;
     height: 100%;
     background-color: #404944;
-    z-index: 200;
+    z-index: 9999;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -119,7 +119,7 @@ a{
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5); /* Затемнение */
-    z-index: 11;
+    z-index: 9998;
 }
 
 /* Ссылки в меню */

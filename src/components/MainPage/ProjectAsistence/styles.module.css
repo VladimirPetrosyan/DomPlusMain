@@ -228,6 +228,26 @@ img.imageDom{
     display: flex;
 }
 
+.sliderArrow {
+    font-size: 2rem; /* Увеличиваем размер стрелок */
+    width: 3rem; /* Увеличиваем ширину кнопок */
+    height: 3rem; /* Увеличиваем высоту кнопок */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sliderContent, .sliderSelectedContent {
+    width: 2.5rem; /* Увеличиваем ширину кнопок номеров */
+    height: 2.5rem; /* Увеличиваем высоту кнопок номеров */
+    font-size: 1.5rem; /* Увеличиваем шрифт для цифр */
+}
+
+.slider {
+    gap: 1.5rem; /* Увеличиваем промежутки между кнопками */
+    padding: 1rem; /* Добавляем больше внутреннего отступа */
+}
+
 @media screen and (max-width: 768px) {
     .sliderArrow {
         font-size: 2rem; /* Увеличиваем размер стрелок */

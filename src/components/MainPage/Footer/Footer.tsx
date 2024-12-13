@@ -1,7 +1,6 @@
 import style from "./styles.module.css";
 import tg from "../../../assets/Tg.png";
 import Vk from "../../../assets/Vk.svg";
-import Vb from "../../../assets/Viber.png";
 import inst from "../../../assets/Inst.png";
 const Footer = () =>{
     return(
@@ -14,10 +13,15 @@ const Footer = () =>{
                     ИНН 236007648639
                 </p>
                 <div className={style.bottomContent}>
-                    <img src={tg}/>
-                    <img src={Vk}/>
-                    <img src={Vb}/>
-                    <img src={inst}/>
+                    <a href="https://t.me/dom_plus_rnd" target="_blank" rel="noopener noreferrer">
+                        <img src={tg} alt="Telegram" />
+                    </a>
+                    <a href="https://vk.com/dompluse" target="_blank" rel="noopener noreferrer">
+                        <img src={Vk} alt="ВКонтакте" />
+                    </a>
+                    <a href="https://instagram.com/dom_plus_rnd/" target="_blank" rel="noopener noreferrer">
+                        <img src={inst} alt="Instagram" />
+                    </a>
                 </div>
             </div>
             <div className={style.secondRow}>

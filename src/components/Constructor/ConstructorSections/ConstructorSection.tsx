@@ -157,12 +157,33 @@ const ConstructorSection = () => {
     };
 
     const getSelectionsString = () => {
+        const foundationNames = {
+            lentochniy: "Ленточный",
+            svainiy: "Свайный",
+            plitochniy: "Плиточный",
+        };
+    
+        const wallNames = {
+            gazoblock: "Газоблок",
+            kirpich: "Кирпич",
+        };
+    
+        const yesNoNames = {
+            yes: "Да",
+            no: "Нет",
+        };
+    
+        const roofNames = {
+            dvukhskatnaya: "Двухскатная",
+            chetyrekhskatnaya: "Четырехскатная",
+        };
+    
         return [
-            `Фундамент: ${selectedFoundation || "не выбран"}`,
-            `Стены: ${selectedWalls || "не выбраны"}`,
-            `Внешняя отделка: ${selectedExterior || "не выбрана"}`,
-            `Внутренняя отделка: ${selectedInterior || "не выбрана"}`,
-            `Крыша: ${selectedRoof || "не выбрана"}`,
+            `Фундамент: ${selectedFoundation ? foundationNames[selectedFoundation] : "не выбран"}`,
+            `Стены: ${selectedWalls ? wallNames[selectedWalls] : "не выбраны"}`,
+            `Внешняя отделка: ${selectedExterior ? yesNoNames[selectedExterior] : "не выбрана"}`,
+            `Внутренняя отделка: ${selectedInterior ? yesNoNames[selectedInterior] : "не выбрана"}`,
+            `Крыша: ${selectedRoof ? roofNames[selectedRoof] : "не выбрана"}`,
         ].join(", ");
     };
 
@@ -184,18 +205,18 @@ const ConstructorSection = () => {
 
     const wallCoordinates = {
         kirpich: [
-            { x: 0, y: -2 }, { x: 0, y: -2}, { x: 0, y: -3 }, { x: 0, y: -2 },
-            { x: 0, y: -2 }, { x: 0, y: -2 }, { x: 0, y: -2 }, { x: 0, y: -2 },
-            { x: 0, y: -2 }, { x: -1, y: -2 }, { x: -2, y: 1 }, { x: 0, y: 1 },
+            { x: 0, y: 2 }, { x: 0, y: 2}, { x: 0, y: 0 }, { x: 0, y: 0 },
+            { x: 0, y: 2 }, { x: 0, y: 2 }, { x: 0, y: -2 }, { x: 0, y: -2 },
+            { x: 0, y: 2 }, { x: -1, y: 2 }, { x: -2, y: 1 }, { x: 0, y: 1 },
             { x: 0, y: 1 }, { x: 0, y: 1 }, { x: 0, y: 1 }, { x: 0, y: 1 }, { x: 0, y: 1 },
-            { x: 0, y: 2}, { x: 0, y: 2 }, { x: 0, y: 1 }, { x: 0, y: 1 },
+            { x: 0, y: 2}, { x: 0, y: 1 }, { x: 0, y: 1 }, { x: 0, y: 1 },
             { x: 0, y: 2 }, { x: 0, y: 1 }
         ],
         gazoblock: [
-            { x: 0, y: -2 }, { x: 0, y: -2 }, { x: 0, y: -2 }, { x: 0, y: -2 },
-            { x: 0, y: -2 }, { x: 0, y: -2 }, { x: 0, y: -2 }, { x: 0, y: -2 },
-            { x: 0, y: -2 }, { x: -1, y: -2 }, { x: -2, y: 1 }, { x: 0, y: 1 },
-            { x: 0, y: 1 }, { x: 0, y: 1 }, { x: 0, y: 1 }, { x: 0, y: 1 },
+            { x: 0, y: 2 }, { x: 0, y: 2}, { x: 0, y: 0 }, { x: 0, y: 0 },
+            { x: 0, y: 2 }, { x: 0, y: 2 }, { x: 0, y: -2 }, { x: 0, y: -2 },
+            { x: 0, y: 2 }, { x: -1, y: 2 }, { x: -2, y: 1 }, { x: 0, y: 1 },
+            { x: 0, y: 1 }, { x: 0, y: 1 }, { x: 0, y: 1 }, { x: 0, y: 1 }, { x: 0, y: 1 },
             { x: 0, y: 2}, { x: 0, y: 1 }, { x: 0, y: 1 }, { x: 0, y: 1 },
             { x: 0, y: 2 }, { x: 0, y: 1 }
         ]

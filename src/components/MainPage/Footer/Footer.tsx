@@ -7,10 +7,10 @@ const Footer = () =>{
         <div className={style.main}>
             <div className={style.firstRow}>
                 <p className={style.topText}>
-                    ИП КИБАЛЬНИКОВА ВИКТОРИЯ АРТЕМОВНА
+                    ИП ВАРДАНЯН АВИК ВАЛЕРИЕВИЧ
                 </p>
                 <p className={style.middleText}>
-                    ИНН 236007648639
+                    ИНН 690891216631
                 </p>
                 <div className={style.bottomContent}>
                     <a href="https://t.me/dom_plus_rnd" target="_blank" rel="noopener noreferrer">
@@ -29,7 +29,10 @@ const Footer = () =>{
                     КОНТАКТЫ
                 </p>
                 <p className={style.contactNumber}>
-                    {("+7 (903) 400-03-61")}
+                    {("+7 (904) 007-94-38")}
+                </p>
+                <p className={style.contactNumber}>
+                    {("+7 (909) 428-88-58")}
                 </p>
                 <p className={style.secondRowText}>
                     Консультации и расчет
@@ -37,10 +40,10 @@ const Footer = () =>{
             </div>
             <div className={style.secondRow}>
                 <p className={style.contact}>
-                    ЭЛЕКТРОННАЯ ПОЧТА
+                ЭЛЕКТРОННАЯ ПОЧТА
                 </p>
                 <p className={style.secondRowText}>
-                    dom.pluse.expert1@yandex.ru
+                    dompluse.rnd@yandex.ru
                 </p>
                 <p className={style.secondRowText}>
                     Напишите нам

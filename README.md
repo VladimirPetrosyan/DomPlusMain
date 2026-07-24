@@ -1,50 +1,70 @@
-# React + TypeScript + Vite
+# ДОМ+ — сайт строительной компании
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Промо-сайт и лид-генерация для компании полного цикла строительства частных домов (Ростов-на-Дону): каталог готовых проектов, интерактивный конструктор дома, услуги, отзывы и приём заявок с интеграцией в amoCRM.
 
-Currently, two official plugins are available:
+![Главная страница](docs/screenshots/home.jpg)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Возможности
 
-## Expanding the ESLint configuration
+- **Каталог проектов домов** — 9+ типовых проектов (60–140 м²) с планировками, характеристиками и слайдером изображений
+- **Интерактивный конструктор дома** — пошаговый визуальный выбор фундамента, стен, наружной/внутренней отделки и крыши с анимациями (Framer Motion), результат собирается в заявку
+- **Кредитный калькулятор** — расчёт условий ипотеки/рассрочки прямо на странице проекта
+- **Каталог услуг** — геодезия, межевание, подбор участка и сопровождение сделки
+- **Отзывы клиентов** — карточки с рейтингом и датами
+- **Формы захвата лидов** — единый виджет заявки на всех страницах, отправка через Axios в API, откуда лид попадает в amoCRM (`@mobilon-dev/amotop`)
+- **Карта на главной** — Яндекс.Карты (`@pbe/react-yandex-maps`) с адресом офиса
+- **Адаптивная навигация** — единый Header/Footer, автоскролл вверх при переходах, ссылки на соцсети (VK, Telegram, WhatsApp, Instagram)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Скриншоты
 
-- Configure the top-level `parserOptions` property like this:
+| Конструктор дома                                  | Каталог проектов                               |
+| -------------------------------------------------- | ----------------------------------------------- |
+| ![Конструктор](docs/screenshots/constructor.jpg)  | ![Проекты](docs/screenshots/projects.jpg)      |
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+| Услуги                                       | Отзывы                                     |
+| ---------------------------------------------- | --------------------------------------------- |
+| ![Услуги](docs/screenshots/services.jpg)      | ![Отзывы](docs/screenshots/reviews.jpg)      |
+
+## Технологии
+
+- **React 18** + **TypeScript**, сборка на **Vite**
+- **React Router** — клиентская маршрутизация (`/`, `/services`, `/projects`, `/reviews`, `/constructor`)
+- **Framer Motion** — анимации конструктора и попапов
+- **Axios** — отправка заявок в API (`REACT_APP_API_BASE_URL`)
+- **Swiper** / **react-slick** — слайдеры проектов и главной страницы
+- **@pbe/react-yandex-maps** — карта офиса
+- **@mobilon-dev/amotop** — интеграция лидов с amoCRM
+- **ESLint** — линтинг проекта
+
+## Структура проекта
+
+```
+src/
+├── components/
+│   ├── MainPage/        # Главная: Header, Hero, Feedback, карта, футер
+│   ├── Constructor/      # Пошаговый конструктор дома с анимациями
+│   ├── Projects/         # Каталог проектов, кредитный калькулятор
+│   ├── ServicesPage/      # Каталог услуг
+│   └── Reviews/           # Страница отзывов
+├── widgets/
+│   └── Form/              # Универсальная форма заявки (лид в CRM)
+└── assets/                 # Изображения, иконки, анимации конструктора
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Запуск проекта
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+```bash
+npm install
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+# Указать адрес API в .env
+echo "REACT_APP_API_BASE_URL=https://api.example.com" > .env
+
+npm run dev       # локальный запуск (Vite)
+npm run build     # production-сборка
+npm run preview   # предпросмотр сборки
+npm run lint       # проверка кода
 ```
+
+## Автор
+
+[Владимир Петросян](https://github.com/VladimirPetrosyan)
